@@ -16,8 +16,8 @@ Xft.dpi: 144 # dpi 设置
 配置文件：`./config/.zshrc`
 
 
-## (DWM)[https://github.com/yaoccc/dwm] (St)[https://github.com/yaoccc/st]
-使用的是(yaoccc)[https://github.com/yaoccc/]的配置
+## [dwm](https://github.com/yaoccc/dwm) [St](https://github.com/yaoccc/st)
+使用的是[yaoccc](https://github.com/yaoccc/)的配置
 
 
 
