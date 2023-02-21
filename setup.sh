@@ -9,5 +9,5 @@ for file in $(ls -a | grep -i ".x"); do
 			rm ~/$file
 			# continue
 	fi
-	ln -s  $pwd/$file ~/$file
+	# ln -s  $pwd/$file ~/$file
 done
