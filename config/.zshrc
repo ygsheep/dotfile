@@ -120,4 +120,6 @@ alias ra=ranger
 alias gc="g++ -o a -g "
 
 
-alias config='/usr/bin/git --git-dir=/home/yysheep/.dotfiles/ --work-tree=/home/yysheep'
+alias push_config=""
+
+
