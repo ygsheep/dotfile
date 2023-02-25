@@ -88,3 +88,140 @@ zsh
 zsh
 ls
 reboot
+ls
+5sudo pacman -Sy archlinux-keyring
+5udo pacman -Sy archlinux-keyring
+sudo pacman -Sy archlinux-keyring
+sudo pacman -S base-devel
+sudo pacman -S yay
+sudo pacman -S linux-header
+sudo pacman -S linux-header
+sudo pacman -S linux
+neofetch
+yay -S dwm
+git 
+cp /mnt/temp/LinuxTemp/.dotfiles/ ~/
+cp /mnt/temp/LinuxTemp/.dotfiles/ ~/ -r
+cp /mnt/temp/LinuxTemp/.config ~/ -r
+cp /mnt/temp/LinuxTemp/.local/ ~/ -r
+cp /mnt/temp/LinuxTemp/.wallpaper/ ~/ -r
+cp /mnt/temp/LinuxTemp/.ssh/ ~/ -r
+cp /mnt/temp/LinuxTemp/.oh-my-zsh/ ~/ -r
+cp /mnt/temp/LinuxTemp/.cache/ ~/ -r
+cp /mnt/temp/LinuxTemp/.gitconfig ~/ -r
+cp /mnt/temp/LinuxTemp/workspace/ ~/ -r
+yay -S wqy-zengei
+yay -S wqy-zenhei
+sudo pacman -Syu
+sudo vim /etc/pacman.d/mirrorlist 
+sudo pacman -Syy
+sudo pacman -Syyu
+sudo pacman -S fakeroot
+yay -S keyd
+yay -S google-chrome-stable
+yay -S chromium
+cd
+ls -a
+cd .config/
+ls
+rm -fr cd
+cd
+ls
+ls -a
+rm .bash*
+rm .zshrc 
+rm .xsession-errors 
+rm .Xauthority 
+ls -a
+ls
+sudo pacman -S stow
+cd .dotfiles/
+ls
+stow Applications/ scipts/ ranger/
+ls
+ls -a
+stow config/
+cd config/
+ls
+cd .config/
+ls
+rm -fr neofetch/
+cd ../
+ls
+ls -a
+cd .config/
+ls
+cd polybar/
+ls
+cd ../
+rm -fr polybar/
+../
+cd ../
+ls
+../
+ls
+cd ../
+ls
+stow config/
+stow config/
+stow config/
+yay -S dwm
+sudo pacman -S xorg
+sudo pacman -S xorg-xinit
+ls
+cd workspace/
+ls
+cd dwm/
+sudo make clean install
+cd ../
+cd st/
+sudo make clean install
+sudo systemctl enable keyd
+sudo systemctl start keyd
+ls
+ls
+touch .profile
+vim .profile 
+cd workspace/dwm/
+ls
+ccd statusbar/
+ls
+cd statusbar/
+ls
+rm temp 
+./statusbar.sh 
+cd ../
+./autostart.sh 
+yay -S nerd-fonts-jetbrains-mono
+yay -S nerd-fonts-fira-code 
+chsh -s /usr/bin/zsh 
+sudo chsh -s /usr/bin/zsh 
+ls
+zsh
+feh
+feh --bg-fill .wallpaper/wallhaven-zmewly.png 
+ls
+yay -Ss picom
+yay -S picom-animations-git
+yay -S picom-animations-git
+ls
+sudo pacman -S linux-header
+sudo pacman -S linux
+neofetch 
+sudo pacman -S wget
+pip install pynvim
+pip install ripgrep
+sudo pacman -S ripgrep
+sudo pacman -S ripgrep fd fzf 
+yay -Ss code-bin
+yay -S visual-studio-code-bin
+curl -LO https://l.tmoe.me/2.awk
+awk -f 2.awk 
+awk -f 2.awk 
+sudo pacman -S pcmanfm
+cd .dotfiles/
+ls
+n README.md 
+nvim README.md 
+reboot
+sudo cat /etc/keyd/default.conf 

@@ -113,12 +113,14 @@ export PATH=$PATH:~/.local/bin/
 alias ls=lsd
 alias cp='cp -r'
 alias n=nvim
+alias vim=nvim
 alias e=exit
 alias c=clear
 alias nl='neofetch | lolcat'
 alias ra=ranger
+alias rm="rm -r"
+alias md="mkdir -p"
 alias gc="g++ -o a -g "
-
 
 alias push_config=""
 
