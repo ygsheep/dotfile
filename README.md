@@ -11,13 +11,11 @@ sudo pacman -S base-devel
 # xorg x11 
 sudo pacman -S xorg xorg-xinit 
 
-
-
 # chromium 
 yay -S chromium micorsoft-edge-stable-bin
 
-# keyd 
-yay -S keyd 
+# keyd
+yay -S keyd
 sudo systemctl enable keyd
 
 # config: /etc/keyd/default.conf
@@ -30,14 +28,42 @@ capslock = overload(control, esc)
 ------------------------
 
 # build tools 
-sudo pacman -S gcc cmake clang
+sudo pacman -S gcc cmake clang make 
 
 # ranger
 sudo pacman -S ueberzug ranger
 
+mkdir ~/workspace/
+
+
+```
+## Polybar 状态栏
+```shell
+paru -S polybar
+
+cd ~/workspace && git clone --depth=1 https://github.com/adi1090x/polybar-themes.git
+cd ~/workspace/polybar-themes/ && chmod +x setup.sh && ./setup.sh
+
+- `setup.sh`
+```shell
+$ ./setup.sh
+
+[*] Installing Polybar Themes...
+
+[*] Choose Style -
+[1] Simple
+[2] Bitmap
+
+[?] Select Option : 1
+
+[*] Installing fonts...
+[*] Creating a backup of your polybar configs...
+[*] Successfully Installed.
 ```
 
-## fcitx5 
+```
+
+## fcitx5 中文输入法
 ```shell
 sudo pacman -S fcitx5 fcitx5-qt fcitx5-gtk fcitx5-config-qt fcitx5-material-color fcitx5-im fcitx5-rime 
 sudo pacman -S fcitx5-chinese-addons
@@ -89,7 +115,7 @@ yay -S udisks2 udevil
 sudo systemctl enable devmon@yysheep.service
 ```
 
-## more tool
+## 常用应用
 ```shell
 yay -S lxappearance              # gui设置
 yay -S paper-gtk-theme-git       # gtk主题
