@@ -20,83 +20,93 @@
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar.
-font pango:monospace 15
+font pango:DejaVu Sans Mono 10
+# font pango:monospace 15
 default_border pixel 1
+default_floating_border normal
+
+# Provide Gaps to Windows. Increase/Decrease as you like.
+gaps inner 2
+# 靠近屏幕边缘隐藏边框
+# 当工作区内只有一个窗口可见时，边框会被隐藏；
+hide_edge_borders smart
+# 当切换当前工作区时自动来回切换
+workspace_auto_back_and_forth yes
+## 使焦点跟随鼠标移动（利弊皆有，用着调吧）
+focus_follows_mouse yes
+
+## 默认浮动的程序（程序的名字可以在 "/usr/share/applictions" 找到）
+for_window [class="Gpicview"] floating enable
+for_window [class="mpv"] floating enable
+for_window [class="Gimp"] floating enable
+for_window [class="Xarchiver"] floating enable
+for_window [class="Genymotion"] floating enable
+for_window [class="Vlc"] floating enable
+for_window [class="VirtualBox"] floating enable
+for_window [class="Pcmanfm"] floating enable
+for_window [class="Catfish"] floating enable
+for_window [class="Fcitx5-configtool"] floating enable
+## 打开应用默认工作区
+for_window [class="Google-chrome"] move to workspace $ws2
+# 聚焦于 应用
+bindsym $mod+c [class="Google-chrome"] focus
 
 
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
+#++++++=自启动程序=++++++#
+exec_always --no-startup-id $HOME/.config/polybar/grayblocks/launch.sh
+exec_always --no-startup-id fctix5 &
+exec_always v2raya --lite &
+exec_always mpd
+# Display Wallpaper, always.
+exec_always feh --bg-fill ~/wallpapers/bg_29.jpg
+#Compositor. This helps in transparency and fading.
+exec_always picom --config=$HOME/scripts/config/picom.conf -b
+# 开启通知server
+exec_always dunst -conf $HOME/scripts/config/dunst.conf
+exec_always flameshot
+exec_always fcitx5
+exec --no-startup-id xss-lock --transfer-sleep-lock -- betterlockscreen -l
+exec --no-startup-id nm-applet
 
-# start a terminal. We use kitty.
+
+# 按下 $mod+o 之后
+# 用 f 打开 firefox，用 t 打开 thunderbird
+# 用回车或 Esc 键返回默认模式
+set $mode_launcher Launch: [f]irefox [t]hunderbird
+bindsym $mod+o mode "$mode_launcher"
+
+mode "$mode_launcher" {
+  bindsym f exec firefox
+  # 文件管理器
+  bindsym e exec pcmanfm
+
+  bindsym Escape mode "default"
+  bindsym Return mode "default"
+}
+
+
+# run terminal
 bindsym $mod+Return exec i3-sensible-terminal
-
 # kill focused window
 bindsym $mod+q kill
 
+
 # start dmenu (a program launcher).
 # bindsym $mod+d exec --no-startup-id dmenu_run
-# A more modern dmenu replacement is rofi:
-# You have 2 options to launch rofi:
 # This mode search for .desktop files in /usr/share/applications.
-# This is the recommended mode. It searches for the programs as
-# defined in .desktop file, with their description, and corresponding
-# icons
 bindsym $mod+d exec --no-startup-id rofi -show drun -theme Monokai -icon-theme "Tela-circle" -show-icons
 
 # The other mode search for applications in /usr/bin or /usr/sbin.
 # This should only be used if a program lacks a .desktop file.
 bindsym $mod+Shift+d exec --no-startup-id rofi -show run -theme Monokai
 
-# Launch Polybar. Take a look at ~/.confi/polybar/config to
-# configure the bar.
-exec_always --no-startup-id $HOME/.config/polybar/grayblocks/launch.sh
-exec_always --no-startup-id fctix5 &
-exec_always --no-startup-id v2raya --lite &
-exec_always mpd
-
-
-# Display Wallpaper, always.
-exec_always feh --bg-fill ~/wallpapers/bg_29.jpg
-
-# Provide Gaps to Windows. Increase/Decrease as you like.
-gaps inner 2
-
-#Compositor. This helps in transparency and fading.
-exec_always  picom --config=$HOME/scripts/config/picom.conf -b
-# 开启通知server
-exec_always dunst -conf $HOME/scripts/config/dunst.conf
-exec_always flameshot
-exec_always fcitx5 
-
-
 # Lock Screen This will yield a black lock screen, which
 # can be customized to your liking.
-bindsym $mod+x exec betterlockscreen -l 
+bindsym $mod+shift+l exec betterlockscreen -u ~/wallpapers/bg_29.jpg -l
 
-# Shutdown the computer
-#bindsym $mod+Shift+s exec shutdown now
-
-#Reboot Machine
-#bindsym $mod+r exec systemctl reboot
-
-# Suspend the system to RAM (needs swap space)
-#bindsym $mod+s exec systemctl suspend
-
-# The combination of xss-lock, nm-applet and pactl is a popular choice, so
-# they are included here as an example. Modify as you see fit.
-
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
-
-# The 4 lines of text above come from i3 documentation. Waking up from a suspended
-# system will launch betterlockscreen
-exec --no-startup-id xss-lock --transfer-sleep-lock -- betterlockscreen -l
-
-# NetworkManager is the most popular way to manage wireless networks on Linux,
-# and nm-applet is a desktop environment-independent system tray GUI for it.
-# We use this. System dark theme is applied to it.
-exec --no-startup-id nm-applet
+## 切换工作区
+bindsym $mod+Tab workspace next
+bindsym $mod+shift+Tab workspace prev
 
 # Use pactl to adjust volume in PulseAudio.
 # These are examples if you would like to use pactl. We will not use this,
@@ -118,15 +128,19 @@ bindsym XF86MonBrightnessDown exec sudo xbacklight -dec 10
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
+## 改变窗口排列方式（贴片/浮动）
+# bindsym $mod+t
+bindsym $mod+shift+t focus mode_toggle
 
-# The keybindings starting from here till the end of the document are
-# used for navigation in the window manager
-
-# 1A] change focus
+# 1A] 切换聚焦
 bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+k focus right
+# 用鼠标侧面的按键来移动窗口
+bindsym $mod+button9 move left
+bindsym $mod+button8 move right
+# 2A] 切换窗口位置
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move right
 
 # 1B] alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -134,11 +148,6 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-# 2A] move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
 
 # 2B] alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -147,7 +156,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # 3] split in horizontal orientation
-bindsym $mod+h split h
+# bindsym $mod+h split h
 
 # 4] split in vertical orientation
 bindsym $mod+v split v
@@ -156,26 +165,26 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # 6] change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
+# bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # 切换浮动/平铺
-bindsym $mod+t floating toggle
+## 切换工作区内窗口的堆叠方式
+bindsym $mod+space floating toggle
+bindsym $mod+Shift+space sticky toggle
 
-# 8] change focus between tiling / floating windows
-bindsym $mod+space exec "st -c float"
-bindsym $mod+shift+space sticky toggle
-# 9A] focus the parent container
+## 隐藏/显示窗口（加减号）
+bindsym $mod+minus move scratchpad
+bindsym $mod+plus scratchpad show
+
+bindsym $mod+h move scratchpad
+bindsym $mod+Shift+h scratchpad show
 # 聚焦于父容器
 bindsym $mod+u focus parent
-
 # 聚焦于上一个拥有焦点的浮动/平铺容器
 bindsym $mod+g focus mode_toggle
 
-# 聚焦于 firefox
-bindsym $mod+b [class="Firefox"] focus
-# bindsym $mod+c [class="google-chrome-stable"] focus
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1"
@@ -253,24 +262,9 @@ bindsym $mod+r mode "resize"
 # finds out, if available). Commented out due to use of polybar. If you want to
 # use i3 bars (status or blocks) this are some examples on how you can do it.
 # bar {
-        #status_command i3status
-        #tray_output primary
-        #status_command i3status -c ~/.config/i3/i3status.conf
-        #status_command i3blocks -c ~/.config/i3/i3blocks.conf
-#}
-
-
-# Launch a program on a certain workspace, from rofi (which may or may not have a keybinding)
-# for_window [class="nameofapp"] move to workspace $wsno.
-# WS No. 5 has been used as example.
-# Note: You will have to launch the program from a program launcher (rofi).
-for_window [class="google-chrome-stable"] move to workspace $ws2
-
-# The following way allows programs to be launched with a
-# defined keybinding, on a certain workspace, without
-# touching program launcher. Assign Programs to respective
-# workspaces.
-bindsym $mod+c workspace number 2
+#   status_command i3status
+#   tray_output primary
+# }
 
 
 #Multi Monitor (Dual Monitor, extended monitor)
@@ -279,4 +273,5 @@ bindsym $mod+c workspace number 2
 #eDP-X is the display used in Laptops.
 #HDMI-X is display used in Desktop connected to monitor with HDMI Cable.
 #VGA-X is display used in Desktop connected to monitor with VGA Cable.
-exec --no-startup-id xrandr --output HDMI-2 --right-of HDMI-1 --auto
+# exec --no-startup-id xrandr --output HDMI-2 --right-of HDMI-1 --auto
+exec --no-startup-id xrandr --output HDMI-2 --same-as eDP-1 --auto
