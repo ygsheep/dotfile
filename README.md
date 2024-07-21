@@ -30,10 +30,10 @@ capslock = overload(control, esc)
 ------------------------
 
 # build tools 
-sudo pacman -S gcc cmake cland 
+sudo pacman -S gcc cmake clang
 
 # ranger
-sudo pacman -S ueberzug
+sudo pacman -S ueberzug ranger
 
 ```
 
@@ -42,13 +42,34 @@ sudo pacman -S ueberzug
 sudo pacman -S fcitx5 fcitx5-qt fcitx5-gtk fcitx5-config-qt fcitx5-material-color fcitx5-im fcitx5-rime 
 sudo pacman -S fcitx5-chinese-addons
 
-sudo echo '
+sudo vim /etc/environment
+
 GTK_IM_MODULE=fcitx
 QT_IM_MODULE=fcitx
 XMODIFIERS=@im=fcitx
 SDL_IM_MODULE=fcitx
-GLFW_IM_MODULE=ibus' >> /etc/environment
+GLFW_IM_MODULE=ibus
+
 ```
+### Fcitx5 输入法皮肤
+
+fcitx5-nord
+![](https://user-images.githubusercontent.com/29998228/127147288-372b2a8b-59ff-47be-9f60-274b12361c8c.png)
+![](https://user-images.githubusercontent.com/29998228/127147303-256c017a-9efa-45fd-b514-48488ec3f5f9.png)
+```shell
+# 手动安装
+git clone https://github.com/tonyfettes/fcitx5-nord.git
+mkdir -p ~/.local/share/fcitx5/themes/
+cd fcitx5-nord
+cp -r Nord-Dark/ Nord-Light/ ~/.local/share/fcitx5/themes/
+
+paru -S fcitx5-nord
+paru -S fcitx5-skin-materia-yanli
+
+# 安装思源黑体和 Noto Color Emoji 字体
+paru -S adobe-source-han-sans-cn-fonts noto-fonts-emoji
+```
+
 
 ## 音频和蓝牙
 ```shell
@@ -83,8 +104,6 @@ yay -S libnotify dunst           # 通知 可使用 dunst -b 命令 启动通知
 yay -S xorg-xsetroot             # dwm设置状态栏
 yay -S xf86-input-synaptics      # 触控板
 yay -S network-manager-applet    # 网络托盘
-yay -S amf-amdgpu-pro            # amd gpu 驱动
-yay -S obs-studio-amf            # obs for amd_gpu
 yay -S mpc mpd ncmpcpp           # tui music player
 ```
 
@@ -102,6 +121,13 @@ Xft.dpi: 144 # dpi 设置
 ## oh-my-zsh
 配置文件：`./config/.zshrc`
 
+$ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+```bash
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+```
 
 ## [dwm](https://github.com/yaoccc/dwm) [St](https://github.com/yaoccc/st)
 使用的是[yaoccc](https://github.com/yaoccc/)的配置

@@ -21,6 +21,8 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar.
 font pango:monospace 15
+default_border pixel 1
+
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -40,11 +42,7 @@ bindsym $mod+q kill
 # This is the recommended mode. It searches for the programs as
 # defined in .desktop file, with their description, and corresponding
 # icons
-# bindsym $mod+d exec --no-startup-id rofi -show drun -theme Monokai -icon-theme "Tela-circle" -show-icons
-
-bindsym $mod+d exec --no-startup-id $HOME/scripts/call_rofi.sh drun
-
-
+bindsym $mod+d exec --no-startup-id rofi -show drun -theme Monokai -icon-theme "Tela-circle" -show-icons
 
 # The other mode search for applications in /usr/bin or /usr/sbin.
 # This should only be used if a program lacks a .desktop file.
@@ -52,20 +50,29 @@ bindsym $mod+Shift+d exec --no-startup-id rofi -show run -theme Monokai
 
 # Launch Polybar. Take a look at ~/.confi/polybar/config to
 # configure the bar.
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id $HOME/.config/polybar/grayblocks/launch.sh
+exec_always --no-startup-id fctix5 &
+exec_always --no-startup-id v2raya --lite &
+exec_always mpd
+
 
 # Display Wallpaper, always.
-exec_always $HOME/.fehbg 
+exec_always feh --bg-fill ~/wallpapers/bg_29.jpg
 
 # Provide Gaps to Windows. Increase/Decrease as you like.
-gaps inner 10
+gaps inner 2
 
 #Compositor. This helps in transparency and fading.
-exec_always picom -f
+exec_always  picom --config=$HOME/scripts/config/picom.conf -b
+# 开启通知server
+exec_always dunst -conf $HOME/scripts/config/dunst.conf
+exec_always flameshot
+exec_always fcitx5 
+
 
 # Lock Screen This will yield a black lock screen, which
 # can be customized to your liking.
-bindsym $mod+x exec betterlockscreen -l
+bindsym $mod+x exec betterlockscreen -l 
 
 # Shutdown the computer
 #bindsym $mod+Shift+s exec shutdown now
@@ -90,11 +97,6 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- betterlockscreen -l
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 # We use this. System dark theme is applied to it.
 exec --no-startup-id nm-applet
-
-exec --no-startup-id fcitx5 
-
-
-
 
 # Use pactl to adjust volume in PulseAudio.
 # These are examples if you would like to use pactl. We will not use this,
@@ -158,18 +160,22 @@ bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
-# 7] toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+# 切换浮动/平铺
+bindsym $mod+t floating toggle
 
 # 8] change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
-
+bindsym $mod+space exec "st -c float"
+bindsym $mod+shift+space sticky toggle
 # 9A] focus the parent container
-bindsym $mod+a focus parent
+# 聚焦于父容器
+bindsym $mod+u focus parent
 
-# 9B] focus the child container
-#bindsym $your_keybinding focus child
+# 聚焦于上一个拥有焦点的浮动/平铺容器
+bindsym $mod+g focus mode_toggle
 
+# 聚焦于 firefox
+bindsym $mod+b [class="Firefox"] focus
+# bindsym $mod+c [class="google-chrome-stable"] focus
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1"
@@ -258,13 +264,13 @@ bindsym $mod+r mode "resize"
 # for_window [class="nameofapp"] move to workspace $wsno.
 # WS No. 5 has been used as example.
 # Note: You will have to launch the program from a program launcher (rofi).
-for_window [class="firefox"] move to workspace $ws5
+for_window [class="google-chrome-stable"] move to workspace $ws2
 
 # The following way allows programs to be launched with a
 # defined keybinding, on a certain workspace, without
 # touching program launcher. Assign Programs to respective
 # workspaces.
-bindsym $mod+b workspace 5; exec firefox
+bindsym $mod+c workspace number 2
 
 
 #Multi Monitor (Dual Monitor, extended monitor)
