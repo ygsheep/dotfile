@@ -44,6 +44,8 @@ paru -S polybar
 cd ~/workspace && git clone --depth=1 https://github.com/adi1090x/polybar-themes.git
 cd ~/workspace/polybar-themes/ && chmod +x setup.sh && ./setup.sh
 
+```
+
 - `setup.sh`
 ```shell
 $ ./setup.sh
@@ -59,8 +61,6 @@ $ ./setup.sh
 [*] Installing fonts...
 [*] Creating a backup of your polybar configs...
 [*] Successfully Installed.
-```
-
 ```
 
 ## fcitx5 中文输入法
