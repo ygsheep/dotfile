@@ -109,6 +109,8 @@ bindsym $mod+shift+l exec betterlockscreen -u ~/wallpapers/bg_29.jpg -l
 bindsym $mod+Tab workspace next
 bindsym $mod+shift+Tab workspace prev
 
+bindsym $mod+p exec flameshot gui
+
 # Use pactl to adjust volume in PulseAudio.
 # These are examples if you would like to use pactl. We will not use this,
 # but rather alsamixer.
