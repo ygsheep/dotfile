@@ -1,8 +1,32 @@
 # ~/.dotfiles
 ![](https://archlinux.org/static/archnavbar/archlogo.8a05bc7f6cd1.svg)
 
-## Quet start
+<details>
+<summary><b>Rofi & Desktop</b></summary>
 
+|Launcher|Networks|
+|--|--|
+|![img](./.access/desktop_1.png)|![img](./.access/desktop_2.png)|
+
+|Powermenu|Color Switcher|
+|--|--|
+|![img](./.access/desktop_3.png)|![img](./.access/desktop_4.png)|
+
+</details>
+
+
+
+## 开始
+
+克隆仓库
+`git clone https://github.com/ygsheep/dotfiles ~/.dotfiles`
+
+```shell
+cd ~/.dotfiles
+cp ./config/.* ~/ -rfv
+cp ./scripts ~/ -rfv
+```
+---
 ```shell
 # 清华源
 $ sudo vim /etc/pacman.d/mirrorlist
