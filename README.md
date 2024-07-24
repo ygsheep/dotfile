@@ -1,11 +1,21 @@
 # ~/.dotfiles
-My ArchLinux backup
-
+![](https://archlinux.org/static/archnavbar/archlogo.8a05bc7f6cd1.svg)
 
 ## Quet start
 
 ```shell
-# 
+# 清华源
+$ sudo vim /etc/pacman.d/mirrorlist
+Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch
+
+$ sudo vim /etc/pacman.config
+[archlinuxcn]
+Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
+
+sudo pacman-key --lsign-key "farseerfc@archlinux.org"
+
+sudo pacman -Sy archlinuxcn-keyring
+# 基础
 sudo pacman -S base-devel
 
 # xorg x11 
@@ -38,6 +48,8 @@ mkdir ~/workspace/
 
 ```
 ## Polybar 状态栏
+![](https://raw.githubusercontent.com/adi1090x/files/master/polybar-themes/previews/grayblocks/md.gif)
+![](https://raw.githubusercontent.com/adi1090x/files/master/polybar-themes/previews/grayblocks/ml.gif)
 ```shell
 paru -S polybar
 
@@ -64,11 +76,16 @@ $ ./setup.sh
 ```
 
 ## fcitx5 中文输入法
+- fcitx5-rime
 ```shell
 sudo pacman -S fcitx5 fcitx5-qt fcitx5-gtk fcitx5-config-qt fcitx5-material-color fcitx5-im fcitx5-rime 
 sudo pacman -S fcitx5-chinese-addons
 
-sudo vim /etc/environment
+```
+- 添加fcitx5 配置
+
+```shell
+$ sudo vim /etc/environment
 
 GTK_IM_MODULE=fcitx
 QT_IM_MODULE=fcitx
@@ -77,11 +94,9 @@ SDL_IM_MODULE=fcitx
 GLFW_IM_MODULE=ibus
 
 ```
-### Fcitx5 输入法皮肤
-
-fcitx5-nord
-![](https://user-images.githubusercontent.com/29998228/127147288-372b2a8b-59ff-47be-9f60-274b12361c8c.png)
-![](https://user-images.githubusercontent.com/29998228/127147303-256c017a-9efa-45fd-b514-48488ec3f5f9.png)
+- Fcitx5 输入法皮肤
+![](./.access/fctix5-nord-dark.png)
+![](./.access/fctix5-nord-light.png)
 ```shell
 # 手动安装
 git clone https://github.com/tonyfettes/fcitx5-nord.git
@@ -125,13 +140,20 @@ yay -S rofi                      # 菜单
 yay -S flameshot                 # 截图软件
 yay -S google-chrome wyeb-git    # 浏览器             
 yay -S byzanz                    # gif截图依赖
-yay -S wps-office-cn             # wps
 yay -S libnotify dunst           # 通知 可使用 dunst -b 命令 启动通知服务
 yay -S xorg-xsetroot             # dwm设置状态栏
 yay -S xf86-input-synaptics      # 触控板
 yay -S network-manager-applet    # 网络托盘
 yay -S mpc mpd ncmpcpp           # tui music player
 ```
+
+## WPS Office 
+![](./.access/wps.png)
+```shell
+paru -S wps-office-mui-zh-cn wps-office-mime-cn wps-office-cn wps-office-fonts ttf-ms-fonts  ttf-wps-fonts
+
+```
+
 
 ## .Xresources
 x11 dpi等设置
