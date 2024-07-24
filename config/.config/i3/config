@@ -48,6 +48,7 @@ for_window [class="Catfish"] floating enable
 for_window [class="Fcitx5-configtool"] floating enable
 ## 打开应用默认工作区
 for_window [class="Google-chrome"] move to workspace $ws2
+for_window [class="Microsoft-edge"] move to workspace $ws2
 # 聚焦于 应用
 bindsym $mod+c [class="Google-chrome"] focus
 
