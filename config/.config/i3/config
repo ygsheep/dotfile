@@ -18,6 +18,7 @@
 # You can uncomment the line below to set 'Alt' key as the mod key.
 #set $mod Mod1
 set $mod Mod4
+set $alt Mod1
 
 # Font for window titles. Will also be used by the bar.
 font pango:DejaVu Sans Mono 10
@@ -31,9 +32,12 @@ gaps inner 2
 # 当工作区内只有一个窗口可见时，边框会被隐藏；
 hide_edge_borders smart
 # 当切换当前工作区时自动来回切换
-workspace_auto_back_and_forth yes
+# workspace_auto_back_and_forth yes
 ## 使焦点跟随鼠标移动（利弊皆有，用着调吧）
 focus_follows_mouse yes
+## 限制浮动窗口大小
+floating_minimum_size 75 x 50
+floating_maximum_size 1200 x 750
 
 ## 默认浮动的程序（程序的名字可以在 "/usr/share/applictions" 找到）
 for_window [class="Gpicview"] floating enable
@@ -45,12 +49,21 @@ for_window [class="Vlc"] floating enable
 for_window [class="VirtualBox"] floating enable
 for_window [class="Pcmanfm"] floating enable
 for_window [class="Catfish"] floating enable
-for_window [class="Fcitx5-configtool"] floating enable
+for_window [class="pavucontrol"] floating enable ## Pulseaudio 音量控制软件
+for_window [class="bilibili"] floating enable
+for_window [class="st-256color"] floating enable
+for_window [class="org.jackhuang.hmcl.Launcher"] floating enable
+
+## WM_NAME
+
+## xwininfo: Window Id
+for_window [id="0xc00049"] floating enable ## 哔哩哔哩
+
 ## 打开应用默认工作区
 for_window [class="Google-chrome"] move to workspace $ws2
 for_window [class="Microsoft-edge"] move to workspace $ws2
 # 聚焦于 应用
-bindsym $mod+c [class="Google-chrome"] focus
+bindsym $mod+g [class="Google-chrome"] focus
 
 
 #++++++=自启动程序=++++++#
@@ -65,10 +78,8 @@ exec_always picom --config=$HOME/scripts/config/picom.conf -b
 # 开启通知server
 exec_always dunst -conf $HOME/scripts/config/dunst.conf
 exec_always flameshot
-exec_always fcitx5
 exec --no-startup-id xss-lock --transfer-sleep-lock -- betterlockscreen -l
 exec --no-startup-id nm-applet
-
 
 # 按下 $mod+o 之后
 # 用 f 打开 firefox，用 t 打开 thunderbird
@@ -88,8 +99,10 @@ mode "$mode_launcher" {
 
 # run terminal
 bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Shift+Return exec "neovide ~/Code/DevCode/README.md"
 # kill focused window
 bindsym $mod+q kill
+bindsym $mod+Shift+q exec $HOME/.config/polybar/grayblocks/scripts/powermenu.sh
 
 
 # start dmenu (a program launcher).
@@ -101,13 +114,14 @@ bindsym $mod+d exec --no-startup-id rofi -show drun -theme Monokai -icon-theme "
 # This should only be used if a program lacks a .desktop file.
 bindsym $mod+Shift+d exec --no-startup-id rofi -show run -theme Monokai
 
+bindsym $mod+Tab exec --no-startup-id rofi -show window -theme Monokai -icon-theme "Tela-circle" -show-icons
 # Lock Screen This will yield a black lock screen, which
 # can be customized to your liking.
 bindsym $mod+shift+l exec betterlockscreen -u ~/wallpapers/bg_29.jpg -l
 
 ## 切换工作区
-bindsym $mod+Tab workspace next
-bindsym $mod+shift+Tab workspace prev
+bindsym $alt+Tab workspace next
+bindsym $alt+shift+Tab workspace prev
 
 bindsym $mod+p exec flameshot gui
 
@@ -186,7 +200,7 @@ bindsym $mod+Shift+h scratchpad show
 # 聚焦于父容器
 bindsym $mod+u focus parent
 # 聚焦于上一个拥有焦点的浮动/平铺容器
-bindsym $mod+g focus mode_toggle
+# bindsym $mod+g focus mode_toggle
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
