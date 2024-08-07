@@ -71,6 +71,14 @@ mkdir ~/workspace/
 
 
 ```
+xdg-open 设置
+
+```shell
+# 默认打开的程序pcmanfm （show in folder）
+xdg-mime default pcmanfm.desktop inode/directory
+
+
+```
 ## Polybar 状态栏
 ![](https://raw.githubusercontent.com/adi1090x/files/master/polybar-themes/previews/grayblocks/md.gif)
 ![](https://raw.githubusercontent.com/adi1090x/files/master/polybar-themes/previews/grayblocks/ml.gif)
