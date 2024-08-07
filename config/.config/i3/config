@@ -53,6 +53,9 @@ for_window [class="pavucontrol"] floating enable ## Pulseaudio 音量控制软�
 for_window [class="bilibili"] floating enable
 for_window [class="st-256color"] floating enable
 for_window [class="org.jackhuang.hmcl.Launcher"] floating enable
+for_window [class="baidunetdisk"] floating enable
+for_window [class="fcitx5-config-qt"] floating enable
+for_window [class="QQ"] floating enable
 
 ## WM_NAME
 
@@ -68,18 +71,19 @@ bindsym $mod+g [class="Google-chrome"] focus
 
 #++++++=自启动程序=++++++#
 exec_always --no-startup-id $HOME/.config/polybar/grayblocks/launch.sh
-exec_always --no-startup-id fctix5 &
-exec_always v2raya --lite &
-exec_always mpd
+exec_always --no-startup-id fcitx5
 # Display Wallpaper, always.
 exec_always feh --bg-fill ~/wallpapers/bg_29.jpg
 #Compositor. This helps in transparency and fading.
 exec_always picom --config=$HOME/scripts/config/picom.conf -b
 # 开启通知server
-exec_always dunst -conf $HOME/scripts/config/dunst.conf
-exec_always flameshot
 exec --no-startup-id xss-lock --transfer-sleep-lock -- betterlockscreen -l
-exec --no-startup-id nm-applet
+exec_always dunst -conf $HOME/scripts/config/dunst.conf
+
+exec mpd
+exec nm-applet &
+exec pa-applet &
+exec flameshot &
 
 # 按下 $mod+o 之后
 # 用 f 打开 firefox，用 t 打开 thunderbird
