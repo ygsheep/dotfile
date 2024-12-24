@@ -11,6 +11,13 @@
     pkgs.chromium
     pkgs.obsidian
     pkgs.jetbrains.pycharm-community-bin
+    pkgs.jetbrains.idea-community-bin
+    pkgs.vscode
+
+  ## java
+    pkgs.jdk8
+    pkgs.glibc
+
   ];
 
   programs.obs-studio = {

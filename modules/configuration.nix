@@ -12,14 +12,35 @@
 
   system.stateVersion = "24.11"; 
 
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+  # Add any missing dynamic libraries for unpackaged programs
+    pkgs.stylua
+    pkgs.pyright
+  ];
+
   # 新增用户 sheep
   users.users.sheep = {
     isNormalUser = true;
     description = "sheep";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker"  ];
     packages = with pkgs; [zsh];
   };
+  users.defaultUserShell = pkgs.zsh;
 
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+
+    shellAliases = {
+      ll = "ls -l";
+      update = "sudo nixos-rebuild switch";
+    };
+    histSize = 10000;
+  };
+  environment.shells = with pkgs; [ zsh ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

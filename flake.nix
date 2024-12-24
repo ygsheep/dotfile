@@ -29,7 +29,7 @@
             inherit inputs;
           };
           modules = [
-            # {nixpkgs.overlays = [inputs.hyprpanel.overlay];}
+            {nixpkgs.overlays = [inputs.hyprpanel.overlay];}
             { networking.hostName = hostname; }
             # General configuration (users, networking, sound, etc)
             ./modules/configuration.nix

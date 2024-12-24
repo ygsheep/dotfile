@@ -18,6 +18,7 @@
     pkgs.hyprpicker
     pkgs.hyprsunset
     pkgs.hypridle
+    # pkgs.hyprpanel
     pkgs.waybar
     pkgs.wofi
     pkgs.wofi-emoji 
@@ -26,12 +27,16 @@
     pkgs.swww
    
    ## Optional
-    grim 
-    grimblast
+   grim
+   grimblast
+   pkgs.cava
+   pkgs.tty-clock
+   pkgs.imv
+   pkgs.yazi
 
 
-    ## vpn proxy
-    v2raya
+   ## vpn proxy
+   v2raya
   ];
   wayland.windowManager.hyprland = {
     # Whether to enable Hyprland wayland compositor

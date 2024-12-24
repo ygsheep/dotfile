@@ -39,6 +39,7 @@
   # services.xserver.displayManager.gdm.wayland = true;
   services.flatpak.enable = true;
   programs.hyprland.enable = true;
+  virtualisation.docker.enable = true;
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
   # ================ 驱动 =================
