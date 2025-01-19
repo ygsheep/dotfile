@@ -2,9 +2,16 @@
 
 {
   home.packages = with pkgs; [
-    pkgs.vcpkg
     pkgs.clang
-    pkgs.libgcc
+    pkgs.cmake
+    pkgs.ninja
+    pkgs.gnumake
+    clang-tools
+    codespell
+    conan
+    cppcheck
+    doxygen
+    gtest
+    lcov
   ];
-
 }

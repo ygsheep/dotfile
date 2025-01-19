@@ -11,6 +11,7 @@
     ../../home/rofi
     ../../home/waybar
     ../../home/app
+    ../../home/app/c++.nix
 
   ];
 

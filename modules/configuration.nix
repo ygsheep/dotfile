@@ -41,10 +41,29 @@
     histSize = 10000;
   };
   environment.shells = with pkgs; [ zsh ];
+  environment.systemPackages = with pkgs; [
+    git
+    vim
+    wget
+    gcc
+
+  ];
+
+  # 将 GCC 添加到环境变量中
+  environment.variables = {
+    CC = "gcc";
+    CXX = "g++";
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  services.ollama = {
+    enable = true;
+    acceleration = "cuda";
+    host="0.0.0.0";
+    environmentVariables = {
+    };
+  };
   # 启用 Flakes 特性以及配套的船新 nix 命令行工具
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  environment.systemPackages = with pkgs; [git vim wget];
 }

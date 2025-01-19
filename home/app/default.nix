@@ -14,9 +14,16 @@
     pkgs.jetbrains.idea-community-bin
     pkgs.vscode
 
-  ## java
+    ## java
     pkgs.jdk8
     pkgs.glibc
+
+    ## Qt
+    pkgs.qtcreator
+    pkgs.llama-cpp
+
+    pkgs.devenv
+
 
   ];
 
