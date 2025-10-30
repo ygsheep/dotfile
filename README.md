@@ -4,14 +4,14 @@
   <a href="https://nixos.org/">
     <img src="https://img.shields.io/static/v1?label=NixOS&message=25.05&style=flat&logo=nixos&colorA=24273A&colorB=8AADF4&logoColor=CAD3F5"/>
   </a>
-   <a href="https://github.com/linuxmobile/kaku">
-    <img src="https://img.shields.io/github/stars/linuxmobile/kaku?style=flat&logo=github&colorA=24273A&colorB=f85149&logoColor=CAD3F5" alt="stars-badge">
+   <a href="https://github.com/ygsheep/Niri-Dot">
+    <img src="https://img.shields.io/github/stars/ygsheep/Niri-Dot?style=flat&logo=github&colorA=24273A&colorB=f85149&logoColor=CAD3F5" alt="stars-badge">
    </a>
   <a href="https://nixos.wiki/wiki/Flakes">
     <img src="https://img.shields.io/static/v1?label=Nix Flake&message=check&style=flat&logo=nixos&colorA=24273A&colorB=9173ff&logoColor=CAD3F5">
   </a>
-   <a href="https://github.com/linuxmobile/kaku/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/linuxmobile/kaku?style=flat&logo=github&colorA=24273A&colorB=4fc8f&logoColor=CAD3F5" alt="license-badge">
+   <a href="https://github.com/ygsheep/Niri-Dot/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/ygsheep/Niri-Dot?style=flat&logo=github&colorA=24273A&colorB=4fc8f&logoColor=CAD3F5" alt="license-badge">
   </a>
 </p>
 
@@ -20,7 +20,7 @@
 
 <p align="center"><img src="/assets/1.png" width="600px"></p>
 
-<h1 align="center">🐑 Kaku - 中文优化的 NixOS 配置</h1>
+<h1 align="center">🐑 Niri-Dot - 中文优化的 NixOS 配置</h1>
 <h3 align="center">一个功能完整的中文本土化 NixOS 桌面环境配置</h3>
 
 ### ⚠ <sup><sub><samp>如果你使用了我桌面/配置中的任何内容，请尊重原创者并标注来源。</samp></sub></sup>
@@ -123,7 +123,7 @@ nix-shell -p nixVersions.stable git
 
 #### 7. 克隆配置文件
 ```bash
-git clone --depth 1 https://github.com/linuxmobile/kaku /mnt/etc/nixos
+git clone --depth 1 https://github.com/ygsheep/Niri-Dot /mnt/etc/nixos
 ```
 
 ### ⚠ <sup><sub><samp>重要提醒 - 请勿忘记！</samp></sub></sup>
@@ -158,13 +158,13 @@ passwd sheep
 
 #### 2. 安装 Home Manager 配置
 ```bash
-home-manager switch --flake 'github:linuxmobile/kaku#sheep@desktop'
+home-manager switch --flake 'github:ygsheep/Niri-Dot#sheep@desktop'
 ```
 
 #### 3. 克隆配置文件到本地（可选但推荐）
 ```bash
 # 克隆配置文件到用户目录（用于后续使用 nh 工具）
-git clone https://github.com/linuxmobile/kaku.git ~/.dotfile
+git clone https://github.com/ygsheep/Niri-Dot.git ~/.dotfile
 ```
 
 #### 4. 验证配置
@@ -191,7 +191,7 @@ home-manager switch --flake ~/.dotfile#sheep@desktop
 ## 🌏 中文支持配置
 
 ### 输入法配置
-Kaku 配置包含完整的中文输入法支持：
+Niri-Dot 配置包含完整的中文输入法支持：
 
 #### Fcitx5 + Rime
 - **框架**：Fcitx5（现代化输入法框架）
@@ -236,7 +236,7 @@ kb-status
 ```
 
 ### 代理管理（可选）
-Kaku 提供了完整的代理管理工具：
+Niri-Dot 提供了完整的代理管理工具：
 
 ```bash
 # 启用代理
@@ -311,7 +311,7 @@ gnome-session --session=gnome
 
 ### 🏗️ 模块化架构
 ```
-kaku/
+Niri-Dot/
 ├── system/           # 系统级配置
 │   ├── core/        # 核心系统配置
 │   ├── chinese/     # 中文支持模块
@@ -398,17 +398,17 @@ nh home switch
 如果您的配置文件在不同位置，可以：
 ```bash
 # 临时指定配置路径
-nh os switch --flake /path/to/your/kaku
+nh os switch --flake /path/to/your/Niri-Dot
 
 # 或者设置环境变量
-export NH_FLAKE="/path/to/your/kaku"
+export NH_FLAKE="/path/to/your/Niri-Dot"
 nh os switch
 ```
 
 **推荐目录结构**：
 ```
 /home/sheep/
-├── .dotfile/          # kaku 配置文件（推荐位置）
+├── .dotfile/          # Niri-Dot 配置文件（推荐位置）
 │   ├── system/        # 系统配置
 │   ├── home/          # 用户配置
 │   └── hosts/         # 主机配置
@@ -762,8 +762,8 @@ systemctl restart gdm  # 或 systemctl restart greetd
 ### 🔄 开发环境设置
 ```bash
 # 克隆仓库
-git clone https://github.com/linuxmobile/kaku.git
-cd kaku
+git clone https://github.com/ygsheep/Niri-Dot.git
+cd Niri-Dot
 
 # 进入开发环境
 nix develop
@@ -787,7 +787,7 @@ nix flake check
 ## 📞 联系方式
 
 - **GitHub**: [@linuxmobile](https://github.com/linuxmobile)
-- **项目地址**: [Kaku](https://github.com/linuxmobile/kaku)
+- **项目地址**: [Niri-Dot](https://github.com/ygsheep/Niri-Dot)
 
 如果这个配置对你有帮助，请给项目一个 ⭐ Star！
 

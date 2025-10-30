@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  # nh default flake - 指向 kaku 配置目录
+  # nh default flake - 指向 Niri-Dot 配置目录
   environment.variables.NH_FLAKE = "/home/sheep/.dotfile";
 
   programs.nh = {
