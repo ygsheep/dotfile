@@ -77,7 +77,7 @@ in {
 
       overview = {
         workspace-shadow.enable = false;
-        backdrop-color = "transparent";
+        backdrop-color = "#808080";
       };
       gestures = {hot-corners.enable = true;};
       cursor = {

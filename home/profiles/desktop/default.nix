@@ -15,6 +15,7 @@
     # software
     ../../software
     ../../software/wayland
+    ../../software/wayland/astal-shell.nix
     ../../software/anyrun
 
     # system services

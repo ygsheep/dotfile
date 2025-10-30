@@ -12,7 +12,7 @@ in
         layer = "top";
         position = "top";
         spacing = 0;
-        height = 34;
+        height = 28;
 
         modules-left = [
           "custom/logo"
@@ -157,7 +157,7 @@ in
       }
 
       window#waybar {
-          background-color: #181825;
+          background-color: transparent;
           transition-property: background-color;
           transition-duration: 0.5s;
       }
