@@ -52,10 +52,6 @@
       };
     };
 
-    astal-shell = {
-      url = "github:aylur/astal-shell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     anyrun = {
       url = "github:anyrun-org/anyrun";
@@ -105,7 +101,7 @@
     };
 
     zen-browser = {
-      url = "github:pfaj/zen-browser-flake";
+      url = "github:youwen5/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

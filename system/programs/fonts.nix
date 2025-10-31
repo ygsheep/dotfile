@@ -12,8 +12,8 @@
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
-      noto-fonts-emoji
-      noto-fonts-extra
+      noto-fonts-color-emoji
+      noto-fonts
 
       # 思源字体
       source-han-sans
@@ -33,7 +33,7 @@
       sarasa-gothic
 
       # 其他常用字体
-      ubuntu_font_family
+      ubuntu-classic
       roboto
       roboto-mono
       adwaita-fonts

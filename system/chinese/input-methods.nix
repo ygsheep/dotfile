@@ -33,7 +33,7 @@
     wqy_microhei
     wqy_zenhei
     # 增强字体支持
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     sarasa-gothic
   ];
 }

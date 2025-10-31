@@ -16,7 +16,7 @@ in
 
         modules-left = [
           "custom/logo"
-          "wlr/workspaces"
+          "niri/workspaces"
         ];
 
         modules-center = [
@@ -32,13 +32,14 @@ in
           "custom/power"
         ];
 
-        "wlr/workspaces" = {
-          on-click = "activate";
-          format = "{name}";
+        "niri/workspaces" = {
+          format = "{icon}";
           format-icons = {
             default = "";
             active = "󱓻";
             urgent = "󱓻";
+            focused = "󱓻";
+            empty = "";
           };
         };
 
@@ -211,8 +212,19 @@ in
           border-radius: 4px;
           margin: 6px 3px;
           padding: 6px 12px;
-          background-color: #1e1e2e;
+          background-color: #6868a1;
           color: #181825;
+      }
+
+      #memory:hover,
+      #custom-power:hover,
+      #battery:hover,
+      #backlight:hover,
+      #wireplumber:hover,
+      #network:hover,
+      #clock:hover,
+      #tray :hover{
+          color: #fff;
       }
 
       #custom-power {
@@ -273,12 +285,12 @@ in
       tooltip {
           border-radius: 8px;
           padding: 15px;
-          background-color: #131822;
+          background-color: #181825;
       }
 
       tooltip label {
           padding: 5px;
-          background-color: #131822;
+          background-color: #181825;
       }
     '';
   };

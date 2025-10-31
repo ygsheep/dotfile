@@ -1,0 +1,6 @@
+Config(
+    // 翻译插件配置
+    max_entries: 5,
+    target_lang: "zh",
+    source_lang: "auto",
+)

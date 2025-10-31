@@ -1,0 +1,5 @@
+Config(
+    // 符号插件配置
+    max_entries: 10,
+    copy_on_select: true,
+)

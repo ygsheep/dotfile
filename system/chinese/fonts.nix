@@ -8,21 +8,21 @@
     source-han-sans
     source-han-serif
     source-han-mono
-    
+
     # Noto 字体（Google）
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
-    
+
     # 文泉驿字体
     wqy_microhei
     wqy_zenhei
-    
+
     # 更纱黑体（编程字体）
     sarasa-gothic
-    
+
     # 方正字体（如果可用）
     # fangzheng-fonts  # 需要额外配置
-    
+
     # 中文 Nerd Fonts
     # 从 assets/fonts 目录安装
   ];
@@ -43,7 +43,7 @@
           <family>AR PL ShanHeiSun Uni</family>
         </prefer>
       </alias>
-      
+
       <alias>
         <family>sans-serif</family>
         <prefer>
@@ -54,7 +54,7 @@
           <family>AR PL UMing CN</family>
         </prefer>
       </alias>
-      
+
       <alias>
         <family>monospace</family>
         <prefer>
@@ -74,7 +74,7 @@
           <string>Noto Serif CJK SC</string>
         </edit>
       </match>
-      
+
       <match target="pattern">
         <test name="family" qual="any">
           <string>SimHei</string>
@@ -83,7 +83,7 @@
           <string>Noto Sans CJK SC</string>
         </edit>
       </match>
-      
+
       <match target="pattern">
         <test name="family" qual="any">
           <string>Microsoft YaHei</string>

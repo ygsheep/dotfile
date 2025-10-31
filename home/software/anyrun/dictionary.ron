@@ -1,0 +1,6 @@
+Config(
+    // 字典插件配置
+    max_entries: 5,
+    show_definition: true,
+    language: "en",
+)

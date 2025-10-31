@@ -116,8 +116,16 @@ in {
     userDirs = {
       enable = true;
       createDirectories = true;
+      desktop = "$HOME/桌面";
+      documents = "$HOME/文档";
+      download = "$HOME/下载";
+      music = "$HOME/音乐";
+      pictures = "$HOME/图片";
+      videos = "$HOME/视频";
+      publicShare = "$HOME/公共";
+      templates = "$HOME/模板";
       extraConfig = {
-        XDG_SCREENSHOTS_DIR = "${config.xdg.userDirs.pictures}/Screenshots";
+        XDG_SCREENSHOTS_DIR = "$HOME/图片/Screenshots";
       };
     };
   };

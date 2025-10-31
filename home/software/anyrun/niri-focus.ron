@@ -1,0 +1,5 @@
+Config(
+    // Niri 焦点插件配置
+    show_workspace_names: true,
+    show_empty_workspaces: false,
+)

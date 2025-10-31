@@ -168,21 +168,29 @@ in {
     package = pkgs.firefox;
 
     # 语言配置
-    languagePack = "zh-CN";
+    # languagePack = "zh-CN";
 
     # 扩展
-    extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-      ublock-origin
-      copy-selected-links
-      sponsorblock
-      brotab
-    ];
+    # extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+    #   ublock-origin
+    #   copy-selected-links
+    #   sponsorblock
+    #   brotab
+    # ];
 
     # 配置文件
     profiles.default = {
       id = 0;
       name = "Default";
       isDefault = true;
+
+      # 扩展
+      extensions.packages = with inputs.firefox-addons.packages.${pkgs.system}; [
+        ublock-origin
+        copy-selected-links
+        sponsorblock
+        brotab
+      ];
 
       # 设置
       settings = {
@@ -231,7 +239,7 @@ in {
         "font.minimum-size.x-western" = 12;
 
         # 媒体设置
-        "media.autoplay.default" = 5;  # 块自动播放
+        "media.autoplay.default" = 5;  # 阻止自动播放
         "media.ffmpeg.vaapi.enabled" = true;
 
         # 开发者设置

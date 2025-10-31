@@ -12,5 +12,6 @@
     seahorse.enable = true;
     adb.enable = true;
   };
-  services.udev.packages = [pkgs.android-udev-rules];
+  # android-udev-rules has been removed, superseded by built-in systemd uaccess rules
+  services.udev.packages = [];
 }

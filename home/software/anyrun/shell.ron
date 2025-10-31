@@ -1,0 +1,6 @@
+Config(
+    // Shell 插件配置
+    max_entries: 10,
+    show_command: true,
+    shell: Some("nu"),
+)

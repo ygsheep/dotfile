@@ -24,7 +24,8 @@ in {
         {command = ["wl-paste" "--type text" "--watch" "cliphist" "store"];}
         {command = ["qs" "-c" "DankMaterialShell"];}
         {command = ["swww-daemon"];}
-        {command = ["swww" "img" "/home/sheep/Niri-Dot/assets/wallpaper/wallhaven-nkp6pq.png"];}
+        # {command = ["swww" "img" "/home/sheep/Niri-Dot/assets/wallpaper/wallhaven-nkp6pq.png"];}
+        {command = ["/home/sheep/Niri-Dot/scripts/random-wallpaper.sh"];}
         {command = ["anyrun"];}
         {command = ["waybar"];}
       ];
@@ -77,7 +78,7 @@ in {
 
       overview = {
         workspace-shadow.enable = false;
-        backdrop-color = "#808080";
+        backdrop-color = "#1e1e2e";
       };
       gestures = {hot-corners.enable = true;};
       cursor = {

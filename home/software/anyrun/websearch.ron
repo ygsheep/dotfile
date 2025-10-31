@@ -1,0 +1,10 @@
+Config(
+    // 网络搜索插件配置
+    max_entries: 5,
+    engines: [
+        ("google", "https://www.google.com/search?q={}"),
+        ("bing", "https://www.bing.com/search?q={}"),
+        ("duckduckgo", "https://duckduckgo.com/?q={}"),
+        ("baidu", "https://www.baidu.com/s?wd={}"),
+    ],
+)

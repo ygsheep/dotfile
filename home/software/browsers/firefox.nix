@@ -6,7 +6,7 @@
   ...
 }:
 {
-  imports = [ ../../../../modules/home-manager/programs/firefox/default.nix ];
+  imports = [ ../../../modules/home-manager/programs/firefox/default.nix ];
 
   # Firefox Wayland 环境变量
   home.sessionVariables = {
