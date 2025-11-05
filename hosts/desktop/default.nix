@@ -159,5 +159,15 @@
     '';
   };
 
-  environment.systemPackages = [pkgs.cryptsetup pkgs.swww];
+  environment.systemPackages = with pkgs; [
+    cryptsetup
+    swww
+    # SDDM Astronaut Theme dependencies
+    qt6.qtbase
+    qt6.qtsvg
+    qt6.qtvirtualkeyboard
+    qt6.qtmultimedia
+    # SDDM theme package (if available in nixpkgs)
+    # Note: sddm-astronaut-theme may need to be added manually or from overlay
+  ];
 }
