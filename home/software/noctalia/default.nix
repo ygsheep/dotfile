@@ -82,7 +82,7 @@
         avatarImage = "";
         dimDesktop = true;
         showScreenCorners = false;
-        scaleRatio = 1;
+        scaleRatio = 1.2;
         radiusRatio = 0.15;
         animationSpeed = 1;
         enableShadows = true;
@@ -102,7 +102,7 @@
 
       # 位置设置
       location = {
-        name = "Shanghai";
+        name = "guangzhou";
         weatherEnabled = true;
         useFahrenheit = false;
         use12hourFormat = false;
@@ -115,11 +115,11 @@
       wallpaper = {
         enabled = true;
         overviewEnabled = true;
-        directory = "/home/sheep/.dotfile/assets";
+        directory = "/home/sheep/.dotfile/assets/wallpaper";
         setWallpaperOnAllMonitors = true;
-        defaultWallpaper = "/home/sheep/.dotfile/assets/1.png";
+        defaultWallpaper = "/home/sheep/.dotfile/assets/wallpaper/wallhaven-pkwxxm_3840x2160.png";
         fillMode = "crop";
-        fillColor = "#000000";
+        fillColor = "#1e1e2e";
         randomEnabled = false;
         transitionDuration = 1000;
         transitionType = "fade";
@@ -236,7 +236,7 @@
       # 颜色主题设置
       colorSchemes = {
         useWallpaperColors = false;
-        predefinedScheme = "Noctalia (default)";
+        predefinedScheme = "catppuccin";
         darkMode = true;
         schedulingMode = "off";
         manualSunrise = "06:30";

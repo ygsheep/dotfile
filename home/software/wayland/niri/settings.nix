@@ -26,8 +26,8 @@ in {
         {command = ["swww-daemon"];}
         # {command = ["swww" "img" "/home/sheep/Niri-Dot/assets/wallpaper/wallhaven-nkp6pq.png"];}
         {command = ["/home/sheep/Niri-Dot/scripts/random-wallpaper.sh"];}
-        {command = ["anyrun"];}
-        {command = ["waybar"];}
+        # {command = ["anyrun"];}
+        # {command = ["waybar"];}
       ];
       input = {
         keyboard.xkb = {

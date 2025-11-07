@@ -11,18 +11,6 @@
     "XF86AudioPrev".action = playerctl "previous";
     "XF86AudioNext".action = playerctl "next";
 
-    "XF86AudioMute" = {
-      allow-when-locked = true;
-      action.spawn = [
-        "qs"
-        "-c"
-        "DankMaterialShell"
-        "ipc"
-        "call"
-        "audio"
-        "mute"
-      ];
-    };
     "XF86AudioMicMute" = {
       allow-when-locked = true;
       action.spawn = [
@@ -36,62 +24,8 @@
       ];
     };
 
-    "XF86AudioRaiseVolume" = {
-      allow-when-locked = true;
-      action.spawn = [
-        "qs"
-        "-c"
-        "DankMaterialShell"
-        "ipc"
-        "call"
-        "audio"
-        "increment"
-        "5"
-      ];
-    };
-    "XF86AudioLowerVolume" = {
-      allow-when-locked = true;
-      action.spawn = [
-        "qs"
-        "-c"
-        "DankMaterialShell"
-        "ipc"
-        "call"
-        "audio"
-        "decrement"
-        "5"
-      ];
-    };
 
-    "XF86MonBrightnessUp" = {
-      allow-when-locked = true;
-      action.spawn = [
-        "qs"
-        "-c"
-        "DankMaterialShell"
-        "ipc"
-        "call"
-        "brightness"
-        "increment"
-        "5"
-        "amdgpu_bl0"
-      ];
-    };
 
-    "XF86MonBrightnessDown" = {
-      allow-when-locked = true;
-      action.spawn = [
-        "qs"
-        "-c"
-        "DankMaterialShell"
-        "ipc"
-        "call"
-        "brightness"
-        "decrement"
-        "5"
-        "amdgpu_bl0"
-      ];
-    };
 
     "Ctrl+Alt+L".action = spawn [
       "qs"
@@ -113,15 +47,6 @@
       "toggle"
     ];
 
-    "Mod+U".action = spawn [
-      "qs"
-      "-c"
-      "DankMaterialShell"
-      "ipc"
-      "call"
-      "settings"
-      "toggle"
-    ];
 
     "Mod+M".action = spawn [
       "qs"
@@ -211,7 +136,6 @@
 
     "Mod+Comma".action = consume-window-into-column;
     "Mod+Period".action = expel-window-from-column;
-    "Mod+C".action = center-visible-columns;
     "Mod+Tab".action = switch-focus-between-floating-and-tiling;
 
     "Mod+Minus".action = set-column-width "-10%";
