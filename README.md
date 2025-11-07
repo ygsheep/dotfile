@@ -20,8 +20,8 @@
 
 <p align="center"><img src="/assets/1.png" width="600px"></p>
 
-<h1 align="center">🐑 Niri-Dot - 中文优化的 NixOS 配置</h1>
-<h3 align="center">一个功能完整的中文本土化 NixOS 桌面环境配置</h3>
+<h1 align="center">🐑 Niri-Dot - 中文优化的模块化 NixOS 配置</h1>
+<h3 align="center">NixOS + Niri + Noctalia - 模块化的现代化桌面环境</h3>
 
 ### ⚠ <sup><sub><samp>如果你使用了我桌面/配置中的任何内容，请尊重原创者并标注来源。</samp></sub></sup>
 
@@ -43,6 +43,7 @@
 - **面板** • [Waybar](https://github.com/Alexays/Waybar) 📊 功能丰富的状态栏
 - **通知守护** • [Dunst](https://github.com/dunst-project/dunst) 🍃 极简主义的通知系统！
 - **启动器** • [AnyRun](https://github.com/Kirottu/anyrun) 🚀 快速的应用启动器！
+- **桌面环境 Shell** • [Noctalia](https://github.com/noctalia-dev/noctalia-shell) 🌙 完整的现代化桌面环境
 - **文件管理器** • [Yazi](https://github.com/sxyazi/yazi) 🔖 Rust 时代的文件管理器！
 - **编辑器** • [Helix](https://docs.helix-editor.com/) ✴️ Rust 编写的 Vim 替代品！
 - **GTK 主题** • [Colloid](https://github.com/vinceliuice/Colloid-gtk-theme) 🎨 现代化的 GTK 主题
@@ -64,13 +65,32 @@
 - **镜像源** • 国内 Nix 镜像源加速
 - **开发工具** • 完整的 Rust、Python、Web 开发环境
 
-### 🖥️ 桌面环境
+### 🖥️ 桌面环境架构
 
-- **默认窗口管理器** • [Niri](https://github.com/YaLTeR/niri/) 🎨 可滚动的平铺窗口管理器
-- **备选桌面环境** • [GNOME](https://www.gnome.org/) 🌟 现代化的 Linux 桌面环境（支持 Wayland）
+**NixOS + Niri + Noctalia** - 模块化的现代化桌面环境
+
+- **操作系统** • [NixOS](https://nixos.org/) 🐧 声明式配置的 Linux 发行版
 - **显示管理器** • [Greetd](https://git.sr.ht/~kennylevinsen/greetd) 🔑 极简的显示管理器（3 层启动链）
+- **窗口管理器** • [Niri](https://github.com/YaLTeR/niri/) 🎨 可滚动的平铺窗口管理器
+- **桌面 Shell** • [Noctalia](https://github.com/noctalia-dev/noctalia-shell) 🌙 完整的桌面环境 shell
 - **启动优化** • 移除冗余层，启动速度提升 30-50%
-- **会话选择** • 自动登录 Niri 窗口管理器
+- **会话选择** • 自动登录到 Niri + Noctalia 环境
+
+#### 架构说明
+
+```
+NixOS (操作系统层)
+    ↓
+Greetd (显示管理器)
+    ↓
+Niri (窗口管理器) + Noctalia-shell (桌面 shell)
+    ↓
+应用程序 (运行在 Niri 管理的窗口中)
+```
+
+- **Niri 负责**: 窗口布局、输入处理、工作区管理、Wayland 合成
+- **Noctalia 负责**: 顶部栏、控制中心、应用启动器、通知系统、壁纸管理
+- **备选环境**: 也可切换到 [GNOME](https://www.gnome.org/) 桌面环境
 
 ### 🔧 系统优化
 
@@ -309,27 +329,31 @@ systemctl --user list-units --type=service --state=running
 
 系统现在支持两个桌面环境：
 
-#### **Niri（默认）**
+#### **主桌面环境：Niri + Noctalia（默认）**
 
-- **特点**: 可滚动的平铺窗口管理器，轻量级且高效
+- **架构**: NixOS + Greetd + Niri + Noctalia-shell
+- **特点**: 模块化的现代化桌面环境，轻量级且高效
+- **窗口管理**: Niri 提供可滚动的平铺窗口管理
+- **用户界面**: Noctalia 提供完整的桌面 shell（顶部栏、控制中心等）
 - **启动方式**: 通过极简启动链自动登录（3 秒内完成）
 - **适用场景**: 开发、代码编辑、键盘驱动的工作流
-- **性能优势**: 启动速度快，资源占用少
+- **性能优势**: 启动速度快，资源占用少，模块化设计
 
-#### **GNOME（备选）**
+#### **备选桌面环境：GNOME**
 
-- **特点**: 完整的桌面环境，用户友好
-- **启动方式**: 在终端中手动启动
+- **架构**: NixOS + GDM + GNOME Shell
+- **特点**: 完整的传统桌面环境，用户友好
+- **启动方式**: 在 GDM 登录界面选择 "GNOME"
 - **适用场景**: 日常使用、办公、多媒体
+- **优势**: 成熟稳定，开箱即用的体验
 
-#### **Greetd 极简显示管理器**
+#### **Greetd 显示管理器**
 
-- **特点**: 极简的 3 层启动链，直接启动 Niri
-- **启动流程**: systemd → greetd → niri-session → Niri WM
-- **性能优化**: 移除了 cage 容器和 tuigreet 欢迎界面
+- **特点**: 极简的 3 层启动链
+- **启动流程**: systemd → greetd → niri-session → Niri WM + Noctalia-shell
+- **性能优化**: 移除了冗余层，启动速度提升 30-50%
 - **配置文件**: `system/services/greetd.nix`
-- **自动登录**: 默认用户 `sheep` 自动登录到 Niri
-- **启动速度**: 比原配置提升 30-50%
+- **自动登录**: 默认用户 `sheep` 自动登录到完整桌面环境
 
 #### **会话切换**
 
@@ -338,14 +362,28 @@ systemctl --user list-units --type=service --state=running
 ls /run/current-system/sw/share/wayland-sessions/
 ls /run/current-system/sw/share/xsessions/
 
-# 手动启动 GNOME（在终端中）
+# 主环境（默认）：Niri + Noctalia
+# 启动时自动登录，无需手动操作
+
+# 切换到 GNOME 环境
+# 1. 如果当前在主环境中，先停止相关服务
+systemctl --user stop noctalia-shell 2>/dev/null || true
+# 2. 启动 GNOME
 gnome-session --session=gnome
 
-# 重启 Niri 会话
+# 返回到主环境
+# 1. 停止 GNOME
+systemctl --user stop gnome-shell 2>/dev/null || true
+# 2. 重新启动 Niri 会话（自动加载 Noctalia）
 niri-session -r
 
-# 如果需要修改登录配置，编辑:
-# system/services/greetd.nix
+# 重启当前桌面环境
+niri-session -r
+
+# 配置文件位置
+# 主环境配置: system/services/greetd.nix, home/software/octalia/default.nix
+# Niri 配置: home/software/wayland/niri/
+# Noctalia 配置: home/software/octalia/default.nix
 ```
 
 ## ⚙️ 配置说明
@@ -537,6 +575,9 @@ nh os switch
 
 - **Super + Enter** - 打开终端 (Ghostty)
 - **Super + R** - 打开应用启动器 (AnyRun)
+- **Super + Shift + R** - 启动 Noctalia 应用启动器
+- **Super + C** - 打开 Noctalia 控制中心
+- **Super + Ctrl + L** - Noctalia 锁屏
 - **Super + D** - 打开应用启动器 (QuickShell Spotlight)
 - **Alt + Space** - 打开应用启动器 (QuickShell Spotlight)
 - **Super + F** - 最大化窗口
@@ -562,6 +603,89 @@ nh os switch
 - **Ctrl + Shift + V** - 粘贴
 - **Ctrl + Shift + T** - 新建标签页
 - **Ctrl + Tab** - 切换标签页
+
+## 🌙 Noctalia 桌面 Shell
+
+Noctalia 是基于 Qt6 的现代化桌面环境 shell，作为 Niri 窗口管理器的用户界面层，现已完全集成到 Niri-Dot 中。
+
+### 🎯 主要特性
+
+- **完整桌面 Shell**: 不仅仅是启动器，而是完整的桌面环境界面
+- **顶部栏**: 系统监控、工作区显示、音量亮度控制、时钟等
+- **控制中心**: 集中管理所有系统设置（网络、蓝牙、电源等）
+- **应用启动器**: 智能搜索和分类，支持剪贴板历史
+- **壁纸管理**: 自动壁纸切换、过渡效果、多显示器支持
+- **通知系统**: 现代化的通知管理
+- **系统集成**: 音量、亮度、媒体控制的多媒体键支持
+- **中文优化**: 完整的中文字体、时区和本地化配置
+
+### ⌨️ 快捷键
+
+| 快捷键 | 功能 |
+|--------|------|
+| `Super + Shift + R` | 打开/关闭 Noctalia 应用启动器 |
+| `Super + C` | 打开/关闭 Noctalia 控制中心 |
+| `Super + Ctrl + L` | Noctalia 锁屏 |
+| `Super + R` | 启动 AnyRun（传统启动器） |
+| `Alt + Space` | QuickShell Spotlight |
+| `XF86Audio*` | 音量控制（通过 Noctalia） |
+| `XF86MonBrightness*` | 亮度控制（通过 Noctalia） |
+
+### ⚙️ 配置文件
+
+配置文件位于：
+- **主配置**: `~/.config/noctalia/config.json`
+- **QuickShell**: `~/.config/quickshell/config.qml`
+- **模块配置**: `home/software/octalia/default.nix`
+
+### 🎨 自定义配置
+
+编辑 `~/.config/noctalia/config.json`:
+
+```json
+{
+  "appearance": {
+    "theme": "default",
+    "accentColor": "#8aadf4",
+    "backgroundColor": "#24273a",
+    "textColor": "#cad3f5"
+  },
+  "modules": {
+    "launcher": {
+      "enabled": true,
+      "fuzzySearch": true,
+      "categories": ["utilities", "development", "games"]
+    },
+    "calculator": {
+      "enabled": true
+    },
+    "websearch": {
+      "enabled": true,
+      "engines": {
+        "google": "https://www.google.com/search?q={}"
+      }
+    }
+  }
+}
+```
+
+### 🔧 故障排除
+
+```bash
+# 检查服务状态
+systemctl --user status noctalia
+
+# 查看日志
+journalctl --user -u noctalia -f
+
+# 手动启动
+noctalia
+
+# 重启服务
+systemctl --user restart noctalia
+```
+
+详细文档请参考：[scripts/README-noctalia.md](scripts/README-noctalia.md)
 
 ## 🛠️ 故障排除
 

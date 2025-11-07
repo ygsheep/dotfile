@@ -159,6 +159,43 @@
     "Mod+Return".action = spawn "${pkgs.ghostty}/bin/ghostty";
     "Mod+R".action = spawn "${pkgs.anyrun}/bin/anyrun";
 
+    # Noctalia 快捷键
+    "Mod+Shift+R".action = spawn [
+      "noctalia-shell" "ipc" "call" "appLauncher" "toggle"
+    ];
+
+    # Noctalia 控制中心
+    "Mod+C".action = spawn [
+      "noctalia-shell" "ipc" "call" "controlCenter" "toggle"
+    ];
+
+    # Noctalia 锁屏 (替代方案)
+    "Mod+Ctrl+L".action = spawn [
+      "noctalia-shell" "ipc" "call" "lockScreen" "toggle"
+    ];
+
+    # 音量控制
+    "XF86AudioRaiseVolume".action = spawn [
+      "noctalia-shell" "ipc" "call" "volume" "increase"
+    ];
+
+    "XF86AudioLowerVolume".action = spawn [
+      "noctalia-shell" "ipc" "call" "volume" "decrease"
+    ];
+
+    "XF86AudioMute".action = spawn [
+      "noctalia-shell" "ipc" "call" "volume" "muteOutput"
+    ];
+
+    # 亮度控制
+    "XF86MonBrightnessUp".action = spawn [
+      "noctalia-shell" "ipc" "call" "brightness" "increase"
+    ];
+
+    "XF86MonBrightnessDown".action = spawn [
+      "noctalia-shell" "ipc" "call" "brightness" "decrease"
+    ];
+
     "Mod+Q".action = close-window;
     "Mod+S".action = switch-preset-column-width;
     "Mod+F".action = maximize-column;
