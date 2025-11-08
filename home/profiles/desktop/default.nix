@@ -12,10 +12,10 @@
     # media services
     ../../services/media/playerctl.nix
 
-    # software
-    ../../software
-    ../../software/wayland
-    ../../software/anyrun
+    # apps (原 software)
+    ../../apps
+    ../../apps/wayland
+    ../../apps/anyrun
 
     # system services
     ../../services/system/gpg-agent.nix

@@ -1,6 +1,6 @@
-{ pkgs, ... }: {
+{ pkgs, globals, ... }: {
   # nh default flake - 指向 Niri-Dot 配置目录
-  environment.variables.NH_FLAKE = "/home/sheep/.dotfile";
+  environment.variables.NH_FLAKE = globals.projectDir;
 
   programs.nh = {
     enable = true;

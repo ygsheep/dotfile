@@ -28,7 +28,7 @@
 ---
 
 <pre align="center">
-<a href="#installation">📦 安装指南</a> • <a href="#features">🌟 特性介绍</a> • <a href="#configuration">⚙️ 配置说明</a> • <a href="#chinese-support">🇨🇳 中文支持</a> • <a href="#key-bindings">⌨️ 快捷键</a>
+<a href="#installation">📦 安装指南</a> • <a href="#features">🌟 特性介绍</a> • <a href="#configuration">⚙️ 配置说明</a> • <a href="#chinese-support">🇨🇳 中文支持</a> • <a href="#key-bindings">⌨️ 快捷键</a> • <a href="./docs">📖 详细文档</a>
 </pre>
 
 ---

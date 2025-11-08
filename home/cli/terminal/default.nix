@@ -3,7 +3,7 @@
   cache = config.xdg.cacheHome;
 in {
   imports = [
-    ./software
+    ./software  # CLI 软件配置
     ./shell/starship.nix
     # ./shell/fish.nix
     ./shell/nushell.nix
