@@ -12,9 +12,8 @@
     # media services
     ../../services/media/playerctl.nix
 
-    # apps (原 software)
+    # apps
     ../../apps
-    ../../apps/wayland
     ../../apps/anyrun
 
     # system services

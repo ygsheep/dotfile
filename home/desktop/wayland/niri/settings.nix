@@ -25,7 +25,7 @@ in {
         {command = ["qs" "-c" "DankMaterialShell"];}
         {command = ["swww-daemon"];}
         # {command = ["swww" "img" "/home/sheep/Niri-Dot/assets/wallpaper/wallhaven-nkp6pq.png"];}
-        {command = ["/home/sheep/Niri-Dot/scripts/random-wallpaper.sh"];}
+        {command = ["flatpak run org.fcitx.Fcitx5"];}
         # {command = ["anyrun"];}
         # {command = ["waybar"];}
       ];

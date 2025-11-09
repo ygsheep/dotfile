@@ -5,7 +5,7 @@
     ./niri
     ./astal
     ./waybar
-    ../noctalia
+    ./noctalia
   ];
 
   home.packages = with pkgs; [

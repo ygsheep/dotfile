@@ -3,6 +3,7 @@
     ./security.nix
     ./users.nix
     #./locale.nix
+    ./time-sync.nix
     ../nix
     ../programs/nushell.nix
   ];

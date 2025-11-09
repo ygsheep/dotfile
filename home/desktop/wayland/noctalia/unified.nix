@@ -86,7 +86,7 @@ in {
         avatarImage = "";
         dimDesktop = true;
         showScreenCorners = false;
-        scaleRatio = 1.2;
+        scaleRatio = 1.0;
         radiusRatio = 0.15;
         animationSpeed = 1;
         enableShadows = true;
@@ -122,7 +122,7 @@ in {
         directory = "${globals.assetsDir}/wallpaper";
         setWallpaperOnAllMonitors = true;
         defaultWallpaper = "${globals.assetsDir}/wallpaper/wallhaven-pkwxxm_3840x2160.png";
-        fillMode = "crop";
+        fillMode = "scale";
         fillColor = "#1e1e2e";
         randomEnabled = false;
         transitionDuration = 1000;
@@ -285,7 +285,7 @@ in {
       "${inputs.quickshell.packages.${pkgs.system}.default}/lib/qt-6/qml"
       "${pkgs.kdePackages.qtdeclarative}/lib/qt-6/qml"
       "${pkgs.kdePackages.kirigami.unwrapped}/lib/qt-6/qml"
-      config.home.sessionVariables.QML2_IMPORT_PATH or ""
+      ""
     ];
   };
 

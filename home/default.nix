@@ -8,7 +8,7 @@
   imports = [
     ./cli  # 移动后的终端配置
     ./editors
-    ./desktop  # 新增桌面环境配置
+    ./desktop/wayland  # 新增桌面环境配置
     ./apps  # 移动后的应用程序配置
     ./programs/input-method
     ./programs/version-control
