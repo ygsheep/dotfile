@@ -81,6 +81,11 @@
     "Print".action.screenshot-screen = {write-to-disk = true;};
     "Mod+Shift+Alt+S".action.screenshot-window = {write-to-disk = true;};
     "Mod+Shift+S".action.screenshot = {show-pointer = false;};
+
+    # Flameshot screenshot keybindings
+    "Mod+P".action = spawn "flameshot" ["gui"];
+    "Mod+Shift+P".action = spawn "flameshot" ["gui" "--clipboard"];
+    "Mod+Ctrl+P".action = spawn "flameshot" ["gui" "--delay" "3000"];
     "Mod+Return".action = spawn "${pkgs.ghostty}/bin/ghostty";
     "Mod+R".action = spawn "${pkgs.anyrun}/bin/anyrun";
 

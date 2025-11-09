@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{pkgs, config, ...}:
 # Wayland config
 {
   imports = [
@@ -12,6 +12,7 @@
     # screenshot
     grim
     slurp
+    (flameshot.override { enableWlrSupport = true; })
 
     # utils
     wl-clipboard
@@ -24,4 +25,26 @@
     SDL_VIDEODRIVER = "wayland";
     XDG_SESSION_TYPE = "wayland";
   };
+
+  # Enable Flameshot service
+  services.flameshot = {
+    enable = true;
+    settings = {
+      General = {
+        # Enable grim adapter for Wayland support
+        useGrimAdapter = true;
+
+        # Other useful settings
+        disabledTrayIcon = false;
+        showStartupLaunchMessage = true;
+        autoCloseIdleDaemon = false;
+        copyPathAfterSave = true;
+        savePath = "${config.home.homeDirectory}/Pictures/Screenshots";
+        savePathFixed = false;
+      };
+    };
+  };
+
+  # Ensure screenshots directory exists
+  home.file."Pictures/Screenshots/.keep".text = "";
 }

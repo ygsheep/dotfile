@@ -20,7 +20,6 @@
     # 系统启动时强制同步时间
     extraConfig = ''
       makestep 1.0 3
-      rtcsync
     '';
   };
 
@@ -34,7 +33,7 @@
   };
 
   # 开机时等待网络可用后再同步时间
-  systemd.services.time-sync.target = {
+  systemd.targets.time-sync = {
     description = "Time Synchronization";
     after = [ "network-online.target" ];
     wants = [ "network-online.target" ];
@@ -56,7 +55,7 @@
     serviceConfig = {
       Type = "oneshot";
       ExecStart = "${pkgs.chrony}/bin/chronyc sources --offline";
-      ExecStartPost = "/usr/bin/timedatectl status || true";
+      ExecStartPost = "/run/current-system/sw/bin/timedatectl status || true";
     };
   };
 
@@ -64,8 +63,6 @@
   environment.systemPackages = with pkgs; [
     chrony          # NTP 客户端和服务端
     ntp             # NTP 工具
-    timedatectl      # systemd 时间工具
-    hwclock          # 硬件时钟工具
   ];
 
   # 系统提示

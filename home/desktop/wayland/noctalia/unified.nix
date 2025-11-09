@@ -118,15 +118,17 @@ in {
       # 壁纸设置（使用全局变量）
       wallpaper = {
         enabled = true;
-        overviewEnabled = true;
+        overviewEnabled = false;
         directory = "${globals.assetsDir}/wallpaper";
         setWallpaperOnAllMonitors = true;
         defaultWallpaper = "${globals.assetsDir}/wallpaper/wallhaven-pkwxxm_3840x2160.png";
         fillMode = "scale";
         fillColor = "#1e1e2e";
-        randomEnabled = false;
-        transitionDuration = 1000;
-        transitionType = "fade";
+        randomEnabled = true;
+        randomIntervalSec = 300;
+        transitionDuration = 1500;
+        transitionType = "random";
+        transitionEdgeSmoothness = 0.05;
         panelPosition = "follow_bar";
       };
 

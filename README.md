@@ -23,8 +23,6 @@
 <h1 align="center">🐑 Niri-Dot - 中文优化的模块化 NixOS 配置</h1>
 <h3 align="center">NixOS + Niri + Noctalia - 模块化的现代化桌面环境</h3>
 
-### ⚠ <sup><sub><samp>如果你使用了我桌面/配置中的任何内容，请尊重原创者并标注来源。</samp></sub></sup>
-
 ---
 
 <pre align="center">
@@ -73,31 +71,6 @@
 - **显示管理器** • [Greetd](https://git.sr.ht/~kennylevinsen/greetd) 🔑 极简的显示管理器（3 层启动链）
 - **窗口管理器** • [Niri](https://github.com/YaLTeR/niri/) 🎨 可滚动的平铺窗口管理器
 - **桌面 Shell** • [Noctalia](https://github.com/noctalia-dev/noctalia-shell) 🌙 完整的桌面环境 shell
-- **启动优化** • 移除冗余层，启动速度提升 30-50%
-- **会话选择** • 自动登录到 Niri + Noctalia 环境
-
-#### 架构说明
-
-```
-NixOS (操作系统层)
-    ↓
-Greetd (显示管理器)
-    ↓
-Niri (窗口管理器) + Noctalia-shell (桌面 shell)
-    ↓
-应用程序 (运行在 Niri 管理的窗口中)
-```
-
-- **Niri 负责**: 窗口布局、输入处理、工作区管理、Wayland 合成
-- **Noctalia 负责**: 顶部栏、控制中心、应用启动器、通知系统、壁纸管理
-- **备选环境**: 也可切换到 [GNOME](https://www.gnome.org/) 桌面环境
-
-### 🔧 系统优化
-
-- **性能优化** • ZRAM 压缩、系统调优
-- **安全性** • 系统安全加固配置
-- **网络** • NetworkManager + 防火墙配置
-- **字体管理** • 自动字体发现和管理
 
 ## 📦 安装指南
 
@@ -339,22 +312,6 @@ systemctl --user list-units --type=service --state=running
 - **适用场景**: 开发、代码编辑、键盘驱动的工作流
 - **性能优势**: 启动速度快，资源占用少，模块化设计
 
-#### **备选桌面环境：GNOME**
-
-- **架构**: NixOS + GDM + GNOME Shell
-- **特点**: 完整的传统桌面环境，用户友好
-- **启动方式**: 在 GDM 登录界面选择 "GNOME"
-- **适用场景**: 日常使用、办公、多媒体
-- **优势**: 成熟稳定，开箱即用的体验
-
-#### **Greetd 显示管理器**
-
-- **特点**: 极简的 3 层启动链
-- **启动流程**: systemd → greetd → niri-session → Niri WM + Noctalia-shell
-- **性能优化**: 移除了冗余层，启动速度提升 30-50%
-- **配置文件**: `system/services/greetd.nix`
-- **自动登录**: 默认用户 `sheep` 自动登录到完整桌面环境
-
 #### **会话切换**
 
 ```bash
@@ -445,29 +402,10 @@ sudo ./scripts/test-startup-performance.sh
 # - 配置对比分析
 ```
 
-### 启动流程优化
-
-Niri-Dot 采用极简启动链设计：
-
-**优化前（5 层）**：
-```
-systemd → greetd → cage → tuigreet → niri-session → Niri WM
-```
-
-**优化后（3 层）**：
-```
-systemd → greetd → niri-session → Niri WM
-```
-
-**性能提升**：
-- ✅ 启动时间减少 30-50%
-- ✅ 内存使用减少 20-40MB
-- ✅ 故障点从 5 个减少到 3 个
-- ✅ 配置复杂度显著降低
-
 ### 故障排查
 
 常用排查命令：
+
 ```bash
 # 查看 Greetd 日志
 journalctl -u greetd -f
@@ -621,19 +559,20 @@ Noctalia 是基于 Qt6 的现代化桌面环境 shell，作为 Niri 窗口管理
 
 ### ⌨️ 快捷键
 
-| 快捷键 | 功能 |
-|--------|------|
-| `Super + Shift + R` | 打开/关闭 Noctalia 应用启动器 |
-| `Super + C` | 打开/关闭 Noctalia 控制中心 |
-| `Super + Ctrl + L` | Noctalia 锁屏 |
-| `Super + R` | 启动 AnyRun（传统启动器） |
-| `Alt + Space` | QuickShell Spotlight |
-| `XF86Audio*` | 音量控制（通过 Noctalia） |
-| `XF86MonBrightness*` | 亮度控制（通过 Noctalia） |
+| 快捷键               | 功能                          |
+| -------------------- | ----------------------------- |
+| `Super + Shift + R`  | 打开/关闭 Noctalia 应用启动器 |
+| `Super + C`          | 打开/关闭 Noctalia 控制中心   |
+| `Super + Ctrl + L`   | Noctalia 锁屏                 |
+| `Super + R`          | 启动 AnyRun（传统启动器）     |
+| `Alt + Space`        | QuickShell Spotlight          |
+| `XF86Audio*`         | 音量控制（通过 Noctalia）     |
+| `XF86MonBrightness*` | 亮度控制（通过 Noctalia）     |
 
 ### ⚙️ 配置文件
 
 配置文件位于：
+
 - **主配置**: `~/.config/noctalia/config.json`
 - **QuickShell**: `~/.config/quickshell/config.qml`
 - **模块配置**: `home/software/octalia/default.nix`
@@ -710,47 +649,6 @@ swww img ~/.dotfile/assets/1.png
 # 重启 Niri 会话
 # 注销并重新登录，或使用以下命令重启
 niri-session -r
-```
-
-#### 应用启动器无法使用
-
-```bash
-# 检查 AnyRun 是否已安装
-which anyrun
-
-# 手动启动 AnyRun
-anyrun
-
-# 检查 QuickShell Spotlight 功能
-qs -c DankMaterialShell ipc call spotlight toggle
-
-# 如果快捷键不工作，检查键盘布局
-setxkbmap -query
-```
-
-#### 输入法无法启动
-
-```bash
-# 检查 fcitx5 进程
-ps aux | grep fcitx5
-
-# 重启 fcitx5
-fcitx5-remote -r && sleep 1 && fcitx5 &
-
-# 重新部署 Rime
-rime-setup deploy
-```
-
-#### 字体显示异常
-
-```bash
-# 重新生成字体缓存
-fc-cache -f -v
-
-# 检查字体配置
-fc-match "sans-serif"
-fc-match "serif"
-fc-match "monospace"
 ```
 
 #### 网络连接问题

@@ -1,7 +1,8 @@
 {
   description = "LinuDev Configuration NixOs.";
 
-  outputs = inputs@{ self, ... }:
+  outputs =
+    inputs@{ self, ... }:
     let
       # 全局配置变量
       globals = {
@@ -13,36 +14,46 @@
         releaseDate = "2025-01-08";
       };
     in
-    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = ["x86_64-linux"];
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [ "x86_64-linux" ];
 
-      imports = [./home/profiles ./hosts ./pkgs];
+      imports = [
+        ./home/profiles
+        ./hosts
+        ./pkgs
+      ];
 
-      perSystem = {
-        config,
-        pkgs,
-        ...
-      }: {
-        devShells = {
-          default = pkgs.mkShell {
-            packages = [pkgs.alejandra pkgs.git config.packages.repl];
-            name = "nixland";
-            DIRENV_LOG_FORMAT = "";
-            # 导出全局变量到环境
-            NIRI_DOT_USER = globals.user;
-            NIRI_DOT_HOME = globals.homeDir;
-            NIRI_DOT_PROJECT = globals.projectDir;
-            NIRI_DOT_ASSETS = globals.assetsDir;
+      perSystem =
+        {
+          config,
+          pkgs,
+          ...
+        }:
+        {
+          devShells = {
+            default = pkgs.mkShell {
+              packages = [
+                pkgs.alejandra
+                pkgs.git
+                config.packages.repl
+              ];
+              name = "nixland";
+              DIRENV_LOG_FORMAT = "";
+              # 导出全局变量到环境
+              NIRI_DOT_USER = globals.user;
+              NIRI_DOT_HOME = globals.homeDir;
+              NIRI_DOT_PROJECT = globals.projectDir;
+              NIRI_DOT_ASSETS = globals.assetsDir;
+            };
+          };
+          # Nix Formatter
+          formatter = pkgs.alejandra;
+
+          packages = {
+            # 导出全局变量供其他模块使用
+            inherit globals;
           };
         };
-        # Nix Formatter
-        formatter = pkgs.alejandra;
-
-        packages = {
-          # 导出全局变量供其他模块使用
-          inherit globals;
-        };
-      };
     };
 
   inputs = {
@@ -72,7 +83,6 @@
         systems.follows = "systems";
       };
     };
-
 
     anyrun = {
       url = "github:anyrun-org/anyrun";
@@ -128,7 +138,9 @@
     };
 
     zen-browser = {
-      url = "github:youwen5/zen-browser-flake";
+      url = "github:0xc000022070/zen-browser-flake";
+      # IMPORTANT: we're using "libgbm" and is only available in unstable so ensure
+      # to have it up-to-date or simply don't specify the nixpkgs input
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

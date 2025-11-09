@@ -1,21 +1,28 @@
 # systems/chinese/input-methods.nix - Fcitx5 + Rime 输入法配置
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
 
-  # 手动安装 fcitx5 相关包
-  environment.systemPackages = with pkgs; [
-    fcitx5
-    fcitx5-rime  # Rime 输入法引擎
-    fcitx5-gtk   # GTK 支持
-    # fcitx5-qt    # Qt 支持
-    # fcitx5-configtool
-  ];
+  i18n.inputMethod = {
+    enabled = "fcitx5";
+    fcitx5.waylandFrontend = true;
+    fcitx5.addons = with pkgs; [
+      rime-data
+      fcitx5-gtk
+      fcitx5-rime
+      fcitx5-nord # 主题
+    ];
+  };
 
   # 输入法环境变量
   environment.sessionVariables = {
     GLFW_IM_MODULE = "fcitx";
-    GTK_IM_MODULE = "fcitx";
+    # GTK_IM_MODULE = "fcitx";
     QT_IM_MODULE = "fcitx";
     XMODIFIERS = "@im=fcitx";
     # Wayland 专用配置

@@ -87,20 +87,20 @@
       case "''${1:-help}" in
         "install")
           echo "📦 安装/更新 Rime Ice 配置..."
-          
+
           # 备份现有配置
           if [[ -d "$RIME_DIR" ]]; then
             echo "💾 备份现有配置..."
             backup_config
           fi
-          
+
           # 创建目录
           mkdir -p "$RIME_DIR"
-          
+
           # 克隆 Rime Ice 配置
           echo "📥 下载 Rime Ice 配置..."
           ${pkgs.git}/bin/git clone https://github.com/iDvel/rime-ice.git "$RIME_DIR" --depth 1
-          
+
           echo "✅ Rime Ice 配置安装完成"
           deploy_rime
           ;;

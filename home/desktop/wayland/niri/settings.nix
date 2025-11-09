@@ -25,7 +25,7 @@ in {
         {command = ["qs" "-c" "DankMaterialShell"];}
         {command = ["swww-daemon"];}
         # {command = ["swww" "img" "/home/sheep/Niri-Dot/assets/wallpaper/wallhaven-nkp6pq.png"];}
-        {command = ["flatpak run org.fcitx.Fcitx5"];}
+        # {command = ["flatpak run org.fcitx.Fcitx5"];}
         # {command = ["anyrun"];}
         # {command = ["waybar"];}
       ];
@@ -90,8 +90,8 @@ in {
         border = {
           enable = true;
           width = 2;
-          active.color = "#${base0D}";
-          inactive.color = "#${base07}";
+          active.color = "#1e1e2e";
+          inactive.color = "#0c0c12";
         };
         shadow = {
           enable = false;

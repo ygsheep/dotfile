@@ -3,7 +3,7 @@
     ./browsers/chromium.nix
     ./browsers/firefox.nix
     ./browsers/edge.nix
-    # ./browsers/zen.nix
+    ./browsers/zen.nix
     ./gtk.nix
     ./media
   ];
