@@ -21,6 +21,9 @@
 
     # utils
     wl-clipboard
+
+    # XWayland support
+    xwayland-satellite
   ];
 
   # make stuff work on wayland

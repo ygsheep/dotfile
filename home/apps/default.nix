@@ -4,8 +4,10 @@
     ./browsers/firefox.nix
     ./browsers/edge.nix
     ./browsers/zen.nix
+
     ./gtk.nix
     ./media
+    ./develop
   ];
 
   home.packages = with pkgs; [

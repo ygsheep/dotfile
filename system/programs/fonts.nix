@@ -85,62 +85,7 @@
           emoji = ["Noto Color Emoji"];
         };
 
-      # 字体渲染本地配置
-      localConf = ''
-        <?xml version="1.0"?>
-        <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
-        <fontconfig>
-          <!-- 启用抗锯齿 -->
-          <match target="font">
-            <edit name="antialias" mode="assign">
-              <bool>true</bool>
-            </edit>
-            <edit name="hinting" mode="assign">
-              <bool>true</bool>
-            </edit>
-            <edit name="hintstyle" mode="assign">
-              <const>hintslight</const>
-            </edit>
-            <edit name="lcdfilter" mode="assign">
-              <const>default</const>
-            </edit>
-          </match>
-
-          <!-- 字体替换规则 -->
-          <alias binding="strong">
-            <family>SimSun</family>
-            <prefer>
-              <family>Noto Serif CJK SC</family>
-            </prefer>
-          </alias>
-
-          <alias binding="strong">
-            <family>SimHei</family>
-            <prefer>
-              <family>Noto Sans CJK SC</family>
-            </prefer>
-          </alias>
-
-          <alias binding="strong">
-            <family>Microsoft YaHei</family>
-            <prefer>
-              <family>Noto Sans CJK SC</family>
-            </prefer>
-          </alias>
-
-          <!-- 禁用位图字体 -->
-          <selectfont>
-            <rejectfont>
-              <pattern>
-                <patelt name="scalable">
-                  <bool>false</bool>
-                </patelt>
-              </pattern>
-            </rejectfont>
-          </selectfont>
-        </fontconfig>
-      '';
-    };
+      };
     fontDir = {
       enable = true;
       decompressFonts = true;

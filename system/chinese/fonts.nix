@@ -35,6 +35,22 @@
     <?xml version="1.0"?>
     <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
     <fontconfig>
+      <!-- 启用抗锯齿 -->
+      <match target="font">
+        <edit name="antialias" mode="assign">
+          <bool>true</bool>
+        </edit>
+        <edit name="hinting" mode="assign">
+          <bool>true</bool>
+        </edit>
+        <edit name="hintstyle" mode="assign">
+          <const>hintslight</const>
+        </edit>
+        <edit name="lcdfilter" mode="assign">
+          <const>lcddefault</const>
+        </edit>
+      </match>
+
       <!-- 中文字体优先级配置 -->
       <alias>
         <family>serif</family>
@@ -108,6 +124,17 @@
           <bool>false</bool>
         </edit>
       </match>
+
+      <!-- 禁用位图字体 -->
+      <selectfont>
+        <rejectfont>
+          <pattern>
+            <patelt name="scalable">
+              <bool>false</bool>
+            </patelt>
+          </pattern>
+        </rejectfont>
+      </selectfont>
     </fontconfig>
   '';
 }
