@@ -6,9 +6,8 @@
 }: let
   # 定义共享目录路径
   sharesBase = "/mnt/资源";
-  publicShare = "${sharesBase}/Public";
+  publicShare = "${sharesBase}/AirVideo";
   privateShare = "${sharesBase}/Private";
-  timeMachineShare = "${sharesBase}/TimeMachine";
 in {
   # 启用 Samba 服务
   services.samba = {
@@ -36,7 +35,7 @@ in {
       };
 
       # 公开共享目录
-      "public" = {
+      "AirVideo" = {
         "path" = publicShare;
         "browseable" = "yes";
         "read only" = "no";
@@ -48,34 +47,15 @@ in {
       };
 
       # 私有共享目录
-      "private" = {
-        "path" = privateShare;
+      "Telegram Desktop" = {
+        "path" = "${sharesBase}/Telegram Desktop";
         "browseable" = "yes";
         "read only" = "no";
-        "guest ok" = "no";
-        "create mask" = "0660";
-        "directory mask" = "0770";
+        "guest ok" = "yes";
+        "create mask" = "0664";
+        "directory mask" = "0775";
         "force user" = globals.user;
         "force group" = "users";
-        "valid users" = globals.user;
-      };
-
-      # Apple Time Machine 共享
-      "TimeMachine" = {
-        "path" = timeMachineShare;
-        "browseable" = "yes";
-        "read only" = "no";
-        "guest ok" = "no";
-        "create mask" = "0660";
-        "directory mask" = "0770";
-        "force user" = globals.user;
-        "force group" = "users";
-        "valid users" = globals.user;
-        "fruit:aapl" = "yes";
-        "fruit:time machine" = "yes";
-        "vfs objects" = "catia fruit streams_xattr";
-        "fruit:encoding" = "native";
-        "fruit:metadata" = "stream";
       };
     };
   };
@@ -127,11 +107,6 @@ in {
         mkdir -p ${privateShare}
         chmod 700 ${privateShare}
         chown ${globals.user}:users ${privateShare}
-
-        # 创建 TimeMachine 共享目录
-        mkdir -p ${timeMachineShare}
-        chmod 755 ${timeMachineShare}
-        chown ${globals.user}:users ${timeMachineShare}
       '';
     };
   };

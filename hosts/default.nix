@@ -30,7 +30,7 @@
               users.sheep.imports =
                 homeImports."sheep@desktop";
               extraSpecialArgs = specialArgs;
-              backupFileExtension = "backup";
+              backupFileExtension = "bak";
             };
           }
 
