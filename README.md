@@ -15,929 +15,174 @@
   </a>
 </p>
 
-<p align="center">
-<a href="https://nixos.org/"><img src="https://img.shields.io/badge/NixOS-25.05-informational.svg?style=flat&logo=nixos&logoColor=CAD3F5&colorA=24273A&colorB=8AADF4"></a>
-
 <p align="center"><img src="/assets/1.png" width="600px"></p>
 
 <h1 align="center">🐑 Niri-Dot - 中文优化的模块化 NixOS 配置</h1>
-<h3 align="center">NixOS + Niri + Noctalia - 模块化的现代化桌面环境</h3>
+<h3 align="center">NixOS + Niri + Noctalia - v2.0.0 模块化桌面环境</h3>
 
 ---
 
 <pre align="center">
-<a href="#installation">📦 安装指南</a> • <a href="#features">🌟 特性介绍</a> • <a href="#configuration">⚙️ 配置说明</a> • <a href="#chinese-support">🇨🇳 中文支持</a> • <a href="#key-bindings">⌨️ 快捷键</a> • <a href="./docs">📖 详细文档</a>
+<a href="#安装">📦 快速安装</a> • <a href="#特性">🌟 核心特性</a> • <a href="#使用">⚙️ 基本使用</a> • <a href="#架构">🏗️ 项目架构</a>
 </pre>
 
 ---
 
-## 🌟 项目特性
+## 📦 快速安装
 
-### 🎨 桌面环境
+### 1. 准备 NixOS 系统
+确保已安装 NixOS 25.05 或更新版本，并启用了 Flakes 支持。
 
-- **窗口管理器** • [Niri](https://github.com/YaLTeR/niri/) 🎨 可滚动的平铺窗口管理器！
-- **Shell 环境** • [Nushell](https://www.nushell.sh/) 🐚 配合 [Starship](https://github.com/starship/starship) 跨平台 shell！
-- **终端** • [WezTerm](https://wezfurlong.org/wezterm/) 💻 强大的现代化终端
-- **面板** • [Waybar](https://github.com/Alexays/Waybar) 📊 功能丰富的状态栏
-- **通知守护** • [Dunst](https://github.com/dunst-project/dunst) 🍃 极简主义的通知系统！
-- **启动器** • [AnyRun](https://github.com/Kirottu/anyrun) 🚀 快速的应用启动器！
-- **桌面环境 Shell** • [Noctalia](https://github.com/noctalia-dev/noctalia-shell) 🌙 完整的现代化桌面环境
-- **文件管理器** • [Yazi](https://github.com/sxyazi/yazi) 🔖 Rust 时代的文件管理器！
-- **编辑器** • [Helix](https://docs.helix-editor.com/) ✴️ Rust 编写的 Vim 替代品！
-- **GTK 主题** • [Colloid](https://github.com/vinceliuice/Colloid-gtk-theme) 🎨 现代化的 GTK 主题
-- **锁屏** • [Hyprlock](https://wiki.hyprland.org/Hypr-Ecosystem/hyprlock/) 🔒 安全的锁屏界面
-
-### 🌏 中文本土化支持
-
-- **输入法框架** • Fcitx5 + Rime（支持雾凇拼音）
-- **中文字体** • 完整的思源、Noto CJK、文泉驿字体支持
-- **字体渲染** • 优化的中文字体渲染和抗锯齿设置
-- **本地化设置** • 完整的中文本地化环境
-- **键盘布局** • 中英文双布局，Alt+Shift 切换
-
-### 🛠️ 开发环境
-
-- **Git 配置** • 预配置好的 Git 用户信息和别名
-- **包管理** • NH 工具集成，便捷的 NixOS 配置管理
-- **代理支持** • 内置代理管理和配置脚本
-- **镜像源** • 国内 Nix 镜像源加速
-- **开发工具** • 完整的 Rust、Python、Web 开发环境
-
-### 🖥️ 桌面环境架构
-
-**NixOS + Niri + Noctalia** - 模块化的现代化桌面环境
-
-- **操作系统** • [NixOS](https://nixos.org/) 🐧 声明式配置的 Linux 发行版
-- **显示管理器** • [Greetd](https://git.sr.ht/~kennylevinsen/greetd) 🔑 极简的显示管理器（3 层启动链）
-- **窗口管理器** • [Niri](https://github.com/YaLTeR/niri/) 🎨 可滚动的平铺窗口管理器
-- **桌面 Shell** • [Noctalia](https://github.com/noctalia-dev/noctalia-shell) 🌙 完整的桌面环境 shell
-
-## 📦 安装指南
-
-### 📋 系统要求
-
-- NixOS 25.05 或更新版本
-- x86_64 架构
-- 支持 UEFI 的系统
-
-### 🚀 快速安装
-
-#### 1. 下载 NixOS ISO
-
+### 2. 克隆配置
 ```bash
-wget -O nixos-minimal.iso https://channels.nixos.org/nixos-25.05/latest-nixos-minimal-x86_64-linux.iso
+git clone https://github.com/ygsheep/dotfile ~/.dotfile
+cd ~/.dotfile
 ```
 
-#### 2. 制作启动盘并安装系统
-
-启动到 NixOS 安装程序，切换到 root：
-
+### 3. 生成硬件配置
 ```bash
-sudo -i
+sudo nixos-generate-config --dir ~/.dotfile/hosts/desktop --force
+rm ~/.dotfile/hosts/desktop/configuration.nix
 ```
 
-#### 3. 磁盘分区（示例配置）
-
+### 4. 安装系统
 ```bash
-# 替换 nvme0n1 为你的磁盘名
-gdisk /dev/nvme0n1
+sudo nixos-rebuild switch --flake .#desktop
 ```
 
-- `o` - 创建新的分区表
-- `n` - 添加 EFI 分区（512M，类型 ef00）
-- `n` - 添加 Linux 分区（剩余空间，类型 8300）
-- `w` - 写入分区表并退出
-
-#### 4. 格式化分区
-
+### 5. 安装用户配置
 ```bash
-mkfs.fat -F 32 -n EFI /dev/nvme0n1p1
-mkfs.xfs -L NIXOS /dev/nvme0n1p2
+home-manager switch --flake .#sheep@desktop
 ```
 
-#### 5. 挂载分区
-
-```bash
-mount /dev/disk/by-label/NIXOS /mnt
-mkdir -p /mnt/boot
-mount /dev/disk/by-label/EFI /mnt/boot
-```
-
-#### 6. 启用 Nix Flakes
-
-```bash
-nix-shell -p nixVersions.stable git
-```
-
-#### 7. 克隆配置文件
-
-```bash
-git clone --depth 1 https://github.com/ygsheep/dotfile /mnt/etc/nixos
-```
-
-### ⚠ <sup><sub><samp>重要提醒 - 请勿忘记！</samp></sub></sup>
-
-#### 8. 生成硬件配置
-
-```bash
-sudo nixos-generate-config --dir /mnt/etc/nixos/hosts/desktop --force
-
-# 删除默认配置文件
-rm -rf /mnt/etc/nixos/hosts/desktop/configuration.nix
-```
-
-#### 9. 安装系统
-
-```bash
-cd /mnt/etc/nixos/
-nixos-install --flake .#desktop
-```
-
-#### 10. 重启系统
-
+### 6. 重启系统
 ```bash
 reboot
 ```
 
-### 🐙 <sup><sub><samp>默认用户名和密码：<strong>nixos</strong></samp></sub></sup>
+**默认用户名和密码：`sheep` / `nixos`**
 
-重启后需要配置用户环境：
+---
 
-#### 1. 更改默认密码
+## 🌟 核心特性
 
+### 🎨 桌面环境
+- **窗口管理器** • [Niri](https://github.com/YaLTeR/niri/) - 可滚动的平铺窗口管理器
+- **桌面 Shell** • [Noctalia](https://github.com/noctalia-dev/noctalia-shell) - 现代化桌面环境
+- **显示管理** • [Greetd](https://git.sr.ht/~kennylevinsen/greetd) - 极简显示管理器 (3层启动链)
+- **终端** • [WezTerm](https://wezfurlong.org/wezterm/) - 强大的现代化终端
+- **文件管理** • [Yazi](https://github.com/sxyazi/yazi) - Rust 时代的文件管理器
+- **编辑器** • 多编辑器支持：Neovim、Helix、VSCode、Zed
+- **启动器** • [AnyRun](https://github.com/Kirottu/anyrun) - 快速应用启动器
+
+### 🌏 中文本土化
+- **输入法** • Fcitx5 + Rime（雾凇拼音），Ctrl+Space 切换
+- **字体** • 完整的思源、Noto CJK 字体支持
+- **本地化** • 完整的中文本地化环境
+- **键盘布局** • 中英文双布局，Alt+Shift 切换
+
+### 🛠️ 开发环境
+- **包管理** • NH 工具集成，便捷的 NixOS 配置管理
+- **开发工具** • 完整的 Rust、Python、Web 开发环境
+- **版本控制** • Git 预配置和别名
+
+---
+
+## ⚙️ 基本使用
+
+### 🚀 系统管理
 ```bash
-passwd sheep
+# 推荐方式：使用 Makefile
+make help          # 查看所有命令
+make switch         # 应用配置
+make check          # 运行检查
+make format         # 格式化代码
+make update         # 更新依赖
+
+# 或使用 nh 工具
+nh os switch        # 应用系统配置
+nh os clean         # 清理旧版本
 ```
 
-#### 2. 安装 Home Manager 配置
+### ⌨️ 快捷键
+- **Super + Enter** - 打开终端
+- **Super + R** - 打开应用启动器
+- **Super + C** - 打开 Noctalia 控制中心
+- **Super + Q** - 关闭窗口
+- **Super + F** - 最大化窗口
+- **Ctrl + Space** - 切换输入法
+- **Alt + Shift** - 切换键盘布局
+- **Print** - 截取屏幕
 
-```bash
-home-manager switch --flake 'github:ygsheep/dotfile#sheep@desktop'
+### 📝 自定义配置
+编辑配置文件来个性化系统：
+
+```nix
+# 添加用户包 - 编辑 home/editors/nvim/default.nix
+home.packages = with pkgs; [
+  your-custom-package
+];
+
+# 修改系统配置 - 编辑 system/ 目录下的模块
+# 添加新主机 - 复制 hosts/desktop/ 到 hosts/your-hostname/
 ```
 
-#### 3. 克隆配置文件到本地（可选但推荐）
+---
 
-```bash
-# 克隆配置文件到用户目录（用于后续使用 nh 工具）
-git clone https://github.com/ygsheep/dotfile.git ~/.dotfile
-```
-
-4. 验证配置
-
-安装完成后，您可以使用以下方式更新配置：
-
-**推荐方式（使用 nh）：**
-
-```bash
-# 检查 nh 是否正确安装
-nh --help
-
-# 使用 nh 更新系统配置
-nh os switch
-```
-
-**传统方式：**
-
-```bash
-# 手动更新系统配置
-sudo nixos-rebuild switch --flake ~/.dotfile#desktop
-
-# 更新 Home Manager 配置
-home-manager switch --flake ~/.dotfile#sheep@desktop
-```
-
-## 🌏 中文支持配置
-
-### 输入法配置
-
-Niri-Dot 配置包含完整的中文输入法支持：
-
-#### Fcitx5 + Rime
-
-- **框架**：Fcitx5（现代化输入法框架）
-- **引擎**：Rime（支持雾凇拼音）
-- **快捷键**：Ctrl+Space 切换输入法
-- **管理工具**：
-
-  ```bash
-  # 安装/更新 Rime 配置
-  rime-setup install
-
-  # 重新部署输入法
-  rime-setup deploy
-
-  # 查看配置状态
-  rime-setup status
-  ```
-
-#### 字体系统
-
-- **主要字体**：Noto CJK 系列、思源字体
-- **编程字体**：JetBrains Mono、Sarasa Mono
-- **Nerd Fonts**：完整的图标字体支持
-- **字体渲染**：优化的抗锯齿和提示设置
-
-### 环境变量
-
-- **语言环境**：`zh_CN.UTF-8`
-- **时区**：`Asia/Shanghai`
-- **输入法**：Fcitx5 环境变量自动设置
-
-### 键盘布局管理
-
-```bash
-# 切换到中文键盘布局
-kb-cn
-
-# 切换到英文键盘布局
-kb-us
-
-# 在中英文之间切换
-kb-toggle
-
-# 查看当前键盘状态
-kb-status
-```
-
-### 代理管理（可选）
-
-Niri-Dot 提供了完整的代理管理工具：
-
-```bash
-# 启用代理
-proxy-on
-
-# 禁用代理
-proxy-off
-
-# 查看代理状态
-proxy-status
-
-# 测试代理连接
-proxy-test
-```
-
-### 🔧 系统服务验证
-
-安装完成后，可以验证以下服务是否正常运行：
-
-```bash
-# 检查 Niri 窗口管理器
-systemctl --user status niri-session
-
-# 检查 swww 壁纸守护进程
-systemctl status swww-daemon
-
-# 检查 Fcitx5 输入法
-systemctl --user status fcitx5-daemon
-
-# 检查显示管理器
-systemctl status greetd
-
-# 查看所有用户服务
-systemctl --user list-units --type=service --state=running
-```
-
-### 🖥️ 桌面环境选择
-
-系统现在支持两个桌面环境：
-
-#### **主桌面环境：Niri + Noctalia（默认）**
-
-- **架构**: NixOS + Greetd + Niri + Noctalia-shell
-- **特点**: 模块化的现代化桌面环境，轻量级且高效
-- **窗口管理**: Niri 提供可滚动的平铺窗口管理
-- **用户界面**: Noctalia 提供完整的桌面 shell（顶部栏、控制中心等）
-- **启动方式**: 通过极简启动链自动登录（3 秒内完成）
-- **适用场景**: 开发、代码编辑、键盘驱动的工作流
-- **性能优势**: 启动速度快，资源占用少，模块化设计
-
-#### **会话切换**
-
-```bash
-# 查看可用的桌面会话
-ls /run/current-system/sw/share/wayland-sessions/
-ls /run/current-system/sw/share/xsessions/
-
-# 主环境（默认）：Niri + Noctalia
-# 启动时自动登录，无需手动操作
-
-# 切换到 GNOME 环境
-# 1. 如果当前在主环境中，先停止相关服务
-systemctl --user stop noctalia-shell 2>/dev/null || true
-# 2. 启动 GNOME
-gnome-session --session=gnome
-
-# 返回到主环境
-# 1. 停止 GNOME
-systemctl --user stop gnome-shell 2>/dev/null || true
-# 2. 重新启动 Niri 会话（自动加载 Noctalia）
-niri-session -r
-
-# 重启当前桌面环境
-niri-session -r
-
-# 配置文件位置
-# 主环境配置: system/services/greetd.nix, home/software/octalia/default.nix
-# Niri 配置: home/software/wayland/niri/
-# Noctalia 配置: home/software/octalia/default.nix
-```
-
-## ⚙️ 配置说明
-
-### 🏗️ 模块化架构
+## 🏗️ 项目架构
 
 ```
 Niri-Dot/
-├── system/           # 系统级配置
-│   ├── core/        # 核心系统配置
-│   ├── chinese/     # 中文支持模块
-│   ├── hardware/    # 硬件驱动
-│   ├── network/     # 网络配置
-│   └── programs/    # 系统程序
-├── home/            # 用户级配置
-│   ├── programs/    # 应用配置
-│   ├── terminal/    # 终端和 shell
-│   └── software/    # GUI 应用
-└── hosts/           # 主机特定配置
-    └── desktop/     # 桌面配置
+├── flake.nix                # 入口点，全局变量
+├── Makefile                 # 项目管理命令
+├── home/                    # 用户级配置
+│   ├── apps/               # GUI 应用
+│   ├── cli/                # 命令行工具
+│   ├── desktop/            # 桌面环境
+│   ├── editors/            # 编辑器配置
+│   └── programs/           # 程序配置
+├── system/                  # 系统级配置
+│   ├── core/               # 核心系统
+│   ├── nix/                # Nix 相关
+│   └── services/           # 系统服务
+├── hosts/                   # 主机配置
+├── scripts/                 # 工具脚本
+│   ├── setup/              # 安装脚本
+│   ├── maintenance/        # 维护脚本
+│   └── testing/            # 测试脚本
+└── assets/                  # 资源文件
 ```
 
-### 📝 自定义配置
+---
 
-#### 添加用户包
-
-编辑 `hosts/desktop/users/sheep.nix`：
-
-```nix
-{ pkgs, ... }: {
-  home.packages = with pkgs; [
-    your-custom-package
-  ];
-}
-```
-
-#### 修改系统配置
-
-编辑 `system/` 目录下的相应模块文件。
-
-#### 添加新主机
-
-复制 `hosts/desktop/` 目录到 `hosts/your-hostname/` 并修改配置。
-
-### 🚀 性能测试与优化
-
-### 启动性能测试
-
-系统提供了专门的启动性能测试工具：
-
-```bash
-# 运行完整性能测试
-sudo ./scripts/test-startup-performance.sh
-
-# 测试项目包括：
-# - 启动流程分析
-# - 内存使用情况
-# - 故障排查检查
-# - 配置对比分析
-```
-
-### 故障排查
-
-常用排查命令：
-
-```bash
-# 查看 Greetd 日志
-journalctl -u greetd -f
-
-# 检查服务状态
-systemctl status greetd
-
-# 重启显示管理器
-sudo systemctl restart greetd
-
-# 测试配置
-sudo nixos-rebuild test
-```
-
-## 🔄 系统维护
-
-#### 推荐方式：使用 nh 工具
-
-`nh` 是一个便捷的 NixOS 包管理器，提供更友好的界面和自动化清理功能。
-
-```bash
-# 查看可用的配置
-nh os list
-
-# 应用系统配置（推荐使用）
-nh os switch
-
-# 测试配置而不应用
-nh os test
-
-# 清理旧的系统版本（自动清理 7 天前的版本）
-nh os clean
-
-# 查看所有 nh 命令
-nh --help
-```
-
-#### 传统方式：使用 nixos-rebuild
-
-```bash
-# 测试配置
-sudo nixos-rebuild test --flake .#desktop
-
-# 应用配置
-sudo nixos-rebuild switch --flake .#desktop
-
-# 清理旧版本
-sudo nix-collect-garbage -d
-```
-
-#### Home Manager 更新
-
-```bash
-# 测试用户配置
-home-manager build --flake .#sheep@desktop
-
-# 应用用户配置
-home-manager switch --flake .#sheep@desktop
-
-# 使用 nh 管理 Home Manager（如果配置了）
-nh home switch
-```
-
-### 📁 配置目录说明
-
-默认情况下，`nh` 会从以下位置查找配置：
-
-- **系统配置**: `/home/sheep/.dotfile`（通过 `NH_FLAKE` 环境变量设置）
-- **其他位置**: 可以使用 `--flake /path/to/config` 指定其他路径
-
-如果您的配置文件在不同位置，可以：
-
-```bash
-# 临时指定配置路径
-nh os switch --flake /path/to/your/Niri-Dot
-
-# 或者设置环境变量
-export NH_FLAKE="/path/to/your/Niri-Dot"
-nh os switch
-```
-
-**推荐目录结构**：
-
-```
-/home/sheep/
-├── .dotfile/          # Niri-Dot 配置文件（推荐位置）
-│   ├── system/        # 系统配置
-│   ├── home/          # 用户配置
-│   └── hosts/         # 主机配置
-├── .config/           # 应用配置目录
-└── ...                # 其他用户文件
-```
-
-## 📸 系统截图
-
-|                           |                           |
-| :-----------------------: | :-----------------------: |
-| <img src="/assets/1.png"> | <img src="/assets/2.png"> |
-| <img src="/assets/3.png"> | <img src="/assets/4.png"> |
-| <img src="/assets/5.png"> | <img src="/assets/6.png"> |
-
-## 🎯 快捷键绑定
-
-### 系统快捷键
-
-- **Super + Enter** - 打开终端 (Ghostty)
-- **Super + R** - 打开应用启动器 (AnyRun)
-- **Super + Shift + R** - 启动 Noctalia 应用启动器
-- **Super + C** - 打开 Noctalia 控制中心
-- **Super + Ctrl + L** - Noctalia 锁屏
-- **Super + D** - 打开应用启动器 (QuickShell Spotlight)
-- **Alt + Space** - 打开应用启动器 (QuickShell Spotlight)
-- **Super + F** - 最大化窗口
-- **Super + Q** - 关闭窗口
-- **Super + Space** - 切换窗口浮动/平铺
-- **Ctrl + Alt + L** - 锁定屏幕
-- **Print** - 截取屏幕
-- **Super + Shift + S** - 截取区域
-- **Alt + Shift** - 切换键盘布局（中英文）
-- **Ctrl + Space** - 切换输入法
-- **Caps Lock** - 点按为 ESC，组合键为 Ctrl（如 Caps+C = Ctrl+C）
-
-### 窗口管理（Niri）
-
-- **Super + 方向键** - 切换窗口焦点
-- **Super + Shift + 方向键** - 移动窗口
-- **Super + Q** - 关闭窗口
-- **Super + F** - 全屏窗口
-
-### 终端快捷键
-
-- **Ctrl + Shift + C** - 复制
-- **Ctrl + Shift + V** - 粘贴
-- **Ctrl + Shift + T** - 新建标签页
-- **Ctrl + Tab** - 切换标签页
-
-## 🌙 Noctalia 桌面 Shell
-
-Noctalia 是基于 Qt6 的现代化桌面环境 shell，作为 Niri 窗口管理器的用户界面层，现已完全集成到 Niri-Dot 中。
-
-### 🎯 主要特性
-
-- **完整桌面 Shell**: 不仅仅是启动器，而是完整的桌面环境界面
-- **顶部栏**: 系统监控、工作区显示、音量亮度控制、时钟等
-- **控制中心**: 集中管理所有系统设置（网络、蓝牙、电源等）
-- **应用启动器**: 智能搜索和分类，支持剪贴板历史
-- **壁纸管理**: 自动壁纸切换、过渡效果、多显示器支持
-- **通知系统**: 现代化的通知管理
-- **系统集成**: 音量、亮度、媒体控制的多媒体键支持
-- **中文优化**: 完整的中文字体、时区和本地化配置
-
-### ⌨️ 快捷键
-
-| 快捷键               | 功能                          |
-| -------------------- | ----------------------------- |
-| `Super + Shift + R`  | 打开/关闭 Noctalia 应用启动器 |
-| `Super + C`          | 打开/关闭 Noctalia 控制中心   |
-| `Super + Ctrl + L`   | Noctalia 锁屏                 |
-| `Super + R`          | 启动 AnyRun（传统启动器）     |
-| `Alt + Space`        | QuickShell Spotlight          |
-| `XF86Audio*`         | 音量控制（通过 Noctalia）     |
-| `XF86MonBrightness*` | 亮度控制（通过 Noctalia）     |
-
-### ⚙️ 配置文件
-
-配置文件位于：
-
-- **主配置**: `~/.config/noctalia/config.json`
-- **QuickShell**: `~/.config/quickshell/config.qml`
-- **模块配置**: `home/software/octalia/default.nix`
-
-### 🎨 自定义配置
-
-编辑 `~/.config/noctalia/config.json`:
-
-```json
-{
-  "appearance": {
-    "theme": "default",
-    "accentColor": "#8aadf4",
-    "backgroundColor": "#24273a",
-    "textColor": "#cad3f5"
-  },
-  "modules": {
-    "launcher": {
-      "enabled": true,
-      "fuzzySearch": true,
-      "categories": ["utilities", "development", "games"]
-    },
-    "calculator": {
-      "enabled": true
-    },
-    "websearch": {
-      "enabled": true,
-      "engines": {
-        "google": "https://www.google.com/search?q={}"
-      }
-    }
-  }
-}
-```
-
-### 🔧 故障排除
-
-```bash
-# 检查服务状态
-systemctl --user status noctalia
-
-# 查看日志
-journalctl --user -u noctalia -f
-
-# 手动启动
-noctalia
-
-# 重启服务
-systemctl --user restart noctalia
-```
-
-详细文档请参考：[scripts/README-noctalia.md](scripts/README-noctalia.md)
-
-## 🛠️ 故障排除
+## 🔧 故障排除
 
 ### 常见问题
-
-#### 状态栏和壁纸不显示
-
 ```bash
-# 检查 QuickShell 是否正在运行
-ps aux | grep qs
-
-# 手动启动 QuickShell
-qs -c DankMaterialShell
-
-# 检查壁纸服务
-ps aux | grep swww
-
-# 手动设置壁纸
-swww init
-swww img ~/.dotfile/assets/1.png
-
-# 重启 Niri 会话
-# 注销并重新登录，或使用以下命令重启
-niri-session -r
-```
-
-#### 网络连接问题
-
-```bash
-# 检查网络状态
-nmcli connection show
-
-# 重启网络管理器
-sudo systemctl restart NetworkManager
-
-# 测试代理连接
-proxy-test
-```
-
-### 日志查看
-
-```bash
-# 系统日志
-journalctl -b 0 -p err
-
-# NixOS 重建日志
-sudo nixos-rebuild switch --show-trace
-
-# Home Manager 日志
-home-manager switch --show-trace
-```
-
-#### 锁屏不工作
-
-```bash
-# 检查 Hyprlock 服务状态
-systemctl --user status hyprlock
-
-# 手动启动 Hyprlock
-hyprlock
-
-# 检查 Hypridle 服务状态
-systemctl --user status hypridle
-
-# 重启 Hypridle 服务
-systemctl --user restart hypridle
-
-# 检查快捷键绑定
-grep -r "Ctrl+Alt" ~/.config/niri/
-```
-
-#### 键盘布局不正确
-
-```bash
-# 查看当前键盘布局
-setxkbmap -query
-
-# 测试键盘布局
-setxkbmap -layout cn
-
-# 如果按键对应不上，可以临时切换布局
-setxkbmap -layout us  # 美式键盘
-setxkbmap -layout cn  # 中文键盘
-
-# 查看可用的键盘布局
-localectl list-x11-keymap-layouts
-
-# 重启 Niri 会话
-# 注销并重新登录，或使用以下命令重启
-niri-session -r
-```
-
-#### 输入法和键盘布局问题
-
-```bash
-# 检查 fcitx5 状态
-fcitx5-diagnose
-
-# 重新设置输入法环境变量
-export GTK_IM_MODULE=fcitx
-export QT_IM_MODULE=fcitx
-export XMODIFIERS=@im=fcitx
-
-# 重启 fcitx5
-fcitx5-remote -r && sleep 1 && fcitx5 &
-
-# 检查键盘符号是否正确
-showkey -a  # 查看按键对应的键码
-
-# 测试 Caps Lock 配置
-# 单击 Caps Lock 应该发送 ESC 信号
-# Caps + 其他键应该作为 Ctrl 使用
-echo "测试 Caps Lock: 按一次应该退出，按 Caps+C 应该复制"
-```
-
-#### Caps Lock 配置验证
-
-```bash
-# 查看当前键盘选项
-setxkbmap -query | grep options
-
-# 手动设置 Caps Lock 行为
-setxkbmap -option caps:escape,ctrl:nocaps
-
-# 如果 Caps Lock 不工作，可以尝试其他选项
-setxkbmap -option caps:super           # Caps Lock 作为 Super 键
-setxkbmap -option caps:hyper          # Caps Lock 作为 Hyper 键
-setxkbmap -option caps:backspace      # Caps Lock 作为退格键
-
-# 恢复默认设置
-setxkbmap -option # 清除所有选项
-```
-
-#### Niri 会话问题
-
-```bash
-# 检查 Niri 服务状态
+# 检查服务状态
 systemctl --user status niri-session
-
-# 检查显示管理器状态
+systemctl --user status noctalia-shell
 systemctl status greetd
 
-# 查看 Niri 日志
+# 查看日志
+journalctl -u greetd -f
 journalctl --user -u niri-session -f
 
-# 手动启动 Niri 会话（如果当前在其他会话中）
-niri-session
-
-# 检查 Niri 配置
-niri --check /home/sheep/.config/niri/config.kdl
+# 重启桌面环境
+niri-session -r
 ```
 
-#### swww 壁纸守护进程问题
-
-```bash
-# 检查 swww-daemon 服务状态
-systemctl status swww-daemon
-
-# 检查用户级 swww 服务
-systemctl --user status swww-init
-
-# 手动初始化 swww
-swww init
-
-# 手动设置壁纸
-swww img /home/sheep/.dotfile/assets/1.png
-
-# 检查 swww 进程
-ps aux | grep swww
-
-# 重启 swww 服务
-sudo systemctl restart swww-daemon
-systemctl --user restart swww-init
-
-# 查看 swww 缓存状态
-swww query
-```
-
-#### GNOME 会话问题
-
-```bash
-# 检查 GDM 服务状态
-systemctl status gdm
-
-# 查看 GNOME 会话日志
-journalctl -u gdm -f
-
-# 检查 GNOME Shell 状态
-systemctl --user status gnome-shell
-
-# 重启 GNOME 服务
-systemctl restart gdm
-
-# 如果 GNOME 启动失败，检查配置
-dconf read /org/gnome/desktop/session
-
-# 强制使用 Wayland 模式
-export GNOME_SHELL_SESSION_MODE=wayland
-
-# 查看可用的 GNOME 会话
-ls /run/current-system/sw/share/wayland-sessions/gnome.desktop
-
-# 手动启动 GNOME 会话
-gnome-session
-```
-
-#### 桌面环境切换问题
-
-```bash
-# 检查当前运行的桌面环境
-echo $XDG_CURRENT_DESKTOP
-
-# 检查会话类型
-echo $XDG_SESSION_TYPE
-
-# 在终端中手动切换桌面环境
-# 切换到 GNOME
-systemctl --user stop niri-session 2>/dev/null || true
-gnome-session &
-
-# 切换到 Niri
-systemctl --user stop gnome-shell 2>/dev/null || true
-niri-session &
-
-# 查看所有运行的用户服务
-systemctl --user list-units --type=service --state=running
-```
-
-#### 显示管理器问题
-
-```bash
-# 检查 GDM 和 Greetd 状态
-systemctl status gdm
-systemctl status greetd
-
-# 如果显示管理器冲突，只启用一个
-# 启用 GDM，禁用 Greetd
-systemctl disable greetd
-systemctl enable gdm
-systemctl restart gdm
-
-# 或者只启用 Greetd
-systemctl disable gdm
-systemctl enable greetd
-systemctl restart greetd
-
-# 查看显示管理器日志
-journalctl -u gdm -f
-journalctl -u greetd -f
-
-# 重启显示管理器
-systemctl restart gdm  # 或 systemctl restart greetd
-```
-
-## 🙏 致谢
-
-### 🔧 灵感来源和资源
-
-|                            项目                             |    作者     |     贡献     |
-| :---------------------------------------------------------: | :---------: | :----------: |
-|      [dotfile](https://github.com/linuxmobile/dotfile)      | linuxmobile | 中文支持配置 |
-|           [niri](https://github.com/YaLTeR/niri/)           |   YaLTeR    |  窗口管理器  |
-|          [wezterm](https://github.com/wez/wezterm)          | Wez Furlong |  终端模拟器  |
-|        [rime-ice](https://github.com/iDvel/rime-ice)        |    iDvel    |  Rime 配置   |
-| [nixos-configs](https://github.com/vimpostor/nixos-configs) |  vimpostor  |  模块化架构  |
-|         [anyrun](https://github.com/Kirottu/anyrun)         |   Kirottu   |    启动器    |
-
-### 🌟 社区项目
-
-本配置基于社区优秀的项目和配置，感谢所有开源贡献者的努力！
-
-## 🤝 贡献指南
-
-欢迎提交 Issue 和 Pull Request！
-
-### 📋 贡献类型
-
-- 🐛 Bug 报告
-- ✨ 新功能建议
-- 📝 文档改进
-- 🎨 主题和美化
-- 🌏 中文支持改进
-
-### 🔄 开发环境设置
-
-```bash
-# 克隆仓库
-git clone https://github.com/ygsheep/dotfile.git
-cd Niri-Dot
-
-# 进入开发环境
-nix develop
-
-# 检查配置
-nix flake check
-```
-
-### 📤 提交更改
-
-1. Fork 本仓库
-2. 创建功能分支
-3. 提交更改
-4. 创建 Pull Request
+---
 
 ## 📄 许可证
 
-本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情。
+MIT License - 查看 [LICENSE](LICENSE) 文件了解详情
 
 ---
 
 ## 📞 联系方式
 
-- **GitHub**: [@linuxmobile](https://github.com/linuxmobile)
+- **GitHub**: [@ygsheep](https://github.com/ygsheep)
 - **项目地址**: [Niri-Dot](https://github.com/ygsheep/dotfile)
 
 如果这个配置对你有帮助，请给项目一个 ⭐ Star！

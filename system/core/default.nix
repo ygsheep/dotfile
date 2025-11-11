@@ -2,7 +2,7 @@
   imports = [
     ./security.nix
     ./users.nix
-    #./locale.nix
+    # ./gnome.nix
     ./time-sync.nix
     ../nix
     ../programs/nushell.nix
@@ -24,14 +24,8 @@
       LANGUAGE = "zh_CN:en_US";
       LC_ALL = "zh_CN.UTF-8";
     };
-
-    # 输入法配置 - 暂时禁用以解决构建问题
-    # inputMethod = {
-    #   enable = true;
-    #   type = "fcitx5";
-    # };
   };
-  
+
   # don't touch this
   system.stateVersion = lib.mkDefault "25.05";
   system = {

@@ -24,6 +24,18 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
+  # fileSystems."/mnt/资源" =
+  #   { device = "/dev/sdd2";
+  #     fsType = "ntfs-3g";
+  #     options = [ "rw" "uid=theUidOfYourUser"];
+  #   };
+
+  # fileSystems."/mnt/开发" =
+  #   { device = "/dev/nvme0n1p4";
+  #     fsType = "ntfs-3g";
+  #     options = [ "rw" "uid=theUidOfYourUser"];
+  #   };
+
   swapDevices =
     [ { device = "/dev/disk/by-uuid/072a19c0-0094-47f1-bc4c-fc305f570469"; }
     ];

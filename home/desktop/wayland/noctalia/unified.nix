@@ -5,9 +5,11 @@
   globals,
   lib,
   ...
-}: let
+}:
+let
   noctalia = inputs.noctalia.packages.${pkgs.system}.default;
-in {
+in
+{
   # 导入 Noctalia Home Manager 模块
   imports = [
     inputs.noctalia.homeModules.default
@@ -36,14 +38,18 @@ in {
         widgets = {
           left = [
             {
-              id = "SystemMonitor";
+              id = "ControlCenter";
+            }
+            {
+              id = "Clock";
+              formatHorizontal = "HH:mm";
+              useMonospacedFont = true;
+              usePrimaryColor = true;
             }
             {
               id = "ActiveWindow";
             }
-            {
-              id = "MediaMini";
-            }
+
           ];
           center = [
             {
@@ -53,10 +59,10 @@ in {
           ];
           right = [
             {
-              id = "ScreenRecorder";
+              id = "Tray";
             }
             {
-              id = "Tray";
+              id = "ScreenRecorder";
             }
             {
               id = "Battery";
@@ -69,13 +75,10 @@ in {
               id = "Brightness";
             }
             {
-              id = "Clock";
-              formatHorizontal = "HH:mm";
-              useMonospacedFont = true;
-              usePrimaryColor = true;
+              id = "SystemMonitor";
             }
             {
-              id = "ControlCenter";
+              id = "MediaMini";
             }
           ];
         };
@@ -199,6 +202,18 @@ in {
         ];
       };
 
+      dock = {
+        enabled = false;
+        displayMode = "always_visible";
+        backgroundOpacity = 1;
+        floatingRatio = 1;
+        size = 1;
+        onlySameOutput = true;
+        monitors = [ ];
+        pinnedApps = [ ];
+        colorizeIcons = false;
+      };
+
       # 网络设置
       network = {
         wifiEnabled = true;
@@ -278,7 +293,7 @@ in {
   };
 
   # 安装 Noctalia 包
-  home.packages = [noctalia];
+  home.packages = [ noctalia ];
 
   # 配置 Noctalia 环境变量
   home.sessionVariables = {
@@ -474,7 +489,7 @@ in {
   systemd.user.services.noctalia = {
     Unit = {
       Description = "Noctalia Shell Launcher";
-      PartOf = ["graphical-session.target"];
+      PartOf = [ "graphical-session.target" ];
     };
 
     Service = {
@@ -487,7 +502,7 @@ in {
       ];
     };
 
-    Install.WantedBy = ["graphical-session.target"];
+    Install.WantedBy = [ "graphical-session.target" ];
   };
 
   # 确保配置目录存在

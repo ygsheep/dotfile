@@ -1,5 +1,5 @@
 {
-  description = "LinuDev Configuration NixOs.";
+  description = "Niri-Dot - 中文优化的模块化 NixOS 配置";
 
   outputs =
     inputs@{ self, ... }:
@@ -49,11 +49,7 @@
           # Nix Formatter
           formatter = pkgs.alejandra;
 
-          packages = {
-            # 导出全局变量供其他模块使用
-            inherit globals;
           };
-        };
     };
 
   inputs = {

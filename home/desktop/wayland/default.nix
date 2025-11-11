@@ -6,6 +6,7 @@
     ./astal
     ./waybar
     ./noctalia
+    ./hyprlock.nix
   ];
 
   home.packages = with pkgs; [

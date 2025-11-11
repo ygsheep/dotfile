@@ -23,11 +23,8 @@ in {
         {command = ["wl-paste" "--watch" "cliphist" "store"];}
         {command = ["wl-paste" "--type text" "--watch" "cliphist" "store"];}
         {command = ["qs" "-c" "DankMaterialShell"];}
-        {command = ["swww-daemon"];}
-        # {command = ["swww" "img" "/home/sheep/Niri-Dot/assets/wallpaper/wallhaven-nkp6pq.png"];}
-        # {command = ["flatpak run org.fcitx.Fcitx5"];}
+        # {command = ["mpvpaper ALL ~/.dotfile/assets/video/andvari-last-origin.3840x2160.mp4"];}
         # {command = ["anyrun"];}
-        # {command = ["waybar"];}
       ];
       input = {
         keyboard.xkb = {

@@ -3,6 +3,7 @@
     # editors
     ../../editors/helix
     ../../editors/zed
+    ../../editors/vscode
 
     # services
     ../../services/wayland/gammastep.nix
@@ -23,6 +24,7 @@
     ../../services/system/power-monitor.nix
   ];
 
+  
   # 所有开发环境和工具的包
   home.packages = with pkgs; [
     # development environments - Nix

@@ -9,6 +9,11 @@
   ];
 
   home.packages = with pkgs; [
+    # apps
+    localsend
+    wechat-uos
+
+
     # messaging
     telegram-desktop
     vesktop
@@ -36,12 +41,10 @@
 
     inkscape
     scrcpy
-    multiviewer-for-f1
 
     swww
     ghostty
     mods
     openvpn
-    waybar
   ];
 }

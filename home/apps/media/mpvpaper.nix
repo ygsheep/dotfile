@@ -8,5 +8,5 @@
     stopList = ''
       firefox
     '';
-  }
+  };
 }

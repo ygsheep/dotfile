@@ -16,7 +16,7 @@
       background = [
         {
           monitor = "";
-          path = "/home/sheep/.dotfile/assets/1.png";
+          path = "/home/sheep/.dotfile/assets/wallpaper/wallhaven-2e8v5x.png";
           blur_passes = 3;
           blur_size = 12;
           noise = "0.1";
