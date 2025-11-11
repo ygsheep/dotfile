@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Niri-Dot is a modular NixOS desktop environment configuration featuring **Niri** (scrollable tiling window manager) + **Noctalia** (modern desktop shell), optimized for Chinese users. The project uses a **3-layer startup chain** architecture: `systemd → greetd → niri-session → Niri WM + Noctalia-shell`.
+Niri-Dot is a modular NixOS desktop environment configuration featuring **Niri** (scrollable tiling window manager) + **Noctalia** (modern desktop shell), optimized for Chinese users. The project uses a **3-layer startup chain** architecture: `systemd → greetd → niri-session → Niri WM + Noctalia-shell`. This is a production-ready NixOS configuration with comprehensive Chinese localization and modern Wayland desktop environment.
 
 ## Essential Commands
 
@@ -105,49 +105,154 @@ globals = {
 
 **Always use `globals.user` instead of hardcoding "sheep"**, and `globals.homeDir` instead of hardcoded paths.
 
-### Module Import Pattern
-Configuration follows this import hierarchy:
-- System level: `system/default.nix` → modules (chinese/, core/, hardware/, etc.)
-- User level: `home/default.nix` → modules (cli/, apps/, desktop/, etc.)
-- Host level: `hosts/default.nix` → system + user configurations
+### Flake-Based Architecture
+The project uses modern flake-parts architecture:
+- **flake.nix**: Central entry point with `inputs.flake-parts.lib.mkFlake`
+- **imports**: `./home/profiles`, `./hosts`, `./pkgs` for modular structure
+- **outputs**: Generated via perSystem configuration
+- **globals**: Centralized variables passed through specialArgs
+
+### Configuration Hierarchy
+- **System level**: `system/default.nix` exports `desktop` and `laptop` module lists
+- **User level**: `home/profiles/default.nix` defines Home Manager imports
+- **Host level**: `hosts/default.nix` merges system + user using `nixosSystem`
+- **Module pattern**: Each directory has `default.nix` for clean imports
 
 ### Key Configuration Files
 
 #### Entry Points
-- `flake.nix`: Global variables, dependencies, outputs, dev environment
-- `home/default.nix`: User configuration entry, Stylix theme system
-- `system/default.nix`: System configuration entry
-- `hosts/default.nix`: Host-specific configuration merging
+- `flake.nix`: Central entry point using flake-parts, defines globals and dev environment
+- `home/profiles/`: Home Manager configuration profiles (desktop, etc.)
+- `system/default.nix`: System configuration with desktop/laptop variants
+- `hosts/default.nix`: Merges system + user configurations via flake-parts
 
 #### Critical Components
 - `home/desktop/wayland/niri/`: Niri window manager settings, binds, animations
-- `home/apps/noctalia/`: Noctalia desktop shell unified configuration
+- `home/desktop/wayland/noctalia/unified.nix`: Noctalia desktop shell unified configuration
+- `home/editors/`: Multi-editor support (nvim, helix, vscode, zed)
 - `system/services/greetd.nix`: Display manager with 3-layer startup chain
-- `system/chinese/`: Complete Chinese localization (fonts, input methods)
+- `system/chinese/`: Complete Chinese localization (fonts, input methods, mirrors)
 
 ## Development Workflow
 
-### 1. Before Making Changes
+### Git Branch Management
+**IMPORTANT**: Always use branches for development work. Never make changes directly to the Niri-Dot branch.
+
 ```bash
-# Always run checks first
+# 1. Create feature branch for any changes
+git checkout -b feature/your-change-name
+
+# 2. Work on your branch, make changes
+# - Edit files
+# - Run validation tests
+# - Commit changes with clear messages
+
+# 3. Validate your changes
 make check
 
-# Validate structure
-./scripts/testing/check-structure.sh
+# 4. When finished and all tests pass:
+git checkout Niri-Dot    # Switch back to Niri-Dot branch
+git merge feature/your-change-name    # Merge your changes
+
+# 5. Push merged changes
+git push origin Niri-Dot
+
+# 6. Clean up (optional)
+git branch -d feature/your-change-name
 ```
 
-### 2. Configuration Development
-- Use `nix develop` for development environment
-- Format code with `make format` before committing
-- Test changes with `nixos-rebuild test --flake .`
-- Apply with `make switch` when ready
+### 1. Development Environment
+```bash
+# Enter flake dev environment with globals
+nix develop
 
-### 3. Module Creation
+# Environment variables available:
+# NIRI_DOT_USER, NIRI_DOT_HOME, NIRI_DOT_PROJECT, NIRI_DOT_ASSETS
+```
+
+### 2. Validation & Testing (Before Commit)
+```bash
+# Always run full validation before committing
+make check
+# Individual checks:
+./scripts/testing/ci-check.sh          # CI-style validation
+./scripts/testing/validate-config.sh  # Configuration integrity
+./scripts/testing/check-structure.sh  # Project structure validation
+```
+
+### 3. Module Development
 When adding new modules:
-- Follow the existing directory structure
-- Use global variables instead of hardcoded values
-- Add appropriate imports to parent `default.nix`
-- Test with validation scripts
+- Create a feature branch first: `git checkout -b feature/new-module`
+- Follow flake-parts pattern (no outputs in individual files)
+- Use `globals` from specialArgs, not hardcoded values
+- Add to appropriate parent `default.nix` imports
+- Test with validation scripts before each commit
+- Commit frequently with descriptive messages
+
+### 4. Commit Standards
+Write meaningful commit messages:
+```bash
+# Good commit format:
+git commit -m "component: brief description
+
+- Detailed explanation of what changed
+- Why this change is needed
+- Any breaking changes or side effects
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>"
+```
+
+### 5. Build & Deployment
+```bash
+# Test build without applying
+make test-build
+# Apply configuration (requires root)
+make switch
+# Or use nh tool
+nh os switch
+```
+
+### 6. Before Merging Checklist
+Before merging your feature branch to main:
+- [ ] All validation tests pass (`make check`)
+- [ ] Configuration builds successfully (`make test-build`)
+- [ ] No breaking changes unless documented
+- [ ] Code is properly formatted (`make format`)
+- [ ] Commits have clear, descriptive messages
+- [ ] Changes are tested on target system if possible
+
+## Git Workflow Rules
+
+### 🚫 PROHIBITED ACTIONS
+- **NEVER** make changes directly to the `Niri-Dot` branch
+- **NEVER** push untested changes to the `Niri-Dot` branch
+- **NEVER** skip validation tests before committing
+- **NEVER** commit without running `make check`
+
+### ✅ REQUIRED WORKFLOW
+1. **Always create a feature branch** before making any changes
+2. **Always run validation** before committing (`make check`)
+3. **Always test builds** before merging (`make test-build`)
+4. **Always write meaningful commit messages**
+5. **Always merge only after all tests pass**
+
+### 📝 Branch Naming Convention
+```bash
+# Feature branches
+feature/add-new-application
+feature/fix-broken-service
+feature/improve-performance
+
+# Bugfix branches
+bugfix/critical-security-issue
+bugfix/input-method-crash
+
+# Refactor branches
+refactor/clean-up-configuration
+refactor/update-niri-settings
+```
 
 ## Important Patterns & Conventions
 
@@ -182,10 +287,18 @@ stylix = {
 ```
 
 ### Input Method Configuration
-Chinese input method setup:
+Chinese input method setup using `system/chinese/input-methods.nix`:
 - Framework: Fcitx5 + Rime (雾凇拼音)
 - Switch: Ctrl+Space
 - Layout: CN with optimizations
+- Environment variables: Automatically configured for Wayland
+
+### Desktop Environment Integration
+The desktop environment integrates multiple components:
+- **Niri WM**: Window management with animations and rules
+- **Noctalia**: Desktop shell with QuickShell integration
+- **3-Layer Chain**: `systemd → greetd → niri-session → desktop environment`
+- **Service Startup**: Defined in Niri settings via `spawn-at-startup`
 
 ## Testing & Validation
 
@@ -231,40 +344,57 @@ Recent reorganization changed these paths:
 - `home/terminal/` → `home/cli/`
 - Scripts moved to subdirectories: `setup/`, `maintenance/`, `testing/`
 
-### Performance Optimizations
-- 3-layer startup chain (reduced from 5 layers)
-- ZRAM compression (25% of RAM)
-- Optimized service startup order
+### Performance Optimizations (system/core/)
+- **3-layer startup chain**: Reduced from 5 layers for faster boot
+- **ZRAM compression**: 25% of RAM for memory efficiency
+- **Optimized service order**: Critical services start first
+- **Wayland native**: GPU acceleration throughout stack
 
-### Chinese Localization
+### Chinese Localization (system/chinese/)
 Complete Chinese support including:
-- Fonts: Noto CJK, Source Han Sans
-- Input methods: Fcitx5 + Rime
-- Mirrors: Chinese package mirrors
-- Localization: System-wide Chinese settings
+- **Fonts**: Noto CJK, Source Han Sans, Adwaita in `fonts.nix`
+- **Input methods**: Fcitx5 + Rime configuration in `input-methods.nix`
+- **Mirrors**: Chinese package mirrors in `mirrors.nix`
+- **Localization**: System-wide Chinese settings in `localization.nix`
 
 ## Troubleshooting Common Issues
 
 ### Build Failures
 1. Run `make check` to identify syntax issues
-2. Check `flake.lock` consistency
-3. Verify all imports exist
+2. Check `flake.lock` consistency and inputs
+3. Verify all imports exist (flake-parts pattern)
 4. Use `nix flake check --no-build` for syntax-only validation
+5. Check flake-parts import paths in `flake.nix`
 
 ### Service Issues
 ```bash
-# Check display manager
+# Check display manager (3-layer startup chain)
 systemctl status greetd
 
-# Check user session
+# Check user session and desktop shell
 systemctl --user status niri-session
+systemctl --user status noctalia-shell
 
 # View logs
 journalctl -u greetd -f
 journalctl --user -u niri-session -f
+journalctl --user -u noctalia -f
+```
+
+### Home Manager Issues
+```bash
+# Check Home Manager service
+systemctl --user status home-manager-sheep
+
+# View Home Manager activation logs
+journalctl -u home-manager-sheep -n 50
+
+# Manually rebuild Home Manager config
+home-manager switch --flake .#sheep@desktop
 ```
 
 ### Performance Issues
 - Run `./scripts/testing/test-startup-performance.sh`
-- Check for unnecessary services
-- Monitor memory usage with `systemd-cgtop`
+- Check for unnecessary services with `systemd-cgtop`
+- Monitor memory usage and ZRAM compression
+- Verify 3-layer startup chain is working optimally
