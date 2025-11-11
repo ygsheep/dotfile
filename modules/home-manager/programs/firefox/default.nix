@@ -1,6 +1,11 @@
-{ config, pkgs, inputs, lib, ... }:
-with lib;
-let
+{
+  config,
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
+with lib; let
   # 生成 Firefox GNOME 主题
   firefox-gnome-theme = pkgs.callPackage ../../../../pkgs/firefox-gnome-theme.nix {
     theme = inputs.firefox-gnome-theme;
@@ -239,7 +244,7 @@ in {
         "font.minimum-size.x-western" = 12;
 
         # 媒体设置
-        "media.autoplay.default" = 5;  # 阻止自动播放
+        "media.autoplay.default" = 5; # 阻止自动播放
         "media.ffmpeg.vaapi.enabled" = true;
 
         # 开发者设置
@@ -262,29 +267,39 @@ in {
         force = true;
         engines = {
           "Qwant" = {
-            urls = [{
-              template = "https://www.qwant.com/?q={searchTerms}";
-            }];
+            urls = [
+              {
+                template = "https://www.qwant.com/?q={searchTerms}";
+              }
+            ];
           };
           "Home Manager" = {
-            urls = [{
-              template = "https://home-manager-options.extranix.com/?query={searchTerms}";
-            }];
+            urls = [
+              {
+                template = "https://home-manager-options.extranix.com/?query={searchTerms}";
+              }
+            ];
           };
           "Nixpkgs" = {
-            urls = [{
-              template = "https://search.nixos.org/packages?channel=unstable&query={searchTerms}";
-            }];
+            urls = [
+              {
+                template = "https://search.nixos.org/packages?channel=unstable&query={searchTerms}";
+              }
+            ];
           };
           "GitHub" = {
-            urls = [{
-              template = "https://github.com/search?q={searchTerms}";
-            }];
+            urls = [
+              {
+                template = "https://github.com/search?q={searchTerms}";
+              }
+            ];
           };
           "Noogle" = {
-            urls = [{
-              template = "https://noogle.dev/q?term={searchTerms}";
-            }];
+            urls = [
+              {
+                template = "https://noogle.dev/q?term={searchTerms}";
+              }
+            ];
           };
         };
       };

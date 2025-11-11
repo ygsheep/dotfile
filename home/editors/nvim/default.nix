@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   # 启用 Neovim 程序
   programs.neovim = {
     enable = true;
@@ -12,5 +14,4 @@
     lua
     luajitPackages.luarocks_bootstrap
   ];
-
 }

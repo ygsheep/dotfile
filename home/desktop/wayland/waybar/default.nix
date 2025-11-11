@@ -1,9 +1,12 @@
-{ pkgs, config, lib, ... }:
-with lib;
-let
-  cfg = config.programs.waybar;
-in
 {
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.programs.waybar;
+in {
   programs.waybar = {
     enable = true;
     package = pkgs.waybar;
@@ -301,5 +304,4 @@ in
     pamixer
     networkmanager
   ];
-
 }

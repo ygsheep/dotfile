@@ -1,7 +1,10 @@
 # systems/chinese/fonts.nix - 中文字体专门配置
-{ config, pkgs, lib, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   # 中文字体包
   fonts.packages = with pkgs; [
     # 思源字体系列（推荐）

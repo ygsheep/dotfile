@@ -1,46 +1,49 @@
-{ pkgs, config, lib, ... }:
-
 {
+  pkgs,
+  config,
+  lib,
+  ...
+}: {
   home.packages = with pkgs; [
     # Node.js 环境
-    nodejs_latest      # 最新版本的 Node.js
-    bun                # 快速的 JavaScript 运行时
-    deno               # 安全的 TypeScript 运行时
+    nodejs_latest # 最新版本的 Node.js
+    bun # 快速的 JavaScript 运行时
+    deno # 安全的 TypeScript 运行时
 
     # 包管理器
-    pnpm               # 快速、节省磁盘空间的包管理器
-    yarn-berry         # Yarn 2+ (Berry)
-    npm                # 默认的 Node.js 包管理器
+    pnpm # 快速、节省磁盘空间的包管理器
+    yarn-berry # Yarn 2+ (Berry)
+    npm # 默认的 Node.js 包管理器
 
     # 构建工具
-    webpack            # 模块打包器
-    rollup             # 模块打包器
-    vite               # 现代前端构建工具
-    esbuild            # 极快的 JavaScript 打包器
-    parcel             # 零配置构建工具
-    turborepo          # TypeScript 构建系统
+    webpack # 模块打包器
+    rollup # 模块打包器
+    vite # 现代前端构建工具
+    esbuild # 极快的 JavaScript 打包器
+    parcel # 零配置构建工具
+    turborepo # TypeScript 构建系统
 
     # TypeScript 支持
-    typescript         # TypeScript 编译器
-    ts-node            # 直接运行 TypeScript
-    tsx                # 快速的 TypeScript 执行器
+    typescript # TypeScript 编译器
+    ts-node # 直接运行 TypeScript
+    tsx # 快速的 TypeScript 执行器
 
     # 代码质量
-    eslint             # JavaScript 代码检查
-    prettier           # 代码格式化
-    eslint_d           # ESLint 守护进程
+    eslint # JavaScript 代码检查
+    prettier # 代码格式化
+    eslint_d # ESLint 守护进程
 
     # 测试工具
-    jest               # JavaScript 测试框架
-    vitest             # Vite 原生测试框架
-    playwright         # 端到端测试
-    cypress            # 端到端测试框架
+    jest # JavaScript 测试框架
+    vitest # Vite 原生测试框架
+    playwright # 端到端测试
+    cypress # 端到端测试框架
 
     # 开发工具
-    nodemon            # 文件监控自动重启
-    concurrently       # 并行运行脚本
-    cross-env          # 跨平台环境变量设置
-    dotenv-cli         # 环境变量管理
+    nodemon # 文件监控自动重启
+    concurrently # 并行运行脚本
+    cross-env # 跨平台环境变量设置
+    dotenv-cli # 环境变量管理
 
     # LSP 和开发服务器
     typescript-language-server

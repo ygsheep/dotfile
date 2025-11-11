@@ -1,7 +1,10 @@
 # home/programs/input-method/keyd.nix - Keyd 键盘重映射用户配置
-{ config, pkgs, lib, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   # 注意: Keyd 服务已在系统配置 systems/services/desktop.nix 中启用
   # 这里提供用户级别的管理脚本和配置
 

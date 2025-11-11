@@ -1,21 +1,19 @@
 {
   description = "Niri-Dot - 中文优化的模块化 NixOS 配置";
 
-  outputs =
-    inputs@{ self, ... }:
-    let
-      # 全局配置变量
-      globals = {
-        user = "sheep";
-        homeDir = "/home/sheep";
-        projectDir = toString ./.;
-        assetsDir = "${toString ./.}/assets";
-        version = "2.0.0";
-        releaseDate = "2025-01-08";
-      };
-    in
-    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [ "x86_64-linux" ];
+  outputs = inputs @ {self, ...}: let
+    # 全局配置变量
+    globals = {
+      user = "sheep";
+      homeDir = "/home/sheep";
+      projectDir = toString ./.;
+      assetsDir = "${toString ./.}/assets";
+      version = "2.0.0";
+      releaseDate = "2025-01-08";
+    };
+  in
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+      systems = ["x86_64-linux"];
 
       imports = [
         ./home/profiles
@@ -23,33 +21,30 @@
         ./pkgs
       ];
 
-      perSystem =
-        {
-          config,
-          pkgs,
-          ...
-        }:
-        {
-          devShells = {
-            default = pkgs.mkShell {
-              packages = [
-                pkgs.alejandra
-                pkgs.git
-                config.packages.repl
-              ];
-              name = "nixland";
-              DIRENV_LOG_FORMAT = "";
-              # 导出全局变量到环境
-              NIRI_DOT_USER = globals.user;
-              NIRI_DOT_HOME = globals.homeDir;
-              NIRI_DOT_PROJECT = globals.projectDir;
-              NIRI_DOT_ASSETS = globals.assetsDir;
-            };
+      perSystem = {
+        config,
+        pkgs,
+        ...
+      }: {
+        devShells = {
+          default = pkgs.mkShell {
+            packages = [
+              pkgs.alejandra
+              pkgs.git
+              config.packages.repl
+            ];
+            name = "nixland";
+            DIRENV_LOG_FORMAT = "";
+            # 导出全局变量到环境
+            NIRI_DOT_USER = globals.user;
+            NIRI_DOT_HOME = globals.homeDir;
+            NIRI_DOT_PROJECT = globals.projectDir;
+            NIRI_DOT_ASSETS = globals.assetsDir;
           };
-          # Nix Formatter
-          formatter = pkgs.alejandra;
-
-          };
+        };
+        # Nix Formatter
+        formatter = pkgs.alejandra;
+      };
     };
 
   inputs = {

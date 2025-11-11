@@ -13,7 +13,6 @@
     localsend
     wechat-uos
 
-
     # messaging
     telegram-desktop
     vesktop

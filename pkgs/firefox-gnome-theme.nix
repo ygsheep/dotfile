@@ -1,5 +1,9 @@
-{ stdenv, fetchFromGitHub, theme, lib }:
-
+{
+  stdenv,
+  fetchFromGitHub,
+  theme,
+  lib,
+}:
 stdenv.mkDerivation {
   pname = "firefox-gnome-theme";
   version = "latest";

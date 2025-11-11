@@ -1,4 +1,8 @@
-{pkgs, config, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   # 极简 greetd 配置 - 直接启动 Niri，移除不必要的中间层
   services.greetd = {
     enable = true;

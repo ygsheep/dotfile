@@ -1,7 +1,10 @@
 # systems/chinese/mirrors.nix - 中国大陆镜像源配置
-{ config, pkgs, lib, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   # Nix 构建缓存和镜像
   nix.settings = {
     # 二进制缓存替代源（中国大陆优化）

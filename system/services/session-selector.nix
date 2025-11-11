@@ -1,4 +1,8 @@
-{ pkgs, config, ... }: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   # Create a session selector for multiple desktop environments
   environment.systemPackages = with pkgs; [
     # Session selector script

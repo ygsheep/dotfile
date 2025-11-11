@@ -148,7 +148,7 @@
   };
 
   # 用户字体目录支持
-  system.fsPackages = [ pkgs.bindfs ];
+  system.fsPackages = [pkgs.bindfs];
   system.userActivationScripts.fonts = ''
     mkdir -p $HOME/.local/share/fonts
   '';

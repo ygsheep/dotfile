@@ -1,6 +1,11 @@
 # 时间同步配置
 # 解决 NixOS 与 Windows 双系统时间同步问题
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   # 设置硬件时钟使用本地时间（与 Windows 保持一致）
   time.hardwareClockInLocalTime = true;
 
@@ -35,9 +40,9 @@
   # 开机时等待网络可用后再同步时间
   systemd.targets.time-sync = {
     description = "Time Synchronization";
-    after = [ "network-online.target" ];
-    wants = [ "network-online.target" ];
-    wantedBy = [ "multi-user.target" ];
+    after = ["network-online.target"];
+    wants = ["network-online.target"];
+    wantedBy = ["multi-user.target"];
   };
 
   # 创建定时同步任务
@@ -47,7 +52,7 @@
       OnCalendar = "hourly";
       Persistent = true;
     };
-    wantedBy = [ "timers.target" ];
+    wantedBy = ["timers.target"];
   };
 
   systemd.user.services."sync-time" = {
@@ -61,8 +66,8 @@
 
   # 添加常用时间同步工具
   environment.systemPackages = with pkgs; [
-    chrony          # NTP 客户端和服务端
-    ntp             # NTP 工具
+    chrony # NTP 客户端和服务端
+    ntp # NTP 工具
   ];
 
   # 系统提示

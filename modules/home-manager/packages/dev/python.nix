@@ -82,6 +82,7 @@
     atexit.register(save_history)
 
     print("Python ${os.sys.version.split()[0]} - 增强模式")
+''';
     print("Tab 补全已启用，历史记录已加载。")
   '';
 

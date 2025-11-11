@@ -1,7 +1,10 @@
 # home/programs/input-method/rime.nix - Rime 输入法用户配置
-{ config, pkgs, lib, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   # Rime 配置管理脚本
   home.file.".local/bin/rime-setup" = {
     text = ''
@@ -137,8 +140,8 @@
   systemd.user.services.fcitx5-daemon = {
     Unit = {
       Description = "Fcitx5 input method framework";
-      After = [ "graphical-session.target" ];
-      PartOf = [ "graphical-session.target" ];
+      After = ["graphical-session.target"];
+      PartOf = ["graphical-session.target"];
     };
 
     Service = {
@@ -153,7 +156,7 @@
     };
 
     Install = {
-      WantedBy = [ "graphical-session.target" ];
+      WantedBy = ["graphical-session.target"];
     };
   };
 }

@@ -1,4 +1,8 @@
-{ pkgs, globals, ... }: {
+{
+  pkgs,
+  globals,
+  ...
+}: {
   # nh default flake - 指向 Niri-Dot 配置目录
   environment.variables.NH_FLAKE = globals.projectDir;
 

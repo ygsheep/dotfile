@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   programs.git = {
     enable = true;
     lfs.enable = true;
@@ -78,5 +81,5 @@
   };
 
   # GitHub CLI integration
-  home.packages = with pkgs; [ gh ];
+  home.packages = with pkgs; [gh];
 }

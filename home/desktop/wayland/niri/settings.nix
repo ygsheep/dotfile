@@ -28,8 +28,8 @@ in {
       ];
       input = {
         keyboard.xkb = {
-          layout = "cn";  # 中文键盘布局
-          options = "caps:escape,ctrl:nocaps";  # Caps Lock 点按为 ESC，组合为 Ctrl
+          layout = "cn"; # 中文键盘布局
+          options = "caps:escape,ctrl:nocaps"; # Caps Lock 点按为 ESC，组合为 Ctrl
         };
 
         touchpad = {

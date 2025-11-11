@@ -24,9 +24,6 @@
       ];
     };
 
-
-
-
     "Ctrl+Alt+L".action = spawn [
       "qs"
       "-c"
@@ -46,7 +43,6 @@
       "clipboard"
       "toggle"
     ];
-
 
     "Mod+M".action = spawn [
       "qs"
@@ -91,39 +87,71 @@
 
     # Noctalia 快捷键
     "Mod+Shift+R".action = spawn [
-      "noctalia-shell" "ipc" "call" "appLauncher" "toggle"
+      "noctalia-shell"
+      "ipc"
+      "call"
+      "appLauncher"
+      "toggle"
     ];
 
     # Noctalia 控制中心
     "Mod+C".action = spawn [
-      "noctalia-shell" "ipc" "call" "controlCenter" "toggle"
+      "noctalia-shell"
+      "ipc"
+      "call"
+      "controlCenter"
+      "toggle"
     ];
 
     # Noctalia 锁屏 (替代方案)
     "Mod+Ctrl+L".action = spawn [
-      "noctalia-shell" "ipc" "call" "lockScreen" "toggle"
+      "noctalia-shell"
+      "ipc"
+      "call"
+      "lockScreen"
+      "toggle"
     ];
 
     # 音量控制
     "XF86AudioRaiseVolume".action = spawn [
-      "noctalia-shell" "ipc" "call" "volume" "increase"
+      "noctalia-shell"
+      "ipc"
+      "call"
+      "volume"
+      "increase"
     ];
 
     "XF86AudioLowerVolume".action = spawn [
-      "noctalia-shell" "ipc" "call" "volume" "decrease"
+      "noctalia-shell"
+      "ipc"
+      "call"
+      "volume"
+      "decrease"
     ];
 
     "XF86AudioMute".action = spawn [
-      "noctalia-shell" "ipc" "call" "volume" "muteOutput"
+      "noctalia-shell"
+      "ipc"
+      "call"
+      "volume"
+      "muteOutput"
     ];
 
     # 亮度控制
     "XF86MonBrightnessUp".action = spawn [
-      "noctalia-shell" "ipc" "call" "brightness" "increase"
+      "noctalia-shell"
+      "ipc"
+      "call"
+      "brightness"
+      "increase"
     ];
 
     "XF86MonBrightnessDown".action = spawn [
-      "noctalia-shell" "ipc" "call" "brightness" "decrease"
+      "noctalia-shell"
+      "ipc"
+      "call"
+      "brightness"
+      "decrease"
     ];
 
     "Mod+Q".action = close-window;

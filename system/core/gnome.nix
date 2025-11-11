@@ -1,4 +1,8 @@
-{pkgs, config, ...}:
+{
+  pkgs,
+  config,
+  ...
+}:
 # Wayland config
 {
   # Pre 25.11

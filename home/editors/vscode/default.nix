@@ -1,4 +1,8 @@
-{ pkgs, config, ... }: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   programs.vscode = {
     enable = true;
     # package = pkgs.vscodium;
@@ -112,7 +116,7 @@
         "nix.serverSettings" = {
           "nil" = {
             "formatting" = {
-              "command" = [ "${pkgs.nixfmt}/bin/nixfmt" ];
+              "command" = ["${pkgs.nixfmt}/bin/nixfmt"];
             };
           };
         };

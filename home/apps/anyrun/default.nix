@@ -7,9 +7,9 @@
   programs.anyrun = {
     enable = true;
     config = {
-      x = { fraction = 0.5; };
-      y = { fraction = 0.3; };
-      width = { fraction = 0.3; };
+      x = {fraction = 0.5;};
+      y = {fraction = 0.3;};
+      width = {fraction = 0.3;};
       hideIcons = false;
       ignoreExclusiveZones = false;
       layer = "overlay";
@@ -39,8 +39,12 @@
     # 使用暗色主题样式
     # Inline comments are supported for language injection into
     # multi-line strings with Treesitter! (Depends on your editor)
-    extraCss = /*css */ ''
-    '';
+    extraCss =
+      /*
+      css
+      */
+      ''
+      '';
 
     extraConfigFiles = {
       "applications.ron".text = ''

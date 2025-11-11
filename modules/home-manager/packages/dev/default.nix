@@ -1,6 +1,9 @@
-{ pkgs, config, lib, ... }:
-
 {
+  pkgs,
+  config,
+  lib,
+  ...
+}: {
   # 导入所有开发环境模块
   imports = [
     ./nix.nix
@@ -13,86 +16,86 @@
   # 通用开发工具
   home.packages = with pkgs; [
     # 版本控制
-    git           # Git 版本控制
-    git-lfs        # Git 大文件支持
-    gh            # GitHub CLI
-    glab          # GitLab CLI
+    git # Git 版本控制
+    git-lfs # Git 大文件支持
+    gh # GitHub CLI
+    glab # GitLab CLI
 
     # 编辑器和工具
-    vim           # Vim 编辑器
-    neovim        # Neovim 编辑器
-    helix         # 现代编辑器
-    micro         # 简单终端编辑器
+    vim # Vim 编辑器
+    neovim # Neovim 编辑器
+    helix # 现代编辑器
+    micro # 简单终端编辑器
 
     # 系统工具
-    htop          # 进程监控
-    btop          # 更好的进程监控
-    fd            # 文件查找
-    ripgrep       # 文本搜索
-    fzf           # 模糊查找器
-    tree          # 目录树
-    bat           # 更好的 cat
-    exa           # 更好的 ls
+    htop # 进程监控
+    btop # 更好的进程监控
+    fd # 文件查找
+    ripgrep # 文本搜索
+    fzf # 模糊查找器
+    tree # 目录树
+    bat # 更好的 cat
+    exa # 更好的 ls
 
     # 网络工具
-    curl          # HTTP 客户端
-    wget          # 文件下载
-    httpie        # 更好的 HTTP 客户端
-    nmap          # 网络扫描
+    curl # HTTP 客户端
+    wget # 文件下载
+    httpie # 更好的 HTTP 客户端
+    nmap # 网络扫描
     wireshark-cli # 网络分析
 
     # 开发工具
-    tmux          # 终端复用器
-    zellij        # 现代终端复用器
-    starship      # Shell 提示符
-    direnv        # 环境变量管理
-    just          # 命令运行器
-    make          # 构建工具
+    tmux # 终端复用器
+    zellij # 现代终端复用器
+    starship # Shell 提示符
+    direnv # 环境变量管理
+    just # 命令运行器
+    make # 构建工具
 
     # 容器和虚拟化
-    docker        # Docker CLI
+    docker # Docker CLI
     docker-compose # Docker Compose
-    podman        # 无 Docker 守护进程的容器
-    qemu          # 虚拟化
+    podman # 无 Docker 守护进程的容器
+    qemu # 虚拟化
 
     # 监控和分析
-    strace        # 系统调用跟踪
-    ltrace        # 库函数跟踪
-    perf          # 性能分析
-    valgrind      # 内存分析
+    strace # 系统调用跟踪
+    ltrace # 库函数跟踪
+    perf # 性能分析
+    valgrind # 内存分析
 
     # 数据库工具
-    sqlite        # SQLite 数据库
-    postgresql    # PostgreSQL 客户端
-    mysql-client  # MySQL 客户端
-    redis         # Redis 客户端
+    sqlite # SQLite 数据库
+    postgresql # PostgreSQL 客户端
+    mysql-client # MySQL 客户端
+    redis # Redis 客户端
 
     # 云和 DevOps
-    kubectl       # Kubernetes CLI
-    helm          # Kubernetes 包管理
-    terraform     # 基础设施即代码
-    ansible       # 自动化配置
-    nomad         # 工作负载调度器
+    kubectl # Kubernetes CLI
+    helm # Kubernetes 包管理
+    terraform # 基础设施即代码
+    ansible # 自动化配置
+    nomad # 工作负载调度器
 
     # 安全工具
-    gnupg         # GPG 加密
-    openssl       # SSL/TLS 工具
-    sshpass       # SSH 密码认证
-    keychain      # SSH 代理管理
+    gnupg # GPG 加密
+    openssl # SSL/TLS 工具
+    sshpass # SSH 密码认证
+    keychain # SSH 代理管理
 
     # 压缩和解压
-    zip           # ZIP 压缩
-    unzip         # ZIP 解压
-    tar           # TAR 工具
-    gzip          # GZIP 压缩
-    p7zip         # 7-Zip 压缩
+    zip # ZIP 压缩
+    unzip # ZIP 解压
+    tar # TAR 工具
+    gzip # GZIP 压缩
+    p7zip # 7-Zip 压缩
 
     # 其他工具
-    jq            # JSON 处理
-    yq            # YAML 处理
-    xmlstarlet    # XML 处理
-    bc            # 计算器
-    calc          # 科学计算器
+    jq # JSON 处理
+    yq # YAML 处理
+    xmlstarlet # XML 处理
+    bc # 计算器
+    calc # 科学计算器
   ];
 
   # 配置 Starship

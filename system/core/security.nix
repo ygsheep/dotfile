@@ -82,6 +82,5 @@
     sudo = {
       wheelNeedsPassword = false;
     };
-
   };
 }

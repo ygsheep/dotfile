@@ -5,11 +5,9 @@
   globals,
   lib,
   ...
-}:
-let
+}: let
   noctalia = inputs.noctalia.packages.${pkgs.system}.default;
-in
-{
+in {
   # 导入 Noctalia Home Manager 模块
   imports = [
     inputs.noctalia.homeModules.default
@@ -49,7 +47,6 @@ in
             {
               id = "ActiveWindow";
             }
-
           ];
           center = [
             {
@@ -209,8 +206,8 @@ in
         floatingRatio = 1;
         size = 1;
         onlySameOutput = true;
-        monitors = [ ];
-        pinnedApps = [ ];
+        monitors = [];
+        pinnedApps = [];
         colorizeIcons = false;
       };
 
@@ -293,7 +290,7 @@ in
   };
 
   # 安装 Noctalia 包
-  home.packages = [ noctalia ];
+  home.packages = [noctalia];
 
   # 配置 Noctalia 环境变量
   home.sessionVariables = {
@@ -489,7 +486,7 @@ in
   systemd.user.services.noctalia = {
     Unit = {
       Description = "Noctalia Shell Launcher";
-      PartOf = [ "graphical-session.target" ];
+      PartOf = ["graphical-session.target"];
     };
 
     Service = {
@@ -502,7 +499,7 @@ in
       ];
     };
 
-    Install.WantedBy = [ "graphical-session.target" ];
+    Install.WantedBy = ["graphical-session.target"];
   };
 
   # 确保配置目录存在

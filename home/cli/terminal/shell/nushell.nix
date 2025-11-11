@@ -1,5 +1,8 @@
-{ pkgs, lib, ... }:
 {
+  pkgs,
+  lib,
+  ...
+}: {
   programs = {
     carapace.enable = true;
     carapace.enableNushellIntegration = true;
@@ -14,156 +17,153 @@
         polars
       ];
 
-      extraConfig =
-        let
-          conf = builtins.toJSON {
-            show_banner = false;
-            edit_mode = "vi";
-            buffer_editor = "hx";
+      extraConfig = let
+        conf = builtins.toJSON {
+          show_banner = false;
+          edit_mode = "vi";
+          buffer_editor = "hx";
 
-            completions = {
-              algorithm = "substring";
-              sort = "smart";
-              case_sensitive = false;
-              quick = true;
-              partial = true;
-              use_ls_colors = true;
-            };
-
-            shell_integration = {
-              osc2 = true;
-              osc7 = true;
-              osc8 = true;
-            };
-
-            use_kitty_protocol = true;
-            bracketed_paste = true;
-            use_ansi_coloring = true;
-            error_style = "fancy";
-
-            display_errors = {
-              exit_code = false;
-              termination_signal = true;
-            };
-
-            table = {
-              mode = "single";
-              index_mode = "always";
-              show_empty = true;
-              padding.left = 1;
-              padding.right = 1;
-              trim = {
-                methodology = "wrapping";
-                wrapping_try_keep_words = true;
-                truncating_suffix = "...";
-              };
-              header_on_separator = true;
-              abbreviated_row_count = null;
-              footer_inheritance = true;
-            };
-
-            ls.use_ls_colors = true;
-            rm.always_trash = false;
-
-            menus = [
-              {
-                name = "completion_menu";
-                only_buffer_difference = false;
-                marker = "? ";
-                type = {
-                  layout = "ide";
-                  min_competion_width = 0;
-                  max_completion_width = 150;
-                  max_completion_height = 25;
-                  padding = 0;
-                  border = false;
-                  cursor_offset = 0;
-                  description_mode = "prefer_right";
-                  min_description_width = 0;
-                  max_description_width = 50;
-                  max_description_height = 10;
-                  description_offset = 1;
-                  correct_cursor_pos = true;
-                };
-                style = {
-                  text = "white";
-                  selected_text = "white_reverse";
-                  match_text = {
-                    attr = "u";
-                  };
-                  selected_match_text = {
-                    attr = "ur";
-                  };
-                  description_text = "yellow";
-                };
-              }
-            ];
-
-            cursor_shape = {
-              vi_insert = "line";
-              vi_normal = "block";
-            };
-
-            highlight_resolved_externals = true;
+          completions = {
+            algorithm = "substring";
+            sort = "smart";
+            case_sensitive = false;
+            quick = true;
+            partial = true;
+            use_ls_colors = true;
           };
-          completions =
-            let
-              completion = name: ''
-                source ${pkgs.nu_scripts}/share/nu_scripts/custom-completions/${name}/${name}-completions.nu
-              '';
-            in
-            names: builtins.foldl' (prev: str: "${prev}\n${str}") "" (map completion names);
-        in
-        ''
-          $env.config = ${conf};
 
-          ${completions [
-            "git"
-            "nix"
-            "man"
-            "rg"
-            "gh"
-            "glow"
-            "bat"
-          ]}
+          shell_integration = {
+            osc2 = true;
+            osc7 = true;
+            osc8 = true;
+          };
 
-          # use ${pkgs.nu_scripts}/share/nu_scripts/modules/background_task/task.nu
-          # source ${pkgs.nu_scripts}/share/nu_scripts/modules/formats/from-env.nu
+          use_kitty_protocol = true;
+          bracketed_paste = true;
+          use_ansi_coloring = true;
+          error_style = "fancy";
 
-          # const path = "~/.nushellrc.nu"
-          # const null = "/dev/null"
-          # source (if ($path | path exists) {
-          #     $path
-          # } else {
-          #     $null
-          # })
+          display_errors = {
+            exit_code = false;
+            termination_signal = true;
+          };
 
+          table = {
+            mode = "single";
+            index_mode = "always";
+            show_empty = true;
+            padding.left = 1;
+            padding.right = 1;
+            trim = {
+              methodology = "wrapping";
+              wrapping_try_keep_words = true;
+              truncating_suffix = "...";
+            };
+            header_on_separator = true;
+            abbreviated_row_count = null;
+            footer_inheritance = true;
+          };
 
-          def fcd [] {
-            let dir = (fd --type d | sk | str trim)
-            if ($dir != "") {
-              cd $dir
+          ls.use_ls_colors = true;
+          rm.always_trash = false;
+
+          menus = [
+            {
+              name = "completion_menu";
+              only_buffer_difference = false;
+              marker = "? ";
+              type = {
+                layout = "ide";
+                min_competion_width = 0;
+                max_completion_width = 150;
+                max_completion_height = 25;
+                padding = 0;
+                border = false;
+                cursor_offset = 0;
+                description_mode = "prefer_right";
+                min_description_width = 0;
+                max_description_width = 50;
+                max_description_height = 10;
+                description_offset = 1;
+                correct_cursor_pos = true;
+              };
+              style = {
+                text = "white";
+                selected_text = "white_reverse";
+                match_text = {
+                  attr = "u";
+                };
+                selected_match_text = {
+                  attr = "ur";
+                };
+                description_text = "yellow";
+              };
             }
-          }
+          ];
 
-          def installed [] {
-            nix-store --query --requisites /run/current-system/ | parse --regex '.*?-(.*)' | get capture0 | sk
-          }
+          cursor_shape = {
+            vi_insert = "line";
+            vi_normal = "block";
+          };
 
-          def installedall [] {
-            nix-store --query --requisites /run/current-system/ | sk | wl-copy
-          }
+          highlight_resolved_externals = true;
+        };
+        completions = let
+          completion = name: ''
+            source ${pkgs.nu_scripts}/share/nu_scripts/custom-completions/${name}/${name}-completions.nu
+          '';
+        in
+          names: builtins.foldl' (prev: str: "${prev}\n${str}") "" (map completion names);
+      in ''
+        $env.config = ${conf};
 
-          def --env fm [...args] {
-          	let tmp = (mktemp -t "yazi-cwd.XXXXX")
-          	yazi ...$args --cwd-file $tmp
-          	let cwd = (open $tmp)
-          	if $cwd != "" and $cwd != $env.PWD {
-          		cd $cwd
-          	}
-          	rm -fp $tmp
+        ${completions [
+          "git"
+          "nix"
+          "man"
+          "rg"
+          "gh"
+          "glow"
+          "bat"
+        ]}
+
+        # use ${pkgs.nu_scripts}/share/nu_scripts/modules/background_task/task.nu
+        # source ${pkgs.nu_scripts}/share/nu_scripts/modules/formats/from-env.nu
+
+        # const path = "~/.nushellrc.nu"
+        # const null = "/dev/null"
+        # source (if ($path | path exists) {
+        #     $path
+        # } else {
+        #     $null
+        # })
+
+
+        def fcd [] {
+          let dir = (fd --type d | sk | str trim)
+          if ($dir != "") {
+            cd $dir
           }
-        '';
+        }
+
+        def installed [] {
+          nix-store --query --requisites /run/current-system/ | parse --regex '.*?-(.*)' | get capture0 | sk
+        }
+
+        def installedall [] {
+          nix-store --query --requisites /run/current-system/ | sk | wl-copy
+        }
+
+        def --env fm [...args] {
+        	let tmp = (mktemp -t "yazi-cwd.XXXXX")
+        	yazi ...$args --cwd-file $tmp
+        	let cwd = (open $tmp)
+        	if $cwd != "" and $cwd != $env.PWD {
+        		cd $cwd
+        	}
+        	rm -fp $tmp
+        }
+      '';
 
       shellAliases = {
         cleanup = "sudo nix-collect-garbage --delete-older-than 1d";

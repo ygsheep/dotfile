@@ -1,4 +1,8 @@
-{pkgs, config, ...}:
+{
+  pkgs,
+  config,
+  ...
+}:
 # Wayland config
 {
   imports = [
@@ -13,7 +17,7 @@
     # screenshot
     grim
     slurp
-    (flameshot.override { enableWlrSupport = true; })
+    (flameshot.override {enableWlrSupport = true;})
 
     # utils
     wl-clipboard
