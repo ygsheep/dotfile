@@ -21,6 +21,23 @@
     openssl
     zlib
 
+    # Graphics & GUI libraries
+    SDL2
+    SDL2.dev
+    wayland
+    wayland-protocols
+    libxkbcommon
+    mesa
+    glew
+    glfw
+
+    # X11 libraries
+    xorg.libX11
+    xorg.libXext
+    xorg.libXcursor
+    xorg.libXrandr
+    xorg.libXi
+
     # Development tools
     clang-tools
     bear

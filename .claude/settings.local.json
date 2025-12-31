@@ -9,7 +9,21 @@
       "Bash(git push:*)",
       "Bash(find:*)",
       "Bash(alejandra:*)",
-      "Bash(echo:*)"
+      "Bash(echo:*)",
+      "Bash(systemctl status:*)",
+      "Bash(localectl:*)",
+      "Bash(tree:*)",
+      "Bash(grep:*)",
+      "Bash(nix search:*)",
+      "Bash(nix-build:*)",
+      "Bash(cat:*)",
+      "Bash(systemctl:*)",
+      "Bash(curl:*)",
+      "Bash(lsof:*)",
+      "Bash(/nix/store/kdkr2h3bznvald0c6hb9whiizbz86laq-nixos-system-desktop-25.11.20251105.ae814fd/activate:*)",
+      "Bash(gcc:*)",
+      "Bash(cmake:*)",
+      "Bash(git checkout:*)"
     ],
     "deny": [],
     "ask": []

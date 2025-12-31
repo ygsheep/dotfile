@@ -110,8 +110,8 @@ with lib; let
       Fingerprinting = true;
     };
     DisablePocket = true;
-    DisableFirefoxAccounts = true;
-    DisableAccounts = true;
+    # DisableFirefoxAccounts = true;  # 已禁用：允许 Firefox 账户登录和同步
+    # DisableAccounts = true;         # 已禁用：允许账户功能
     DisableFirefoxScreenshots = true;
     OverrideFirstRunPage = "";
     DontCheckDefaultBrowser = true;

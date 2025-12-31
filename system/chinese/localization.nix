@@ -69,8 +69,9 @@
   time.timeZone = "Asia/Shanghai";
 
   # 中文键盘布局
+  # 注意：Caps Lock 映射现在由 keyd 管理（见 system/services/keyd.nix）
   services.xserver.xkb = {
     layout = "cn"; # 中文键盘布局
-    options = "caps:escape,ctrl:nocaps"; # Caps Lock 点按为 ESC，组合为 Ctrl
+    # options 由 keyd 接管，不再设置 XKB 选项以避免冲突
   };
 }
