@@ -4,6 +4,7 @@
     ./cpp.nix
     ./nix.nix
     ./python.nix
+    ./gitkraken.nix
   ];
 
   home.packages = with pkgs; [

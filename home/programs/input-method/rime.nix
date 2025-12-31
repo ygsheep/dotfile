@@ -136,27 +136,6 @@
     rime-status = "rime-setup status";
   };
 
-  # Fcitx5 自动启动服务 (Home Manager)
-  systemd.user.services.fcitx5-daemon = {
-    Unit = {
-      Description = "Fcitx5 input method framework";
-      After = ["graphical-session.target"];
-      PartOf = ["graphical-session.target"];
-    };
-
-    Service = {
-      Type = "simple";
-      ExecStart = "${pkgs.fcitx5}/bin/fcitx5";
-      ExecReload = "${pkgs.coreutils}/bin/kill -USR1 $MAINPID";
-      Restart = "on-failure";
-      RestartSec = "3";
-      Environment = [
-        "GLFW_IM_MODULE=fcitx"
-      ];
-    };
-
-    Install = {
-      WantedBy = ["graphical-session.target"];
-    };
-  };
+  # 注意：Fcitx5 由 NixOS 系统级配置管理（system/chinese/input-methods.nix）
+  # 不再在 Home Manager 中启动 fcitx5-daemon 服务，避免冲突
 }

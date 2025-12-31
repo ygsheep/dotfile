@@ -2,6 +2,7 @@
   imports = [
     # ./flatpak.nix  # 暂时注释掉，避免路径问题
     ./samba.nix # Samba 文件服务配置
+    ./keyd.nix # Keyd 键盘重映射服务
   ];
 
   services = {

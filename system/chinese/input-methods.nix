@@ -40,4 +40,30 @@
     noto-fonts-color-emoji
     sarasa-gothic
   ];
+
+  # 系统级 Fcitx5 默认配置（作为后备配置）
+  environment.etc."xdg/fcitx5/profile".text = ''
+    [Groups/0]
+    # Group Name
+    Name=默认
+    # Layout
+    Default Layout=cn
+    # Default Input Method
+    DefaultIM=rime
+
+    [Groups/0/Items/0]
+    # Name
+    Name=keyboard-cn
+    # Layout
+    Layout=
+
+    [Groups/0/Items/1]
+    # Name
+    Name=rime
+    # Layout
+    Layout=
+
+    [GroupOrder]
+    0=默认
+  '';
 }

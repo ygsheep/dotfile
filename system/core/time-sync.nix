@@ -60,7 +60,7 @@
     serviceConfig = {
       Type = "oneshot";
       ExecStart = "${pkgs.chrony}/bin/chronyc sources --offline";
-      ExecStartPost = "/run/current-system/sw/bin/timedatectl status || true";
+      ExecStartPost = "${pkgs.systemd}/bin/timedatectl status || true";
     };
   };
 
@@ -77,8 +77,8 @@
     echo "✅ 时区设置为 Asia/Shanghai"
     echo "✅ NTP 服务已启用"
     echo ""
-    echo "📊 当前时间状态："
-    timedatectl status
+    echo "📊 查看当前时间状态："
+    echo "   timedatectl status"
     echo ""
     echo "🔄 如果时间仍然不同步，请运行："
     echo "   sudo systemctl restart chronyd"

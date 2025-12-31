@@ -29,7 +29,8 @@ in {
       input = {
         keyboard.xkb = {
           layout = "cn"; # 中文键盘布局
-          options = "caps:escape,ctrl:nocaps"; # Caps Lock 点按为 ESC，组合为 Ctrl
+          # options 由 keyd 接管，不再设置 XKB 选项以避免冲突
+          # Caps Lock 功能：单独按 = Esc，组合键 = Ctrl
         };
 
         touchpad = {
