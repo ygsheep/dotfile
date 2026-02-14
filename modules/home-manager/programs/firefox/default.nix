@@ -144,29 +144,32 @@ with lib; let
       ];
     };
     ExtensionSettings = {
-      "uBlock0@raymondhill.net" = {
-        installation_mode = "normal_installed";
-        install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-        default_area = "navbar";
-      };
+      # NOTE: Auto-install disabled due to network restrictions in China (HTTP 451)
+      # Install extensions manually from browser
+      # "uBlock0@raymondhill.net" = {
+      #   installation_mode = "normal_installed";
+      #   install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+      #   default_area = "navbar";
+      # };
     };
   };
 
   # uBlock Origin 过滤列表
-  ublock-filter-lists = [
-    "https://easylist.to/easylist/easylist.txt"
-    "https://easylist.to/easylist/easyprivacy.txt"
-    "https://easylist-downloads.adblockplus.org/easylistgermany.txt"
-    "https://easylist-downloads.adblockplus.org/abp-filters-anti-cv.txt"
-    "https://pgl.yoyo.org/adservers/serverlist.php?hostformat=adblockplus&showintro=0&mimetype=plaintext"
-    "https://www.i-dont-care-about-cookies.eu/abp.txt"
-    "https://secure.fanboy.co.nz/fanboy-cookiemonster.txt"
-    "https://github.com/DandelionSprout/adfilt/raw/master/LegitimateURLShortener.txt"
-    "https://raw.githubusercontent.com/hoshsadiq/adblock-nocoin-list/master/nocoin.txt"
-    "https://raw.githubusercontent.com/ryanbr/fanboy-adblock/master/filterscript.txt"
-    "https://easylist-downloads.adblockplus.org/easylistchina.txt"
-    "https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/ABP-Filters.txt"
-  ];
+  # NOTE: Disabled - extension not auto-installed due to network restrictions
+  # ublock-filter-lists = [
+  #   "https://easylist.to/easylist/easylist.txt"
+  #   "https://easylist.to/easylist/easyprivacy.txt"
+  #   "https://easylist-downloads.adblockplus.org/easylistgermany.txt"
+  #   "https://easylist-downloads.adblockplus.org/abp-filters-anti-cv.txt"
+  #   "https://pgl.yoyo.org/adservers/serverlist.php?hostformat=adblockplus&showintro=0&mimetype=plaintext"
+  #   "https://www.i-dont-care-about-cookies.eu/abp.txt"
+  #   "https://secure.fanboy.co.nz/fanboy-cookiemonster.txt"
+  #   "https://github.com/DandelionSprout/adfilt/raw/master/LegitimateURLShortener.txt"
+  #   "https://raw.githubusercontent.com/hoshsadiq/adblock-nocoin-list/master/nocoin.txt"
+  #   "https://raw.githubusercontent.com/ryanbr/fanboy-adblock/master/filterscript.txt"
+  #   "https://easylist-downloads.adblockplus.org/easylistchina.txt"
+  #   "https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/ABP-Filters.txt"
+  # ];
 in {
   programs.firefox = {
     enable = true;
@@ -190,12 +193,13 @@ in {
       isDefault = true;
 
       # 扩展
-      extensions.packages = with inputs.firefox-addons.packages.${pkgs.system}; [
-        ublock-origin
-        copy-selected-links
-        sponsorblock
-        brotab
-      ];
+      # NOTE: Auto-install disabled due to network restrictions in China (HTTP 451)
+      # extensions.packages = with inputs.firefox-addons.packages.${pkgs.system}; [
+      #   ublock-origin
+      #   copy-selected-links
+      #   sponsorblock
+      #   brotab
+      # ];
 
       # 设置
       settings = {
@@ -310,19 +314,20 @@ in {
   };
 
   # uBlock Origin 配置文件
-  home.file.".mozilla/firefox/default/managed-storage/uBlock0@raymondhill.net.json".text = builtins.toJSON {
-    name = "uBlock0@raymondhill.net";
-    type = "storage";
-    data = {
-      adminSettings = {
-        userSettings = {
-          uiTheme = "dark";
-          uiLang = "zh-CN";
-          selectedFilterLists = ublock-filter-lists;
-        };
-      };
-    };
-  };
+  # NOTE: Disabled - extension not auto-installed due to network restrictions
+  # home.file.".mozilla/firefox/default/managed-storage/uBlock0@raymondhill.net.json".text = builtins.toJSON {
+  #   name = "uBlock0@raymondhill.net";
+  #   type = "storage";
+  #   data = {
+  #     adminSettings = {
+  #       userSettings = {
+  #         uiTheme = "dark";
+  #         uiLang = "zh-CN";
+  #         selectedFilterLists = ublock-filter-lists;
+  #       };
+  #     };
+  #   };
+  # };
 
   # Betterfox 配置
   home.file.".mozilla/firefox/default/betterfox.js".text = ''
