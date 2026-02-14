@@ -27,6 +27,8 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
       systemd-boot.graceful = true;
+      # 限制保留的启动项数量（自动清理旧 generations）
+      systemd-boot.configurationLimit = 10;
     };
 
     plymouth.enable = true;

@@ -9,6 +9,7 @@
     ./nix.nix
     ./skim.nix
     # ./transient-services.nix
+    # ./wezterm.nix
     ./xdg.nix
     ./yazi
     ./zoxide.nix

@@ -11,6 +11,10 @@
       ../.
       ./desktop
     ];
+    "sheep@thinkbook" = [
+      ../.
+      ./thinkbook
+    ];
   };
 
   inherit (inputs.hm.lib) homeManagerConfiguration;
@@ -23,6 +27,10 @@ in {
     homeConfiguration = {
       "sheep_desktop" = homeManagerConfiguration {
         modules = homeImports."sheep@desktop";
+        inherit pkgs extraSpecialArgs;
+      };
+      "sheep_thinkbook" = homeManagerConfiguration {
+        modules = homeImports."sheep@thinkbook";
         inherit pkgs extraSpecialArgs;
       };
     };

@@ -14,6 +14,8 @@ in {
     enable = true;
     securityType = "user";
     openFirewall = true;
+    # 禁用 nmbd（NetBIOS 名称服务）- 笔记本通常不需要
+    enableNmbd = false;
     settings = {
       global = {
         "workgroup" = "WORKGROUP";

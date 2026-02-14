@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     ./browsers/chromium.nix
     ./browsers/firefox.nix
@@ -47,5 +51,8 @@
     ghostty
     mods
     openvpn
+
+    # AI coding agent
+    inputs.opencode-desktop.packages.x86_64-linux.default
   ];
 }

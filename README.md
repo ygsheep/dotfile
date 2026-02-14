@@ -46,6 +46,19 @@ rm ~/.dotfile/hosts/desktop/configuration.nix
 ```
 
 ### 4. 安装系统
+
+#### 国内用户代理配置（可选）
+如果在国内网络环境下，建议使用代理加速下载：
+```bash
+# 方法1：临时使用代理
+sudo http_proxy="http://your-proxy:port" https_proxy="http://your-proxy:port" nixos-rebuild switch --flake .#desktop
+
+# 方法2：配置 substituters（推荐）
+# 编辑 /etc/nixos/configuration.nix 或在配置中添加：
+nix.settings.substituters = "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store https://cache.nixos.org";
+```
+
+#### 正常安装
 ```bash
 sudo nixos-rebuild switch --flake .#desktop
 ```
