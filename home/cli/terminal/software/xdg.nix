@@ -111,6 +111,7 @@ in {
     mimeApps = {
       enable = true;
       defaultApplications = associations;
+      force = true;  # 强制覆盖已存在的备份文件
     };
 
     userDirs = {
