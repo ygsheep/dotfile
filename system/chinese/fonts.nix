@@ -29,10 +29,12 @@
 
     # 中文 Nerd Fonts
     # 从 assets/fonts 目录安装
+    # ./assets/fonts
   ];
 
   # 本地字体安装（从 assets/fonts）
   # 使用 home-manager 的 home.fonts.fontDir 配置
+
 
   # 中文字体配置优化
   fonts.fontconfig.localConf = ''

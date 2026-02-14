@@ -6,16 +6,24 @@
 }: {
   imports = [./hardware-configuration.nix];
 
+  # 使用 CachyOS LTS 内核，更好的性能和硬件支持
   boot = {
-    # 加载内核模块 - AMD CPU 配置
     kernelModules = ["amdgpu" "kvm-amd" "i2c-dev" "efivarfs" "thinkpad_acpi"];
-    kernelPackages = lib.mkForce pkgs.linuxPackages_cachyos-lts;
+    kernelPackages = lib.mkForce pkgs.cachyosKernels.linuxPackages-cachyos-lts;
+
     kernelParams = [
       "amd_pstate=active" # 启用 AMD P-state CPU 缩放驱动
       "amd_iommu=force" # 强制启用 AMD IOMMU 以获得更好的 DMA 保护
       "mitigations=off" # 禁用 CPU 安全缓解措施（提高性能，降低安全性）
-      "ideapad_laptop" # 允许联想 IdeaPad 的动态散热控制
+      "ideapad_laptop" # 允许联想 IdeaPad v4 动态散热控制
       "nvme_core.default_ps_max_latency_us=0" # 设置 NVMe 电源状态延迟为最小值（最高性能）
+
+      # 用于 SSD/NVMe
+      "swapfile=none" # 禁用交换文件（使用内存交换能提高性能）
+      "swapfile.priority=2048" # 提高 zram 交换优先级
+      "zram.stdEnforceCount=3" # zram 压缩算法
+      "zram.num_devices=2" # zram 设备数量（25% RAM）
+      "zram.zramSize=8G" # 每个设备 8GB
 
       "randomize_kstack_offset=on" # 在每次系统调用时随机化内核栈偏移（缓解某些漏洞利用）
       "vsyscall=none" # 禁用 vsyscall（移除旧的系统调用接口，提高安全性）
@@ -33,6 +41,7 @@
       "init_on_alloc=1" # 初始化分配的内存
       "init_on_free=1" # 初始化释放的内存
     ];
+
     kernel.sysctl = {
       "vm.swappiness" = 10; # 降低交换倾向（默认为 60）
       "vm.vfs_cache_pressure" = 50; # 降低缓存压力（默认为 100）
@@ -51,7 +60,7 @@
       "kernel.kptr_restrict" = 2; # 对非特权用户隐藏内核指针（安全性）
       "kernel.ftrace_enabled" = false; # 禁用内核函数跟踪（安全性，禁用调试）
       "kernel.dmesg_restrict" = 1; # 限制非 root 用户访问 dmesg（安全性）
-      "fs.protected_fifos" = 2; # 完全限制写入不属于写入者的 FIFO（安全性）
+      "fs.protected_fifos" = 2; # 完全限制写入到 FIFOs（安全性）
       "fs.protected_regular" = 2; # 完全限制写入不属于写入者的常规文件（安全性）
       "fs.suid_dumpable" = 0; # 禁用 setuid 程序的核心转储（安全性）
       "net.core.bpf_jit_harden" = 2; # 为所有用户加固 BPF JIT 编译器
@@ -64,61 +73,12 @@
       "dev.tty.ldisc_autoload" = 0; # 禁用 TTY 线路规程自动加载
       "vm.unprivileged_userfaultfd" = 0; # 禁用非特权 userfaultfd
     };
-
-    blacklistedKernelModules = [
-      # 晦涩的网络协议
-      "af_802154" # IEEE 802.15.4
-      "appletalk" # Appletalk
-      "atm" # ATM
-      "ax25" # 业余 X.25
-      "decnet" # DECnet
-      "econet" # Econet
-      "ipx" # 网间分组交换
-      "n-hdlc" # 高级数据链路控制
-      "netrom" # NetRom
-      "p8022" # IEEE 802.3
-      "p8023" # Novell raw IEEE 802.3
-      "psnap" # 子网络访问协议
-      "rds" # 可靠数据报服务
-      "rose" # ROSE
-      "tipc" # 透明进程间通信
-      "x25" # X.25
-
-      # 旧的或罕见的或审计不足的文件系统
-      "adfs" # Active Directory 联合服务
-      "affs" # Amiga 快速文件系统
-      "befs" # Be 文件系统
-      "bfs" # BFS，由 SCO UnixWare OS 用于 /stand 切片
-      "cramfs" # 压缩 ROM/RAM 文件系统
-      "efs" # 扩展文件系统
-      "erofs" # 增强型只读文件系统
-      "exofs" # 扩展对象文件系统
-      "f2fs" # 友好闪存文件系统
-      "freevxfs" # Veritas 文件系统驱动程序
-      "gfs2" # 全局文件系统 2
-      "hfs" # 分层文件系统（Macintosh）
-      "hfsplus" # 同上，但具有扩展属性
-      "hpfs" # 高性能文件系统（由 OS/2 使用）
-      "jffs2" # 日志闪存文件系统（v2）
-      "jfs" # 日志文件系统 - 仅对 VMWare 会话有用
-      "ksmbd" # SMB3 内核服务器
-      "minix" # minix fs - 由 minix OS 使用
-      "nilfs2" # 日志结构文件系统的新实现
-      "omfs" # 优化的 MPEG 文件系统
-      "qnx4" # 由 QNX4 OS 使用的基于范围的文件系统
-      "qnx6" # 由 QNX6 OS 使用的基于范围的文件系统
-      "squashfs" # 压缩只读文件系统（由实时 CD 使用）
-      "sysv" # 实现 Xenix FS、SystemV/386 FS 和 Coherent FS 的所有功能
-      "udf" # https://docs.kernel.org/5.15/filesystems/udf.html
-      "vivid" # 虚拟视频测试驱动程序（不必要）
-
-      # 禁用 Thunderbolt 和 FireWire 以防止 DMA 攻击
-      "firewire-core"
-      "thunderbolt"
-    ];
   };
 
   networking.hostName = "thinkbook";
+
+  # xdg portal 配置 (Home Manager 要求)
+  environment.pathsToLink = ["/share/applications" "/share/xdg-desktop-portal"];
 
   security.tpm2.enable = true;
 

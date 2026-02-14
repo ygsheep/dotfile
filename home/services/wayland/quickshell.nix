@@ -11,7 +11,7 @@ in {
       quickshell
     ]
     ++ [
-      inputs.mynixpkgs.packages.${pkgs.system}.dgop
+      # inputs.mynixpkgs.packages.${pkgs.system}.dgop  # 暂时注释掉，包不存在
       accountsservice
       brightnessctl
       cava

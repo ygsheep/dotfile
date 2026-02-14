@@ -1,8 +1,12 @@
 {
   config,
+  inputs,
   pkgs,
   ...
 }: {
+  # Apply CachyOS kernel overlay
+  nixpkgs.overlays = [inputs.nix-cachyos-kernel.overlays.pinned];
+
   boot = {
     bootspec.enable = true;
 
@@ -11,8 +15,8 @@
     };
     supportedFilesystems = ["ntfs"];
 
-    # use latest kernel
-    kernelPackages = pkgs.linuxPackages_latest;
+    # Use CachyOS LTS kernel for better performance and hardware support
+    kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-lts;
 
     consoleLogLevel = 3;
     kernelParams = [

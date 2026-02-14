@@ -28,11 +28,12 @@
   ];
 
   # 语言服务器配置
-  programs.vscode = {
-    extensions = with pkgs.vscode-extensions; [
-      golang.go
-    ];
-  };
+  # NOTE: Auto-install disabled due to network restrictions in China
+  # programs.vscode = {
+  #   extensions = with pkgs.vscode-extensions; [
+  #     golang.go
+  #   ];
+  # };
 
   # 环境变量
   home.sessionVariables = {

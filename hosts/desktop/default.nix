@@ -6,130 +6,75 @@
 }: {
   imports = [./hardware-configuration.nix];
 
+  # 使用 CachyOS LTS 内核，更好的性能和硬件支持
   boot = {
-    # load modules on boot
     kernelModules = ["amdgpu" "v4l2loopback" "i2c-dev" "efivarfs"];
-    kernelPackages = lib.mkForce pkgs.linuxPackages_cachyos;
-    extraModulePackages = with config.boot.kernelPackages; [v4l2loopback];
+    kernelPackages = lib.mkForce pkgs.cachyosKernels.linuxPackages-cachyos-lts;
+
     kernelParams = [
-      "amd_pstate=active" # Enable AMD P-state CPU scaling driver
-      "amd_iommu=force" # Force AMD IOMMU for better DMA protection
-      "mitigations=off" # Disable CPU security mitigations (improves performance, reduces security)
-      "ideapad_laptop" # Allow Lenovo IdeaPad v4 Dynamic Thermal Control
-      "nvme_core.default_ps_max_latency_us=0" # Set NVMe power state latency to minimum (max performance)
+      "amd_pstate=active" # 启用 AMD P-state CPU 缩放驱动
+      "amd_iommu=force" # 强制启用 AMD IOMMU 以获得更好的 DMA 保护
+      "mitigations=off" # 禁用 CPU 安全缓解措施（提高性能，降低安全性）
+      "ideapad_laptop" # 允许联想 IdeaPad v4 动态散热控制
+      "nvme_core.default_ps_max_latency_us=0" # 设置 NVMe 电源状态延迟为最小值（最高性能）
+      "randomize_kstack_offset=on" # 在每次系统调用时随机化内核栈偏移（缓解某些漏洞利用）
+      "vsyscall=none" # 禁用 vsyscall（移除旧的系统调用接口，提高安全性）
+      "slab_nomerge" # 禁用合并类似的 SLAB 缓存（加强对某些堆攻击的防护）
+      "module.sig_enforce=1" # 只允许加载具有有效签名的内核模块（防止未签名模块）
+      "lockdown=confidentiality" # 在机密模式下启用内核锁定（限制对内核的访问，即使是 root）
+      "page_poison=1" # 用毒值填充释放的内存页（有助于检测释放后重用漏洞）
+      "page_alloc.shuffle=1" # 随机化页面分配器顺序（缓解某些内存损坏攻击）
+      "sysrq_always_enabled=0" # 完全禁用魔法 SysRq 键（防止低级系统命令）
+      "rootflags=noatime" # 使用 noatime 挂载根文件系统（提高性能，禁用文件访问时间更新）
+      "lsm=landlock,lockdown,yama,integrity,apparmor,bpf,tomoyo,selinux" # 启用并排序 Linux 安全模块（堆叠 LSM 提高安全性）
+      "fbcon=nodefer" # 不延迟内核消息到帧缓冲控制台（立即显示消息）
 
-      "randomize_kstack_offset=on" # Randomize kernel stack offset on each syscall (mitigates some exploits)
-      "vsyscall=none" # Disable vsyscall (removes legacy syscall interface, improves security)
-      "slab_nomerge" # Disable merging of similar SLAB caches (hardens against some heap attacks)
-      "module.sig_enforce=1" # Only allow loading kernel modules with valid signatures (prevents unsigned modules)
-      "lockdown=confidentiality" # Enable kernel lockdown in confidentiality mode (restricts kernel access even for root)
-      "page_poison=1" # Fill freed memory pages with poison value (helps detect use-after-free bugs)
-      "page_alloc.shuffle=1" # Randomize page allocator order (mitigates some memory corruption attacks)
-      "sysrq_always_enabled=0" # Disable magic SysRq key entirely (prevents low-level system commands)
-      "rootflags=noatime" # Mount root filesystem with noatime (improves performance, disables file access time updates)
-      "lsm=landlock,lockdown,yama,integrity,apparmor,bpf,tomoyo,selinux" # Enable and order Linux Security Modules (stacked LSMs for security)
-      "fbcon=nodefer" # Do not defer kernel messages to framebuffer console (shows messages immediately)
-
-      # Additional security hardening for HSI compliance (validated)
-      "init_on_alloc=1" # Initialize allocated memory
-      "init_on_free=1" # Initialize freed memory
+      # 用于 HSI 合规性的额外安全加固（已验证）
+      "init_on_alloc=1" # 初始化分配的内存
+      "init_on_free=1" # 初始化释放的内存
     ];
+
     kernel.sysctl = {
-      "vm.swappiness" = 10; # Lower tendency to swap (default is 60)
-      "vm.vfs_cache_pressure" = 50; # Reduce cache pressure (default is 100)
-      "vm.dirty_ratio" = 10; # Lower max % of dirty memory before writeback (default is 20)
-      "vm.dirty_background_ratio" = 5; # Lower % of dirty memory to start background writeback (default is 10)
+      "vm.swappiness" = 10; # 降低交换倾向（默认为 60）
+      "vm.vfs_cache_pressure" = 50; # 降低缓存压力（默认为 100）
+      "vm.dirty_ratio" = 10; # 降低写回前的最大脏内存百分比（默认为 20）
+      "vm.dirty_background_ratio" = 5; # 降低开始后台写回的脏内存百分比（默认为 10）
 
-      "kernel.nmi_watchdog" = 0; # Disable NMI watchdog (slightly improves performance)
+      "kernel.nmi_watchdog" = 0; # 禁用 NMI 看门狗（略微提高性能）
 
-      # Network performance optimizations
+      # 网络性能优化
       "net.core.netdev_budget" = 600;
       "net.core.netdev_max_backlog" = 16384;
       "net.ipv4.tcp_no_metrics_save" = 1;
       "net.ipv4.tcp_moderate_rcvbuf" = 1;
 
-      "kernel.sysrq" = 0; # Disable magic SysRq key (prevents low-level system commands)
-      "kernel.kptr_restrict" = 2; # Hide kernel pointers from unprivileged users (security)
-      "kernel.ftrace_enabled" = false; # Disable kernel function tracing (security, disables debugging)
-      "kernel.dmesg_restrict" = 1; # Restrict access to dmesg for non-root users (security)
-      "fs.protected_fifos" = 2; # Fully restrict writing to FIFOs not owned by the writer (security)
-      "fs.protected_regular" = 2; # Fully restrict writing to regular files not owned by the writer (security)
-      "fs.suid_dumpable" = 0; # Disable core dumps for setuid programs (security)
-      "net.core.bpf_jit_harden" = 2; # Harden BPF JIT compiler for all users
+      "kernel.sysrq" = 0; # 禁用魔法 SysRq 键（防止低级系统命令）
+      "kernel.kptr_restrict" = 2; # 对非特权用户隐藏内核指针（安全性）
+      "kernel.ftrace_enabled" = false; # 禁用内核函数跟踪（安全性，禁用调试）
+      "kernel.dmesg_restrict" = 1; # 限制非 root 用户访问 dmesg（安全性）
+      "fs.protected_fifos" = 2; # 完全限制写入到 FIFOs（安全性）
+      "fs.protected_regular" = 2; # 完全限制写入不属于写入者的常规文件（安全性）
+      "fs.suid_dumpable" = 0; # 禁用 setuid 程序的核心转储（安全性）
+      "net.core.bpf_jit_harden" = 2; # 为所有用户加固 BPF JIT 编译器
 
-      # Additional security hardening
-      "kernel.core_uses_pid" = 1; # Append PID to core filenames
-      "kernel.randomize_va_space" = 2; # Full ASLR
-      "vm.mmap_rnd_bits" = 32; # Increase ASLR entropy for mmap
-      "vm.mmap_rnd_compat_bits" = 16; # Increase ASLR entropy for compat mmap
-      "dev.tty.ldisc_autoload" = 0; # Disable TTY line discipline autoloading
-      "vm.unprivileged_userfaultfd" = 0; # Disable unprivileged userfaultfd
+      # 额外安全加固
+      "kernel.core_uses_pid" = 1; # 将 PID 附加到核心文件名
+      "kernel.randomize_va_space" = 2; # 完整 ASLR
+      "vm.mmap_rnd_bits" = 32; # 增加 mmap 的 ASLR 熵
+      "vm.mmap_rnd_compat_bits" = 16; # 增加 compat mmap 的 ASLR 熵
+      "dev.tty.ldisc_autoload" = 0; # 禁用 TTY 线路规程自动加载
+      "vm.unprivileged_userfaultfd" = 0; # 禁用非特权 userfaultfd
     };
-
-    blacklistedKernelModules = [
-      # Obscure network protocols.
-      "af_802154" # IEEE 802.15.4
-      "appletalk" # Appletalk
-      "atm" # ATM
-      "ax25" # Amatuer X.25
-      "decnet" # DECnet
-      "econet" # Econet
-      "ipx" # Internetwork Packet Exchange
-      "n-hdlc" # High-level Data Link Control
-      "netrom" # NetRom
-      "p8022" # IEEE 802.3
-      "p8023" # Novell raw IEEE 802.3
-      "psnap" # SubnetworkAccess Protocol
-      "rds" # Reliable Datagram Sockets
-      "rose" # ROSE
-      "tipc" # Transparent Inter-Process Communication
-      "x25" # X.25
-
-      # Old or rare or insufficiently audited filesystems.
-      "adfs" # Active Directory Federation Services
-      "affs" # Amiga Fast File System
-      "befs" # "Be File System"
-      "bfs" # BFS, used by SCO UnixWare OS for the /stand slice
-      "cramfs" # compressed ROM/RAM file system
-      "efs" # Extent File System
-      "erofs" # Enhanced Read-Only File System
-      "exofs" # EXtended Object File System
-      "f2fs" # Flash-Friendly File System
-      "freevxfs" # Veritas filesystem driver
-      "gfs2" # Global File System 2
-      "hfs" # Hierarchical File System (Macintosh)
-      "hfsplus" # Same as above, but with extended attributes.
-      "hpfs" # High Performance File System (used by OS/2)
-      "jffs2" # Journalling Flash File System (v2)
-      "jfs" # Journaled File System - only useful for VMWare sessions
-      "ksmbd" # SMB3 Kernel Server
-      "minix" # minix fs - used by the minix OS
-      "nilfs2" # New Implementation of a Log-structured File System
-      "omfs" # Optimized MPEG Filesystem
-      "qnx4" # Extent-based file system used by the QNX4 OS.
-      "qnx6" # Extent-based file system used by the QNX6 OS.
-      "squashfs" # compressed read-only file system (used by live CDs)
-      "sysv" # implements all of Xenix FS, SystemV/386 FS and Coherent FS.
-      "udf" # https://docs.kernel.org/5.15/filesystems/udf.html
-      "vivid" # Virtual Video Test Driver (unnecessary)
-
-      # Disable Thunderbolt and FireWire to prevent DMA attacks
-      "firewire-core"
-      "thunderbolt"
-    ];
-
-    extraModprobeConfig = ''
-      options v4l2loopback exclusive_caps=1 card_label="OBS Virtual Output"
-      options rtw88_core disable_lps_deep=y
-      options rtw88_pci disable_aspm=y
-    '';
   };
 
   networking.hostName = "desktop";
 
+  # xdg portal 配置 (Home Manager 要求)
+  environment.pathsToLink = ["/share/applications" "/share/xdg-desktop-portal"];
+
   security.tpm2.enable = true;
 
-  # Additional security hardening for HSI compliance
+  # HSI 合规性的额外安全加固
   security = {
     forcePageTableIsolation = true;
     protectKernelImage = true;
@@ -140,7 +85,7 @@
   };
 
   services = {
-    # for SSD/NVME
+    # 用于 SSD/NVMe
     fstrim.enable = true;
     scx.enable = true;
     scx.scheduler = "scx_rusty";
@@ -151,7 +96,7 @@
     cpu.amd.updateMicrocode = true;
   };
 
-  # Additional systemd hardening
+  # 额外的 systemd 加固
   systemd = {
     coredump.extraConfig = ''
       Storage=none

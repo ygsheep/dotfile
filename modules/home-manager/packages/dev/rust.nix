@@ -15,8 +15,8 @@
     cargo-outdated      # 检查过时依赖
 
     # 交叉编译
-    rustc              # 重新添加以确保交叉编译支持
-    rustPlatform.rustc.target.linux-musl;
+    rustc                                      # 重新添加以确保交叉编译支持
+    pkgs.rustPlatform.rustc.target.linux-musl  # musl target
 
     # 调试工具
     gdb                 # GDB 调试器
@@ -30,10 +30,11 @@
   ];
 
   # VSCode 扩展
-  programs.vscode = {
-    extensions = with pkgs.vscode-extensions; [
-      rust-lang.rust-analyzer
-      vadimcn.vscode-lldb
-    ];
-  };
+  # NOTE: Auto-install disabled due to network restrictions in China
+  # programs.vscode = {
+  #   extensions = with pkgs.vscode-extensions; [
+  #     rust-lang.rust-analyzer
+  #     vadimcn.vscode-lldb
+  #   ];
+  # };
 }

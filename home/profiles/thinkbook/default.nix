@@ -4,6 +4,7 @@
   ...
 }: {
   # 继承 desktop profile 的所有配置
+  # thinkbook 使用 KDE Plasma 6 + Niri WM
   imports = [../desktop];
 
   # 覆盖 Niri 显示器缩放配置

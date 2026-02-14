@@ -6,7 +6,7 @@
       # instant repl with automatic flake loading
       repl = pkgs.callPackage ./repl {};
 
-      SF-Pro = pkgs.callPackage ./SF-Pro {inherit (pkgs) stdenv;};
+      SF-Pro = pkgs.callPackage ./SF-Pro {};
       SF-Pro-mono = pkgs.callPackage ./SF-Pro-mono {};
 
       default = pkgs.hello;

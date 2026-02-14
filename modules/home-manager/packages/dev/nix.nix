@@ -13,12 +13,13 @@
   ];
 
   # VSCode 扩展
-  programs.vscode = {
-    extensions = with pkgs.vscode-extensions; [
-      jnoortheen.nix-ide
-      bbenoist.nix
-    ];
-  };
+  # NOTE: Auto-install disabled due to network restrictions in China
+  # programs.vscode = {
+  #   extensions = with pkgs.vscode-extensions; [
+  #     jnoortheen.nix-ide
+  #     bbenoist.nix
+  #   ];
+  # };
 
   # 编辑器配置
   programs.helix = {
@@ -35,7 +36,7 @@
   programs.git = {
     attributes = [ "*.nix diff=nix" ];
     extraConfig = {
-      diff "nix" = {
+      diff.nix = {
         command = "nix-diff";
       };
     };

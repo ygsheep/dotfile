@@ -4,7 +4,8 @@
   ...
 }: let
   # get these into the module system
-  extraSpecialArgs = {inherit inputs self;};
+  globals = import "${self}/lib/globals.nix" {inherit self;};
+  extraSpecialArgs = {inherit inputs self globals;};
 
   homeImports = {
     "sheep@desktop" = [
@@ -19,7 +20,14 @@
 
   inherit (inputs.hm.lib) homeManagerConfiguration;
 
-  pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+  # 使用与系统相同的 nixpkgs 配置（包括 allowUnfree）
+  pkgs = import inputs.nixpkgs {
+    system = "x86_64-linux";
+    config.allowUnfree = true;
+    config.permittedInsecurePackages = [
+      "electron-25.9.0"
+    ];
+  };
 in {
   _module.args = {inherit homeImports;};
 

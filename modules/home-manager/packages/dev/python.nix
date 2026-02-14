@@ -38,15 +38,16 @@
   ];
 
   # 语言服务器配置
-  programs.vscode = {
-    extensions = with pkgs.vscode-extensions; [
-      ms-python.python
-      ms-python.vscode-pylance
-      ms-python.black-formatter
-      ms-python.isort
-      charliermarsh.ruff
-    ];
-  };
+  # NOTE: Auto-install disabled due to network restrictions in China
+  # programs.vscode = {
+  #   extensions = with pkgs.vscode-extensions; [
+  #     ms-python.python
+  #     ms-python.vscode-pylance
+  #     ms-python.black-formatter
+  #     ms-python.isort
+  #     charliermarsh.ruff
+  #   ];
+  # };
 
   # 配置环境变量
   home.sessionVariables = {
@@ -81,7 +82,7 @@
 
     atexit.register(save_history)
 
-    print("Python ${os.sys.version.split()[0]} - 增强模式")
+    print("Python ''${os.sys.version.split()[0]} - 增强模式")
 ''';
     print("Tab 补全已启用，历史记录已加载。")
   '';

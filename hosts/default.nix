@@ -20,8 +20,13 @@
     # 通用模块列表
     commonModules = [
       inputs.agenix.nixosModules.default
-      inputs.chaotic.nixosModules.default
+      inputs.hm.nixosModules.home-manager
     ];
+
+    # 导入 overlays 集合（如有）
+
+    # 导入 cachyos-kernel overlay 的主机已在其模块中单独定义
+
 
     # desktop 主机配置
     desktopModules =
@@ -36,6 +41,8 @@
             users.sheep.imports = homeImports."sheep@desktop";
             extraSpecialArgs = specialArgs;
             backupFileExtension = "bak";
+            useUserPackages = true;
+            useGlobalPkgs = true;
           };
         }
       ];
@@ -46,16 +53,14 @@
       ++ laptop
       ++ [
         ./thinkbook
-        "${mod}/core/gnome.nix" # GNOME 桌面环境 + GDM
-        "${mod}/services/gnome-services.nix"
+        "${mod}/desktop/kde.nix" # KDE Plasma 6 桌面环境 + SDDM
         {
-          # 禁用 greetd，使用 GDM 作为显示管理器
-          services.greetd.enable = lib.mkForce false;
-
           home-manager = {
             users.sheep.imports = homeImports."sheep@thinkbook";
             extraSpecialArgs = specialArgs;
             backupFileExtension = "bak";
+            useUserPackages = true;
+            useGlobalPkgs = true;
           };
         }
       ];

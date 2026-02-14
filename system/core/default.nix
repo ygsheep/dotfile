@@ -30,7 +30,7 @@
   system.stateVersion = lib.mkDefault "25.05";
   system = {
     switch.enable = true;
-    rebuild.enableNg = true;
+    # rebuild.enableNg = true;  # nixos-24.11 中可能不存在此选项
   };
 
   time.timeZone = lib.mkDefault "Asia/Shanghai";

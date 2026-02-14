@@ -54,15 +54,16 @@
   ];
 
   # 语言服务器配置
-  programs.vscode = {
-    extensions = with pkgs.vscode-extensions; [
-      ms-vscode.vscode-typescript-next
-      bradlc.vscode-tailwindcss
-      esbenp.prettier-vscode
-      ms-vscode.vscode-eslint
-      vitejs.vite
-    ];
-  };
+  # NOTE: Auto-install disabled due to network restrictions in China
+  # programs.vscode = {
+  #   extensions = with pkgs.vscode-extensions; [
+  #     ms-vscode.vscode-typescript-next
+  #     bradlc.vscode-tailwindcss
+  #     esbenp.prettier-vscode
+  #     ms-vscode.vscode-eslint
+  #     vitejs.vite
+  #   ];
+  # };
 
   # 环境变量
   home.sessionVariables = {
