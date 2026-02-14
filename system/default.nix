@@ -6,7 +6,7 @@ let
     # ./hardware/graphics.nix
     # ./hardware/fwupd.nix
 
-    # ./network/default.nix
+    ./network/default.nix
 
     # ./chinese/fonts.nix
     # ./chinese/input-methods.nix
