@@ -28,51 +28,53 @@
   ];
 
 in {
-  home.packages = [
-    (pkgs.wrapFirefox
-      inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser-unwrapped
-      {
-        extraPrefs = lib.concatLines (
-          lib.mapAttrsToList (
-            name: value: ''lockPref(${lib.strings.toJSON name}, ${lib.strings.toJSON value});''
-          ) prefs
-        );
-
-        extraPolicies = {
-          DisableTelemetry = true;
-          ExtensionSettings = builtins.listToAttrs extensions;
-
-          SearchEngines = {
-            Default = "ddg";
-            Add = [
-              {
-                Name = "nixpkgs packages";
-                URLTemplate = "https://search.nixos.org/packages?query={searchTerms}";
-                IconURL = "https://wiki.nixos.org/favicon.ico";
-                Alias = "@np";
-              }
-              {
-                Name = "NixOS options";
-                URLTemplate = "https://search.nixos.org/options?query={searchTerms}";
-                IconURL = "https://wiki.nixos.org/favicon.ico";
-                Alias = "@no";
-              }
-              {
-                Name = "NixOS Wiki";
-                URLTemplate = "https://wiki.nixos.org/w/index.php?search={searchTerms}";
-                IconURL = "https://wiki.nixos.org/favicon.ico";
-                Alias = "@nw";
-              }
-              {
-                Name = "google";
-                URLTemplate = "https://google.com/search?q={searchTerms}";
-                IconURL = "https://google.com/favicon.ico";
-                Alias = "@g";
-              }
-            ];
-          };
-        };
-      }
-    )
-  ];
+  # NOTE: Zen browser disabled due to network restrictions in China
+  # Use standard Firefox from modules/home-manager/programs/firefox/default.nix instead
+  # home.packages = [
+  #   (pkgs.wrapFirefox
+  #     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser-unwrapped
+  #     {
+  #       extraPrefs = lib.concatLines (
+  #         lib.mapAttrsToList (
+  #           name: value: ''lockPref(${lib.strings.toJSON name}, ${lib.strings.toJSON value});''
+  #         ) prefs
+  #       );
+  #
+  #       extraPolicies = {
+  #         DisableTelemetry = true;
+  #         ExtensionSettings = builtins.listToAttrs extensions;
+  #
+  #         SearchEngines = {
+  #           Default = "ddg";
+  #           Add = [
+  #             {
+  #               Name = "nixpkgs packages";
+  #               URLTemplate = "https://search.nixos.org/packages?query={searchTerms}";
+  #               IconURL = "https://wiki.nixos.org/favicon.ico";
+  #               Alias = "@np";
+  #             }
+  #             {
+  #               Name = "NixOS options";
+  #               URLTemplate = "https://search.nixos.org/options?query={searchTerms}";
+  #               IconURL = "https://wiki.nixos.org/favicon.ico";
+  #               Alias = "@no";
+  #             }
+  #             {
+  #               Name = "NixOS Wiki";
+  #               URLTemplate = "https://wiki.nixos.org/w/index.php?search={searchTerms}";
+  #               IconURL = "https://wiki.nixos.org/favicon.ico";
+  #               Alias = "@nw";
+  #             }
+  #             {
+  #               Name = "google";
+  #               URLTemplate = "https://google.com/search?q={searchTerms}";
+  #               IconURL = "https://google.com/favicon.ico";
+  #               Alias = "@g";
+  #             }
+  #           ];
+  #         };
+  #       };
+  #     }
+  #   )
+  # ];
 }
