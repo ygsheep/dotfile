@@ -34,14 +34,8 @@
     SessionDir=/etc/share/wayland-sessions
   '';
 
-  # 在 /run/current-system/sw/share/wayland-sessions 创建符号链接
-  systemd.tmpfiles.rules = [
-    "L+ /run/current-system/sw/share/wayland-sessions/plasma.desktop - - - - /run/current-system/sw/share/wayland-sessions/plasma.desktop"
-    "L+ /run/current-system/sw/share/wayland-sessions/niri.desktop - - - - /etc/wayland-sessions/niri.desktop"
-  ];
-
   # 创建 niri.desktop 会话文件
-  environment.etc."wayland-sessions/niri.desktop".text = ''
+  environment.etc."share/wayland-sessions/niri.desktop".text = ''
     [Desktop Entry]
     Name=Niri
     Comment=Scrollable tiling window manager
