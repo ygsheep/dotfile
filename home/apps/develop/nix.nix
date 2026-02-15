@@ -11,15 +11,6 @@
     direnv
   ];
 
-  # VSCode 扩展
-  # NOTE: Auto-install disabled due to network restrictions in China
-  # programs.vscode = {
-  #   extensions = with pkgs.vscode-extensions; [
-  #     jnoortheen.nix-ide
-  #     bbenoist.nix
-  #   ];
-  # };
-
   # 编辑器配置
   programs.helix = {
     languages.language = [

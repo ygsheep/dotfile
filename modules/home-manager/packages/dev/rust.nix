@@ -27,13 +27,4 @@
     cargo-criterion # 基准测试
     hyperfine # 命令行性能测试
   ];
-
-  # VSCode 扩展
-  # NOTE: Auto-install disabled due to network restrictions in China
-  # programs.vscode = {
-  #   extensions = with pkgs.vscode-extensions; [
-  #     rust-lang.rust-analyzer
-  #     vadimcn.vscode-lldb
-  #   ];
-  # };
 }

@@ -8,11 +8,11 @@
   extraSpecialArgs = {inherit inputs self globals;};
 
   homeImports = {
-    "sheep@desktop" = [
+    "${globals.user}@desktop" = [
       ../.
       ./desktop
     ];
-    "sheep@thinkbook" = [
+    "${globals.user}@thinkbook" = [
       ../.
       ./thinkbook
     ];
@@ -33,12 +33,12 @@ in {
 
   flake = {
     homeConfiguration = {
-      "sheep_desktop" = homeManagerConfiguration {
-        modules = homeImports."sheep@desktop";
+      "${globals.user}_desktop" = homeManagerConfiguration {
+        modules = homeImports."${globals.user}@desktop";
         inherit pkgs extraSpecialArgs;
       };
-      "sheep_thinkbook" = homeManagerConfiguration {
-        modules = homeImports."sheep@thinkbook";
+      "${globals.user}_thinkbook" = homeManagerConfiguration {
+        modules = homeImports."${globals.user}@thinkbook";
         inherit pkgs extraSpecialArgs;
       };
     };

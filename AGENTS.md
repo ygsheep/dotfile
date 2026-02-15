@@ -2,6 +2,9 @@
 
 Guidelines for agentic coding agents working in the Niri-Dot repository.
 
+## Project Overview
+**Output Format**: Reply in Chinese (中文), end with "喵！"
+
 ## Build, Lint & Test Commands
 
 ### Essential Commands

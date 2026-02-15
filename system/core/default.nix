@@ -2,7 +2,6 @@
   imports = [
     ./security.nix
     ./users.nix
-    # ./gnome.nix
     ./time-sync.nix
     ../nix
     ../programs/nushell.nix

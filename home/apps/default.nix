@@ -7,7 +7,6 @@
     ./browsers/chromium.nix
     ./browsers/firefox.nix
     ./browsers/edge.nix
-    ./browsers/zen.nix
 
     ./gtk.nix
     ./media
@@ -45,9 +44,9 @@
     resources
 
     inkscape
-    scrcpy
+    # scrcpy
 
-    swww
+    # swww
     ghostty
     mods
     openvpn

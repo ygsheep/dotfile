@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  globals,
   ...
 }: {
   # 极简 greetd 配置 - 直接启动 Niri，移除不必要的中间层
@@ -9,7 +10,7 @@
     settings = {
       default_session = {
         command = "${pkgs.niri}/bin/niri-session";
-        user = "sheep";
+        user = globals.user;
       };
     };
   };

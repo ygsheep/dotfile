@@ -2,6 +2,7 @@
   lib,
   pkgs,
   inputs,
+  globals,
   ...
 }: {
   programs.anyrun = {
@@ -173,7 +174,7 @@
             // Nix 运行插件配置
             max_entries: 5,
             show_command: true,
-            flake_path: Some(config.xdg.configHome.nix FlakePath or "/home/sheep/Niri-Dot"),
+            flake_path: Some(config.xdg.configHome.nix FlakePath or "${globals.projectDir}"),
             channel: "nixpkgs-unstable",
         )
       '';

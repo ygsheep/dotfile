@@ -13,7 +13,6 @@
     ../../cli/terminal/emulators/kitty.nix
 
     # services
-    ../../services/wayland/gammastep.nix
     ../../services/wayland/quickshell.nix
     ../../services/wayland/hypridle.nix
 

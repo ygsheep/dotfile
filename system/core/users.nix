@@ -1,5 +1,9 @@
-{pkgs, ...}: {
-  users.users.sheep = {
+{
+  pkgs,
+  globals,
+  ...
+}: {
+  users.users.${globals.user} = {
     isNormalUser = true;
     shell = pkgs.nushell;
     extraGroups = [

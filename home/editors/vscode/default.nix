@@ -7,42 +7,6 @@
     enable = true;
     # package = pkgs.vscodium;
     profiles.default = {
-      # NOTE: Auto-install disabled due to network restrictions in China
-      # Install extensions manually from VS Code marketplace
-      # extensions = with pkgs.vscode-extensions; [
-      #   # Language support
-      #   ms-python.python
-      #   ms-python.black-formatter
-      #   ms-python.flake8
-      #   rust-lang.rust-analyzer
-      #   ms-vscode.cpptools
-      #   ms-vscode.cmake-tools
-      #   ms-vscode.hexeditor
-      #
-      #   # Nix/NixOS
-      #   jnoortheen.nix-ide
-      #   bbenoist.nix
-      #
-      #   # Git
-      #   eamodio.gitlens
-      #   mhutchie.git-graph
-      #
-      #   # Themes
-      #   dracula-theme.theme-dracula
-      #   pkief.material-icon-theme
-      #
-      #   # Utilities
-      #   ms-vscode.live-server
-      #   bradlc.vscode-tailwindcss
-      #   esbenp.prettier-vscode
-      #
-      #   # Docker
-      #   ms-azuretools.vscode-docker
-      #
-      #   # Remote development
-      #   ms-vscode-remote.remote-ssh
-      #   ms-vscode-remote.remote-containers
-      # ];
       extensions = [];
 
       userSettings = {

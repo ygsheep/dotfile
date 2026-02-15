@@ -33,11 +33,10 @@
       ++ laptop
       ++ [
         ./desktop
-        "${mod}/programs/gamemode.nix"
         "${mod}/core/limine.nix"
         {
           home-manager = {
-            users.sheep.imports = homeImports."sheep@desktop";
+            users.${globals.user}.imports = homeImports."${globals.user}@desktop";
             extraSpecialArgs = specialArgs;
             backupFileExtension = "bak";
             useUserPackages = true;
@@ -55,7 +54,7 @@
         "${mod}/desktop/kde.nix" # KDE Plasma 6 桌面环境 + SDDM
         {
           home-manager = {
-            users.sheep.imports = homeImports."sheep@thinkbook";
+            users.${globals.user}.imports = homeImports."${globals.user}@thinkbook";
             extraSpecialArgs = specialArgs;
             backupFileExtension = "bak";
             useUserPackages = true;
