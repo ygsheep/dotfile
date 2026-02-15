@@ -93,10 +93,11 @@
   };
 
   services = {
-    # V2RayA 代理管理服务 - xray 包在当前 nixpkgs 不可用，暂时禁用
+    # V2RayA 代理管理服务
     v2raya = {
       enable = true;
       # 使用 Xray 核心替代 V2Ray，支持 XTLS-RPRX-Vision
+      package = pkgs.v2raya;
       cliPackage = pkgs.xray;
     };
 

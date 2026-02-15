@@ -27,7 +27,7 @@
     kdePackages.gwenview # 图片查看器
     kdePackages.ark # 压缩工具
     kdePackages.kate # 文本编辑器
-    kdePackages.konsole # 终端
+    # kdePackages.konsole # 终端 (已移除，使用 kitty/foot)
     kdePackages.spectacle # 截图工具
 
     # ========== KDE 系统工具 ==========
