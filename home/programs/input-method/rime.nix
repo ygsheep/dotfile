@@ -129,6 +129,15 @@
     executable = true;
   };
 
+  # Rime 简体中文配置
+  xdg.configFile."fcitx5/rime/default.custom.yaml".text = ''
+    # Rime 用户配置：简体中文优先
+    patch:
+      schema_list:
+        - schema: luna_pinyin_simp  # 朙月拼音·简化字
+        - schema: luna_pinyin       # 朙月拼音（繁体，保留备用）
+  '';
+
   # Shell 别名
   home.shellAliases = {
     rime = "rime-setup";

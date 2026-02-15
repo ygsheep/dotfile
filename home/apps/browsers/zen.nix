@@ -26,7 +26,6 @@
     # Manually install extensions from browser instead
     # (extension "ublock-origin" "uBlock0@raymondhill.net")
   ];
-
 in {
   # NOTE: Zen browser disabled due to network restrictions in China
   # Use standard Firefox from modules/home-manager/programs/firefox/default.nix instead

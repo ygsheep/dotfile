@@ -6,7 +6,7 @@
 }: {
   home.packages = with pkgs; [
     # Node.js 环境
-    nodejs_latest # 最新版本的 Node.js
+    pkgs.nodejs_24 # Node.js 24 LTS
     bun # 快速的 JavaScript 运行时
     deno # 安全的 TypeScript 运行时
 

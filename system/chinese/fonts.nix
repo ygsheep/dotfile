@@ -35,7 +35,6 @@
   # 本地字体安装（从 assets/fonts）
   # 使用 home-manager 的 home.fonts.fontDir 配置
 
-
   # 中文字体配置优化
   fonts.fontconfig.localConf = ''
     <?xml version="1.0"?>

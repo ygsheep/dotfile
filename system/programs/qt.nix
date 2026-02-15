@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   # 完全注释掉 Qt 配置来测试
   # qt = {
   #   enable = true;

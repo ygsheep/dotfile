@@ -22,6 +22,7 @@ in {
       spawn-at-startup = [
         {command = ["wl-paste" "--watch" "cliphist" "store"];}
         {command = ["wl-paste" "--type text" "--watch" "cliphist" "store"];}
+        {command = ["fcitx5" "-d" "--replace"];} # 启动 Fcitx5 输入法
         {command = ["qs" "-c" "DankMaterialShell"];}
         # {command = ["mpvpaper ALL ~/.dotfile/assets/video/andvari-last-origin.3840x2160.mp4"];}
         # {command = ["anyrun"];}

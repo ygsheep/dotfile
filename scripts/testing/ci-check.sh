@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # CI 检查脚本 - 验证 NixOS 配置的正确性
 # 用于持续集成和本地开发环境

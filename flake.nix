@@ -146,9 +146,5 @@
       url = "github:rafaelmardojai/firefox-gnome-theme";
       flake = false;
     };
-
-    opencode-desktop = {
-      url = "github:tomsch/opencode-desktop-nix";
-    };
   };
 }

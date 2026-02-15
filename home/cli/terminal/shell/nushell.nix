@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  globals,
   ...
 }: {
   programs = {
@@ -232,6 +233,9 @@
       };
       extraEnv = ''
         $env.CARAPACE_BRIDGES = 'inshellisense,carapace,zsh,fish,bash'
+
+        # npm global bin 路径
+        $env.PATH = ($env.PATH | split row (char esep) | prepend '${globals.homeDir}/.local/share/npm/bin')
       '';
     };
   };

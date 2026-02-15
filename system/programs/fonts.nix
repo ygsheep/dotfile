@@ -84,8 +84,7 @@
           ];
           emoji = ["Noto Color Emoji"];
         };
-
-      };
+    };
     fontDir = {
       enable = true;
       decompressFonts = true;

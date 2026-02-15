@@ -39,8 +39,8 @@
       accept-flake-config = false;
 
       # 自动清理旧的 generations（当可用空间低于此值时触发）
-      min-free = 1024 * 1024 * 1024;  # 1GB
-      max-free = 5 * 1024 * 1024 * 1024;  # 5GB
+      min-free = 1024 * 1024 * 1024; # 1GB
+      max-free = 5 * 1024 * 1024 * 1024; # 5GB
     };
   };
 }

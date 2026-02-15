@@ -52,7 +52,7 @@
     mods
     openvpn
 
-    # AI coding agent
-    inputs.opencode-desktop.packages.x86_64-linux.default
+    # lmstudio本地大模型
+    lmstudio
   ];
 }

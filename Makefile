@@ -1,11 +1,17 @@
 # Niri-Dot Makefile
 # 提供常用的项目管理和维护命令
 
-.PHONY: help check format build clean test validate docs install-deps
+# 主机配置 (可覆盖: make build HOST=laptop)
+HOST ?= thinkbook
+
+.PHONY: help check format build clean test validate docs install-deps build-thinkbook switch-thinkbook build-desktop switch-desktop
 
 # 默认目标
 help:
 	@echo "Niri-Dot 项目管理命令:"
+	@echo ""
+	@echo "变量:"
+	@echo "  HOST=$(HOST)  - 目标主机 (desktop/laptop/thinkbook)"
 	@echo ""
 	@echo "检查和验证:"
 	@echo "  check      - 运行所有检查 (语法、格式、构建)"
@@ -13,9 +19,15 @@ help:
 	@echo "  test       - 运行测试套件"
 	@echo ""
 	@echo "构建和部署:"
-	@echo "  build      - 构建 NixOS 配置"
+	@echo "  build      - 构建 NixOS 配置 (当前主机: $(HOST))"
 	@echo "  switch     - 应用配置 (需要 root)"
 	@echo "  test-build - 测试构建但不应用"
+	@echo ""
+	@echo "快捷构建:"
+	@echo "  build-thinkbook  - 构建 thinkbook 配置"
+	@echo "  switch-thinkbook - 应用 thinkbook 配置"
+	@echo "  build-desktop    - 构建 desktop 配置"
+	@echo "  switch-desktop   - 应用 desktop 配置"
 	@echo ""
 	@echo "代码质量:"
 	@echo "  format     - 格式化所有 Nix 文件"
@@ -39,16 +51,16 @@ test: check validate
 
 # 构建和部署
 build:
-	@echo "🏗️  构建 NixOS 配置..."
-	nix build .#nixosConfigurations.desktop.config.system.build.toplevel
+	@echo "🏗️  构建 NixOS 配置 ($(HOST))..."
+	nix build .#nixosConfigurations.$(HOST).config.system.build.toplevel
 
 test-build:
 	@echo "🧪 测试构建..."
 	nix flake show --all-systems
 
 switch: check
-	@echo "🔄 应用配置 (需要 root 权限)..."
-	sudo nixos-rebuild switch --flake .
+	@echo "🔄 应用配置 ($(HOST), 需要 root 权限)..."
+	sudo nixos-rebuild switch --flake .#$(HOST)
 
 # 代码质量
 format:
@@ -119,3 +131,16 @@ info:
 	@echo "NixOS: 25.05"
 	@echo "主页: https://github.com/ygsheep/dotfile"
 	@echo "文档: ./docs/README.md"
+
+# 主机特定快捷命令
+build-thinkbook:
+	@$(MAKE) build HOST=thinkbook
+
+switch-thinkbook:
+	@$(MAKE) switch HOST=thinkbook
+
+build-desktop:
+	@$(MAKE) build HOST=desktop
+
+switch-desktop:
+	@$(MAKE) switch HOST=desktop

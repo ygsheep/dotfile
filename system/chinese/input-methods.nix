@@ -10,7 +10,7 @@
     fcitx5.waylandFrontend = true;
     fcitx5.addons = with pkgs; [
       rime-data
-      fcitx5-gtk
+      fcitx5-gtk # 包含 GTK2/3/4 支持
       fcitx5-rime
       fcitx5-nord # 主题
     ];
@@ -19,7 +19,7 @@
   # 输入法环境变量
   environment.sessionVariables = {
     GLFW_IM_MODULE = "fcitx";
-    # GTK_IM_MODULE = "fcitx";
+    GTK_IM_MODULE = "fcitx"; # GTK 应用需要（Firefox, VSCode 等）
     QT_IM_MODULE = "fcitx";
     XMODIFIERS = "@im=fcitx";
     # Wayland 专用配置

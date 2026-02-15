@@ -41,8 +41,9 @@ cd ~/.dotfile
 
 ### 3. 生成硬件配置
 ```bash
-sudo nixos-generate-config --dir ~/.dotfile/hosts/desktop --force
-rm ~/.dotfile/hosts/desktop/configuration.nix
+# 主机名可以是: desktop, laptop, thinkbook 等
+sudo nixos-generate-config --dir ~/.dotfile/hosts/thinkbook --force
+rm ~/.dotfile/hosts/thinkbook/configuration.nix
 ```
 
 ### 4. 安装系统
@@ -51,7 +52,7 @@ rm ~/.dotfile/hosts/desktop/configuration.nix
 如果在国内网络环境下，建议使用代理加速下载：
 ```bash
 # 方法1：临时使用代理
-sudo http_proxy="http://your-proxy:port" https_proxy="http://your-proxy:port" nixos-rebuild switch --flake .#desktop
+sudo http_proxy="http://your-proxy:port" https_proxy="http://your-proxy:port" nixos-rebuild switch --flake .#thinkbook
 
 # 方法2：配置 substituters（推荐）
 # 编辑 /etc/nixos/configuration.nix 或在配置中添加：
@@ -60,12 +61,16 @@ nix.settings.substituters = "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/s
 
 #### 正常安装
 ```bash
-sudo nixos-rebuild switch --flake .#desktop
+# 使用 Makefile（推荐）
+make switch-thinkbook
+
+# 或直接使用 nixos-rebuild
+sudo nixos-rebuild switch --flake .#thinkbook
 ```
 
 ### 5. 安装用户配置
 ```bash
-home-manager switch --flake .#sheep@desktop
+home-manager switch --flake .#sheep@thinkbook
 ```
 
 ### 6. 重启系统
@@ -105,16 +110,22 @@ reboot
 
 ### 🚀 系统管理
 ```bash
-# 推荐方式：使用 Makefile
-make help          # 查看所有命令
-make switch         # 应用配置
-make check          # 运行检查
-make format         # 格式化代码
-make update         # 更新依赖
+# 推荐方式：使用 Makefile（默认主机：thinkbook）
+make help               # 查看所有命令
+make switch             # 应用配置（使用默认主机）
+make switch-thinkbook   # 应用 thinkbook 配置
+make switch-desktop     # 应用 desktop 配置
+make check              # 运行检查
+make format             # 格式化代码
+make update             # 更新依赖
+
+# 指定主机名
+make build HOST=desktop
+make switch HOST=laptop
 
 # 或使用 nh 工具
-nh os switch        # 应用系统配置
-nh os clean         # 清理旧版本
+nh os switch            # 应用系统配置
+nh os clean             # 清理旧版本
 ```
 
 ### ⌨️ 快捷键
@@ -137,8 +148,14 @@ home.packages = with pkgs; [
 ];
 
 # 修改系统配置 - 编辑 system/ 目录下的模块
-# 添加新主机 - 复制 hosts/desktop/ 到 hosts/your-hostname/
+# 添加新主机 - 复制 hosts/thinkbook/ 到 hosts/your-hostname/
+# 然后在 Makefile 中添加对应的快捷命令
 ```
+
+**支持的主机配置:**
+- `desktop` - 桌面机完整配置
+- `thinkbook` - ThinkBook 笔记本（默认）
+- `laptop` - 通用笔记本配置
 
 ---
 
@@ -147,23 +164,27 @@ home.packages = with pkgs; [
 ```
 Niri-Dot/
 ├── flake.nix                # 入口点，全局变量
-├── Makefile                 # 项目管理命令
+├── Makefile                 # 项目管理命令（支持多主机）
 ├── home/                    # 用户级配置
-│   ├── apps/               # GUI 应用
-│   ├── cli/                # 命令行工具
+│   ├── apps/               # GUI 应用（原 software/）
+│   ├── cli/                # 命令行工具（原 terminal/）
 │   ├── desktop/            # 桌面环境
 │   ├── editors/            # 编辑器配置
 │   └── programs/           # 程序配置
 ├── system/                  # 系统级配置
 │   ├── core/               # 核心系统
+│   ├── chinese/            # 中文本土化
 │   ├── nix/                # Nix 相关
 │   └── services/           # 系统服务
 ├── hosts/                   # 主机配置
+│   ├── desktop/            # 桌面机配置
+│   ├── thinkbook/          # ThinkBook 笔记本
+│   └── laptop/             # 通用笔记本配置
 ├── scripts/                 # 工具脚本
 │   ├── setup/              # 安装脚本
 │   ├── maintenance/        # 维护脚本
 │   └── testing/            # 测试脚本
-└── assets/                  # 资源文件
+└── assets/                  # 资源文件（壁纸、字体）
 ```
 
 ---
@@ -171,6 +192,18 @@ Niri-Dot/
 ## 🔧 故障排除
 
 ### 常见问题
+
+#### Home Manager 启动失败
+如果遇到 `home-manager-sheep.service` 失败：
+```bash
+# 检查错误日志
+journalctl -u home-manager-sheep -n 50
+
+# 常见原因：Profile Sync Daemon (PSD) 与 Home Manager 扩展管理冲突
+# 解决方案：扩展已手动安装，Home Manager 不再自动管理 Chromium 扩展
+```
+
+#### 桌面环境问题
 ```bash
 # 检查服务状态
 systemctl --user status niri-session
@@ -183,6 +216,16 @@ journalctl --user -u niri-session -f
 
 # 重启桌面环境
 niri-session -r
+```
+
+#### 构建问题
+```bash
+# 检查配置语法
+make check
+
+# 清理并重新构建
+make clean
+make switch
 ```
 
 ---

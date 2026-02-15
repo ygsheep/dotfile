@@ -27,7 +27,6 @@
 
     # 导入 cachyos-kernel overlay 的主机已在其模块中单独定义
 
-
     # desktop 主机配置
     desktopModules =
       desktop

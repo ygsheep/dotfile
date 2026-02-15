@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   home.packages = with pkgs; [
     # Nix 工具
     nixfmt
@@ -34,7 +33,7 @@
 
   # Git 配置
   programs.git = {
-    attributes = [ "*.nix diff=nix" ];
+    attributes = ["*.nix diff=nix"];
     extraConfig = {
       diff."nix".command = "nix-diff";
     };

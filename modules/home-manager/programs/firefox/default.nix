@@ -153,7 +153,6 @@ with lib; let
       # };
     };
   };
-
   # uBlock Origin 过滤列表
   # NOTE: Disabled - extension not auto-installed due to network restrictions
   # ublock-filter-lists = [

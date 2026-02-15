@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    nodejs_latest
+    pkgs.nodejs_24
     biome
     vue-language-server
     vscode-langservers-extracted

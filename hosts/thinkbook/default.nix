@@ -93,6 +93,13 @@
   };
 
   services = {
+    # V2RayA 代理管理服务 - xray 包在当前 nixpkgs 不可用，暂时禁用
+    # services.v2raya = {
+    #   enable = true;
+    #   # 使用 Xray 核心替代 V2Ray，支持 XTLS-RPRX-Vision
+    #   cliPackage = pkgs.xray;
+    # };
+
     # 用于 SSD/NVMe
     fstrim.enable = true;
     scx.enable = true;
@@ -119,5 +126,5 @@
     '';
   };
 
-  environment.systemPackages = [pkgs.cryptsetup pkgs.swww];
+  environment.systemPackages = [pkgs.cryptsetup pkgs.swww]; # xray 包暂时不可用
 }

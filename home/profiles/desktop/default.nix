@@ -9,6 +9,9 @@
     ../../editors/zed
     ../../editors/vscode
 
+    # terminal
+    ../../cli/terminal/emulators/kitty.nix
+
     # services
     ../../services/wayland/gammastep.nix
     ../../services/wayland/quickshell.nix
@@ -26,6 +29,9 @@
     ../../services/system/cliphist.nix
     ../../services/system/polkit-agent.nix
     ../../services/system/power-monitor.nix
+
+    # develop tools
+    ../../apps/develop/default.nix
   ];
 
   # 所有开发环境和工具的包
@@ -53,7 +59,7 @@
     clippy # Rust 代码检查
 
     # development environments - JavaScript
-    nodejs_latest # 最新版本的 Node.js
+    pkgs.nodejs_24 # Node.js 24 LTS
     bun # 快速的 JavaScript 运行时
     pnpm # 快速、节省磁盘空间的包管理器
     typescript # TypeScript 编译器
