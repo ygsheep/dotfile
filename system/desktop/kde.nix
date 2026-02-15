@@ -34,10 +34,22 @@
     SessionDir=/etc/share/wayland-sessions
   '';
 
-  # 在 /etc/share/wayland-sessions 创建符号链接指向 plasma.desktop
+  # 在 /run/current-system/sw/share/wayland-sessions 创建符号链接
   systemd.tmpfiles.rules = [
-    "L+ /etc/share/wayland-sessions/plasma.desktop - - - - /run/current-system/sw/share/wayland-sessions/plasma.desktop"
+    "L+ /run/current-system/sw/share/wayland-sessions/plasma.desktop - - - - /run/current-system/sw/share/wayland-sessions/plasma.desktop"
+    "L+ /run/current-system/sw/share/wayland-sessions/niri.desktop - - - - /etc/wayland-sessions/niri.desktop"
   ];
+
+  # 创建 niri.desktop 会话文件
+  environment.etc."wayland-sessions/niri.desktop".text = ''
+    [Desktop Entry]
+    Name=Niri
+    Comment=Scrollable tiling window manager
+    Exec=${pkgs.niri}/bin/niri-session
+    Type=Application
+    DesktopNames=niri
+    Keywords=wm;tiling;wayland;
+  '';
 
   # KDE 核心应用包
   environment.systemPackages = with pkgs; [
@@ -60,18 +72,6 @@
     wayland-utils # Wayland 工具集
     wl-clipboard # Wayland 剪贴板工具
   ];
-
-  # 直接在 plasma-workspace 目录中创建 niri.desktop
-  # 这样 SDDM 可以同时发现 Plasma 和 Niri 会话
-  environment.etc."share/wayland-sessions/niri.desktop".text = ''
-    [Desktop Entry]
-    Name=Niri
-    Comment=Scrollable tiling window manager
-    Exec=${pkgs.niri}/bin/niri-session
-    Type=Application
-    DesktopNames=niri
-    Keywords=wm;tiling;wayland;
-  '';
 
   # 排除不需要的 KDE 应用
   environment.plasma6.excludePackages = with pkgs; [
