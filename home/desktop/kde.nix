@@ -34,7 +34,14 @@
     # ========== KDE 系统工具 ==========
     kdePackages.kde-gtk-config # GTK 配置集成
     kdePackages.systemsettings # 系统设置
+    kdePackages.kdeconnect-kde # KDE Connect 设备连接
   ];
+
+  # ========== KDE Connect 服务 ==========
+  services.kdeconnect = {
+    enable = true;
+    indicator = true;
+  };
 
   # ========== Qt 配置 ==========
   qt = {
