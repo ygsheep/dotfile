@@ -9,6 +9,16 @@
       sddm = {
         enable = true;
         wayland.enable = true;
+        settings = {
+          General = {
+            DisplayServer = "wayland";
+          };
+          Wayland = {
+            SessionDir = "/run/current-system/sw/share/wayland-sessions";
+          };
+          X11 = {
+          };
+        };
       };
     };
 
