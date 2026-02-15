@@ -8,14 +8,13 @@
 
     # ========== 窗口主题 ==========
     orchis-theme # 现代 GTK/Qt 窗口主题
-    graphite-kde-theme # KDE 窗口装饰
 
     # ========== 光标主题 ==========
     bibata-cursors # 你当前在用 ✓
 
     # ========== Fcitx5 KDE 集成 ==========
-    fcitx5-qt # Qt5/Qt6 输入法支持
-    fcitx5-configtool # Fcitx5 图形配置工具
+    kdePackages.fcitx5-qt # Qt5/Qt6 输入法支持
+    qt6Packages.fcitx5-configtool # Fcitx5 图形配置工具
 
     # ========== KDE 组件 ==========
     kdePackages.breeze # 默认 Breeze 主题
@@ -44,30 +43,11 @@
   };
 
   # ========== Qt 配置 ==========
+  # 注意：完整 KDE Plasma 环境下不需要手动配置 Qt
   qt = {
     enable = true;
     platformTheme = "kde";
-    style = "breeze";
   };
-
-  # ========== KDE Plasma 配置 ==========
-  # 注释：如果你启用完整 KDE Plasma，取消下面注释
-  # programs.plasma = {
-  #   enable = true;
-  #
-  #   workspace = {
-  #     clickItemTo = "select";  # 单击选择
-  #     theme = "breeze-dark";
-  #   };
-  #
-  #   hotkeys.commands = {
-  #     "launch-konsole" = {
-  #       name = "Launch Konsole";
-  #       key = "Ctrl+Alt+T";
-  #       command = "konsole";
-  #     };
-  #   };
-  # };
 
   # ========== 主题配置文件 ==========
   xdg.configFile = {

@@ -12,6 +12,9 @@
     # terminal
     ../../cli/terminal/emulators/kitty.nix
 
+    # desktop environment
+    ../../desktop/kde.nix
+
     # services
     ../../services/wayland/quickshell.nix
     ../../services/wayland/hypridle.nix
