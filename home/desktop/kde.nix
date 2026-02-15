@@ -1,6 +1,6 @@
 # KDE Plasma 主题配置
 # Papirus-Dark 图标 + Orchis 窗口主题 + Gruvbox 配色
-{pkgs, ...}: {
+{pkgs, lib, ...}: {
   home.packages = with pkgs; [
     # ========== 图标主题 ==========
     papirus-icon-theme # 现代扁平化图标
@@ -89,8 +89,8 @@
 
   # ========== 环境变量 ==========
   home.sessionVariables = {
-    # KDE 应用使用 Breeze
-    QT_QPA_PLATFORMTHEME = "kde";
+    # KDE 应用使用 Breeze (强制覆盖 wayland 配置中的 gtk3)
+    QT_QPA_PLATFORMTHEME = lib.mkForce "kde";
     # GTK 应用使用 Orchis
     GTK_THEME = "Orchis-dark";
   };
