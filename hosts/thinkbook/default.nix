@@ -93,13 +93,12 @@
   };
 
   services = {
-    # V2RayA 代理管理服务
-    v2raya = {
-      enable = true;
-      # 使用 Xray 核心替代 V2Ray，支持 XTLS-RPRX-Vision
-      package = pkgs.v2raya;
-      cliPackage = pkgs.xray;
-    };
+    # V2RayA 代理管理服务 (暂时禁用，需要手动配置)
+    # v2raya = {
+    #   enable = true;
+    #   package = pkgs.v2raya;
+    #   cliPackage = pkgs.xray;
+    # };
 
     # 用于 SSD/NVMe
     fstrim.enable = true;
