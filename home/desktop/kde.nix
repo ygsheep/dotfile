@@ -4,7 +4,7 @@
   home.packages = with pkgs; [
     # ========== 图标主题 ==========
     papirus-icon-theme # 现代扁平化图标
-    whitesur-icon-theme # macOS 风格备选
+    # whitesur-icon-theme 已在 gtk.nix 中配置
 
     # ========== 窗口主题 ==========
     orchis-theme # 现代 GTK/Qt 窗口主题
