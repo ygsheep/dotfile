@@ -108,9 +108,8 @@
     # 笔记本电脑电源管理
     upower.enable = true;
     thermald.enable = true;
-    auto-cpufreq.enable = true;
-    # 禁用 power-profiles-daemon（与 auto-cpufreq 冲突）
-    power-profiles-daemon.enable = lib.mkForce false;
+    # 使用 power-profiles-daemon 支持 AMD P-state 电源模式切换
+    power-profiles-daemon.enable = true;
   };
 
   hardware = {
