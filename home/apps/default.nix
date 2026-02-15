@@ -7,7 +7,7 @@
     ./browsers/chromium.nix
     ./browsers/firefox.nix
     ./browsers/edge.nix
-    ./browsers/zen.nix
+    # ./browsers/zen.nix  # Zen Browser (已禁用)
 
     ./gtk.nix
     ./media
