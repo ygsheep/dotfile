@@ -9,6 +9,11 @@
       sddm = {
         enable = true;
         wayland.enable = true;
+        settings = {
+          Wayland = {
+            SessionDir = "/run/current-system/sw/share/wayland-sessions";
+          };
+        };
       };
     };
 
@@ -28,14 +33,13 @@
     LookAndFeelPackage=org.kde.breezedark.desktop
   '';
 
-  # SDDM 配置：添加 /etc/share/wayland-sessions 作为会话目录
-  environment.etc."sddm.conf.d/sessions.conf".text = ''
-    [Wayland]
-    SessionDir=/etc/share/wayland-sessions
-  '';
+  # 使用 systemd tmpfiles 创建 niri.desktop 到正确位置
+  systemd.tmpfiles.rules = [
+    "L+ /run/current-system/sw/share/wayland-sessions/niri.desktop - - - - /etc/niri-session.desktop"
+  ];
 
-  # 创建 niri.desktop 会话文件
-  environment.etc."share/wayland-sessions/niri.desktop".text = ''
+  # 创建 niri.desktop 会话文件（在 /etc 下）
+  environment.etc."niri-session.desktop".text = ''
     [Desktop Entry]
     Name=Niri
     Comment=Scrollable tiling window manager
