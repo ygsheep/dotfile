@@ -32,11 +32,11 @@
     glfw
 
     # X11 libraries
-    xorg.libX11
-    xorg.libXext
-    xorg.libXcursor
-    xorg.libXrandr
-    xorg.libXi
+    libx11
+    libxext
+    libxcursor
+    libxrandr
+    libxi
 
     # Development tools
     clang-tools

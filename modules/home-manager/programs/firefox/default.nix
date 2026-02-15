@@ -118,12 +118,13 @@ with lib; let
     DisplayBookmarksToolbar = "never";
     DisplayMenuBar = "never";
     SearchEngines = {
-      Default = "Qwant";
+      Default = "qwant";
       Add = [
         {
           Name = "Qwant";
           URLTemplate = "https://www.qwant.com/?q={searchTerms}";
           IconURL = "https://www.qwant.com/favicon.ico";
+          ID = "qwant";
         }
         {
           Name = "Home Manager";
@@ -225,10 +226,10 @@ in {
 
       # 搜索引擎
       search = {
-        default = "Qwant";
+        default = "qwant";
         force = true;
         engines = {
-          "Qwant" = {
+          "qwant" = {
             urls = [
               {
                 template = "https://www.qwant.com/?q={searchTerms}";

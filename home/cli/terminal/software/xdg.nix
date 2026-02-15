@@ -125,7 +125,7 @@ in {
       publicShare = "$HOME/公共";
       templates = "$HOME/模板";
       extraConfig = {
-        XDG_SCREENSHOTS_DIR = "$HOME/图片/Screenshots";
+        SCREENSHOTS = "$HOME/图片/Screenshots";
       };
     };
   };
