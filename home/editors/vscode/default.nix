@@ -104,6 +104,8 @@
         "workbench.tree.renderIndentGuides" = "always";
         "workbench.list.smoothScrolling" = true;
         "editor.smoothScrolling" = true;
+        "workbench.iconTheme": "vscode-jetbrains-icon-theme-2023-dark"
+
       };
     };
   };

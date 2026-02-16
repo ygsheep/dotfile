@@ -126,5 +126,13 @@
     '';
   };
 
-  environment.systemPackages = [pkgs.cryptsetup pkgs.swww]; # xray 包暂时不可用
+  environment.systemPackages = with pkgs; [
+    cryptsetup
+    swww
+    # Tauri 应用依赖（OpenCode Desktop 需要）
+    webkitgtk_4_1
+    libayatana-appindicator
+    # C++ 标准库（OpenCode 文件监视器需要）
+    gcc
+  ]; # xray 包暂时不可用
 }

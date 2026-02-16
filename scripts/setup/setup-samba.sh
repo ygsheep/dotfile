@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Niri-Dot Samba 设置脚本
+# NixOS Samba 设置脚本
 # 用于配置 Samba 用户和密码
 
 set -euo pipefail

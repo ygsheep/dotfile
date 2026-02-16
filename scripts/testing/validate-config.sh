@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# 配置验证脚本 - 验证 Niri-Dot 配置的完整性和正确性
+# 配置验证脚本 - 验证 NixOS 配置的完整性和正确性
 
 set -euo pipefail
 

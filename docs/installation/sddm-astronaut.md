@@ -1,6 +1,6 @@
 # SDDM Astronaut Theme 安装指南
 
-本指南帮助你在 Niri-Dot 项目中安装和配置漂亮的 SDDM Astronaut 主题。
+本指南帮助你在 NixOS 项目中安装和配置漂亮的 SDDM Astronaut 主题。
 
 ## 🎨 主题预览
 

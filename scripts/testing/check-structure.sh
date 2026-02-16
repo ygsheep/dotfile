@@ -4,7 +4,7 @@
 
 set -euo pipefail
 
-echo "🔍 检查 Niri-Dot 项目结构..."
+echo "🔍 检查 NixOS 项目结构..."
 
 cd "$(dirname "$0")/../.."
 

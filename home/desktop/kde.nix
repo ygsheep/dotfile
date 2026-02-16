@@ -295,12 +295,12 @@
     # Plasma 样式配置
     "plasmarc".text = ''
       [General]
-      # ChromeOS-dark Plasma 样式
-      PlasmaStyle=ChromeOS-dark
-      PlasmaTheme=ChromeOS-dark
+      # ChromeOS Plasma 样式（深色主题通过 LookAndFeelPackage 控制）
+      PlasmaStyle=ChromeOS
+      PlasmaTheme=ChromeOS
 
       [Theme]
-      name=ChromeOS-dark
+      name=ChromeOS
     '';
   };
 

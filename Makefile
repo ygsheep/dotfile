@@ -1,4 +1,4 @@
-# Niri-Dot Makefile
+# NixOS Makefile
 # 提供常用的项目管理和维护命令
 
 # 主机配置 (可覆盖: make build HOST=laptop)
@@ -8,7 +8,7 @@ HOST ?= thinkbook
 
 # 默认目标
 help:
-	@echo "Niri-Dot 项目管理命令:"
+	@echo "NixOS 项目管理命令:"
 	@echo ""
 	@echo "变量:"
 	@echo "  HOST=$(HOST)  - 目标主机 (desktop/laptop/thinkbook)"
@@ -125,7 +125,7 @@ install-wallpaper:
 
 # 项目信息
 info:
-	@echo "📋 Niri-Dot 项目信息:"
+	@echo "📋 NixOS 项目信息:"
 	@echo "版本: 2.0.0"
 	@echo "发布日期: 2025-01-08"
 	@echo "NixOS: 25.05"

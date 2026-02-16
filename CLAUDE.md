@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Niri-Dot is a modular NixOS desktop environment configuration optimized for Chinese users. Features:
+NixOS is a modular NixOS desktop environment configuration optimized for Chinese users. Features:
 - **Dual Desktop**: Niri WM (desktop) + KDE Plasma 6 (laptop)
 - **Chinese Localization**: Fcitx5 + Rime input method, complete font support
 - **3-Layer Startup**: `systemd → greetd → niri-session → desktop environment`

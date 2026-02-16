@@ -17,7 +17,7 @@
 
 <p align="center"><img src="/assets/1.png" width="600px"></p>
 
-<h1 align="center">🐑 Niri-Dot - 中文优化的模块化 NixOS 配置</h1>
+<h1 align="center">🐑 NixOS - 中文优化的模块化 NixOS 配置</h1>
 <h3 align="center">NixOS + Niri + Noctalia - v2.0.0 模块化桌面环境</h3>
 
 ---
@@ -184,7 +184,7 @@ home.packages = with pkgs; [
 ## 🏗️ 项目架构
 
 ```
-Niri-Dot/
+NixOS/
 ├── flake.nix                # 入口点，全局变量
 ├── Makefile                 # 项目管理命令（支持多主机）
 ├── home/                    # 用户级配置
@@ -293,7 +293,7 @@ MIT License - 查看 [LICENSE](LICENSE) 文件了解详情
 ## 📞 联系方式
 
 - **GitHub**: [@ygsheep](https://github.com/ygsheep)
-- **项目地址**: [Niri-Dot](https://github.com/ygsheep/dotfile)
+- **项目地址**: [NixOS](https://github.com/ygsheep/dotfile)
 
 如果这个配置对你有帮助，请给项目一个 ⭐ Star！
 

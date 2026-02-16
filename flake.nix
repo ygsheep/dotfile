@@ -1,5 +1,5 @@
 {
-  description = "Niri-Dot - 中文优化的模块化 NixOS 配置";
+  description = "NixOS - 中文优化的模块化 NixOS 配置";
 
   outputs = inputs @ {self, ...}: let
     # 全局配置变量

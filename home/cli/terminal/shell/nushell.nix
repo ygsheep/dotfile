@@ -234,8 +234,23 @@
       extraEnv = ''
         $env.CARAPACE_BRIDGES = 'inshellisense,carapace,zsh,fish,bash'
 
-        # npm global bin 路径
-        $env.PATH = ($env.PATH | split row (char esep) | prepend '${globals.homeDir}/.local/share/npm/bin')
+        # 用户本地 bin 路径（优先级从高到低）
+        # OpenCode, 用户本地工具
+        # Python: pipx, poetry
+        # Node.js: npm, pnpm, yarn, bun, deno
+        # Rust: cargo
+        # Go: go
+        $env.PATH = ($env.PATH | split row (char esep)
+          | prepend '${globals.homeDir}/.local/bin'
+          | prepend '${globals.homeDir}/.local/share/pnpm'
+          | prepend '${globals.homeDir}/.local/share/npm/bin'
+          | prepend '${globals.homeDir}/.npm-global/bin'
+          | prepend '${globals.homeDir}/.bun/bin'
+          | prepend '${globals.homeDir}/.deno/bin'
+          | prepend '${globals.homeDir}/.cargo/bin'
+          | prepend '${globals.homeDir}/go/bin'
+          | prepend '${globals.homeDir}/.opencode/bin'
+          | prepend '${globals.homeDir}/bin')
       '';
     };
   };

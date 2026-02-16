@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Guidelines for agentic coding agents working in the Niri-Dot repository.
+Guidelines for agentic coding agents working in the NixOS repository.
 
 ## Project Overview
 **Output Format**: Reply in Chinese (中文), end with "喵！"

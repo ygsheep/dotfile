@@ -1,6 +1,6 @@
 # Noctalia 官方集成指南
 
-Noctalia 是一个基于 Qt6 的现代化桌面环境 shell，现已使用官方 Home Manager 模块完全集成到 Niri-Dot 项目中。
+Noctalia 是一个基于 Qt6 的现代化桌面环境 shell，现已使用官方 Home Manager 模块完全集成到 NixOS 项目中。
 
 ## 🌙 Noctalia 特性
 
@@ -15,7 +15,7 @@ Noctalia 是一个基于 Qt6 的现代化桌面环境 shell，现已使用官方
 
 ## 📦 安装状态
 
-✅ **已集成**: Noctalia 官方模块已完全集成到 Niri-Dot 配置中
+✅ **已集成**: Noctalia 官方模块已完全集成到 NixOS 配置中
 - 官方 Home Manager 模块导入
 - systemd 服务自动启动
 - 完整的中文本地化配置

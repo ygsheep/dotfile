@@ -21,7 +21,7 @@ print_message() {
 
 print_header() {
     echo "========================================"
-    echo "       Niri-Dot CI 检查脚本"
+    echo "       NixOS CI 检查脚本"
     echo "========================================"
 }
 

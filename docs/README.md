@@ -1,6 +1,6 @@
-# Niri-Dot 文档中心
+# NixOS 文档中心
 
-欢迎来到 Niri-Dot 配置的文档中心！这里包含了完整的使用指南和配置说明。
+欢迎来到 NixOS 配置的文档中心！这里包含了完整的使用指南和配置说明。
 
 ## 📚 文档导航
 
@@ -21,7 +21,7 @@
 ## 🏗️ 项目结构
 
 ```
-Niri-Dot/
+NixOS/
 ├── docs/                    # 📖 文档目录
 │   ├── installation/        # 安装指南
 │   ├── configuration/       # 配置说明
@@ -44,7 +44,7 @@ Niri-Dot/
 1. **克隆仓库**：
    ```bash
    git clone <repository-url>
-   cd Niri-Dot
+   cd NixOS
    ```
 
 2. **验证配置**：
