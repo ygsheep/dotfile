@@ -1,31 +1,16 @@
-{pkgs, ...}: {
+{pkgs, globals, ...}: {
+  # 启用 xdg 模块（用于 desktop entries）
+  xdg.enable = true;
+  xdg.mimeApps.enable = true;
+  xdg.mimeApps.defaultApplications = {
+    "text/plain" = "hx.desktop";
+  };
+
+  # OpenCode - AI 编码代理
   home.packages = with pkgs; [
-    # OpenCode - AI 编码代理
-    opencode # 终端版本的 AI 编码代理
-    opencode-desktop # 桌面客户端
+    opencode
+    opencode-desktop
   ];
-
-  # OpenCode 启动脚本（使用 activation 直接创建可执行文件）
-  home.activation.createOpenCodeDesktopScript = ''
-        mkdir -p ~/.local/bin
-        cat > ~/.local/bin/opencode-desktop << 'SCRIPT'
-    #!/usr/bin/env bash
-    # OpenCode Desktop 启动脚本 - 设置必要的环境变量
-
-    # 找到 libstdc++ 的路径
-    LIBSTDCXX_DIR=$(find /nix/store -maxdepth 1 -name "*gcc*lib" -type d 2>/dev/null | head -1)
-    if [ -n "$LIBSTDCXX_DIR" ] && [ -d "$LIBSTDCXX_DIR/lib" ]; then
-      export LD_LIBRARY_PATH="$LIBSTDCXX_DIR/lib:$LD_LIBRARY_PATH"
-    fi
-
-    # 设置 PATH
-    export PATH="$HOME/.opencode/bin:$HOME/.local/bin:$PATH"
-
-    # 启动 OpenCode Desktop
-    exec OpenCode "$@"
-    SCRIPT
-        chmod +x ~/.local/bin/opencode-desktop
-  '';
 
   # OpenCode 配置
   home.file.".config/opencode/config.toml".text = ''
@@ -56,14 +41,34 @@
     # api_key = "your-api-key-here"
   '';
 
-  # 桌面快捷方式
-  xdg.desktopEntries.OpenCode = {
-    name = "OpenCode";
-    comment = "The open source AI coding agent";
-    exec = "opencode-desktop %F";
-    icon = "OpenCode";
-    type = "Application";
-    categories = ["Development" "IDE"];
-    terminal = false;
+  # OpenCode 启动脚本（使用 nix-shell 提供干净环境）
+  home.file.".local/bin/opencode-desktop" = {
+    executable = true;
+    text = ''
+      #!/usr/bin/env bash
+      # OpenCode Desktop 启动脚本 - 使用 nix-shell
+
+      # 设置 KDE 环境变量（使用原生窗口装饰）
+      export XDG_CURRENT_DESKTOP=KDE
+      export DESKTOP_SESSION=plasma
+      export KDE_FULL_SESSION=true
+      export XDG_SESSION_TYPE=wayland
+      export GTK_USE_PORTAL=1
+
+      # 使用 nix-shell 提供干净环境并启动 OpenCode
+      exec nix-shell -p opencode --run "OpenCode $@"
+    '';
   };
+
+  # Desktop 快捷方式（使用 globals 避免硬编码）
+  home.file.".local/share/applications/OpenCode.desktop".text = ''
+    [Desktop Entry]
+    Name=OpenCode
+    Comment=AI coding agent
+    Exec=bash -c 'export PATH="$HOME/.opencode/bin:$HOME/.local/bin:$PATH" && exec opencode-desktop %F'
+    Icon=opencode
+    Type=Application
+    Categories=Development;IDE;
+    Terminal=false
+  '';
 }

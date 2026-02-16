@@ -13,7 +13,7 @@
       userSettings = {
         # General settings
         "workbench.colorTheme" = "Dracula";
-        "workbench.iconTheme" = "material-icon-theme";
+        "workbench.iconTheme" = "vscode-jetbrains-icon-theme-2023-dark";
         "workbench.startupEditor" = "none";
         "workbench.editor.enablePreview" = false;
         "workbench.editor.showTabs" = true;
@@ -104,7 +104,6 @@
         "workbench.tree.renderIndentGuides" = "always";
         "workbench.list.smoothScrolling" = true;
         "editor.smoothScrolling" = true;
-        "workbench.iconTheme": "vscode-jetbrains-icon-theme-2023-dark"
 
       };
     };
