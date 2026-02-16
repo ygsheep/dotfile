@@ -13,7 +13,7 @@
     bold_font        auto
     italic_font      auto
     bold_italic_font auto
-    font_size        11.0
+    font_size        14.0
 
     # Cursor
     cursor_shape     beam
@@ -59,7 +59,7 @@
     # Color scheme (Gruvbox Dark)
     foreground #ebdbb2
     background #1d2021
-    background_opacity 0.95
+    background_opacity 0.98
 
     # Cursor colors
     cursor #ebdbb2

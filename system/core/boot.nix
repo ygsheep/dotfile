@@ -13,7 +13,7 @@
     initrd = {
       systemd.enable = true;
     };
-    supportedFilesystems = ["ntfs"];
+    supportedFilesystems = ["ntfs" "ntfs3g"];
 
     # Use CachyOS LTS kernel for better performance and hardware support
     kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-lts;
@@ -47,5 +47,8 @@
       TMPDIR = "/var/tmp";
     };
   };
-  environment.systemPackages = [config.boot.kernelPackages.cpupower];
+  environment.systemPackages = [
+    config.boot.kernelPackages.cpupower
+    pkgs.ntfs3g
+  ];
 }

@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   config,
   ...
 }: {
@@ -21,7 +22,7 @@
 
         # Editor settings
         "editor.fontSize" = 14;
-        "editor.fontFamily" = "'JetBrains Mono', 'monospace', monospace";
+        "editor.fontFamily" = lib.mkForce "'JetBrains Mono', 'monospace', monospace";
         "editor.lineHeight" = 1.6;
         "editor.tabSize" = 2;
         "editor.insertSpaces" = true;

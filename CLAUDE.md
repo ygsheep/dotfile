@@ -10,7 +10,7 @@ Niri-Dot is a modular NixOS desktop environment configuration optimized for Chin
 - **3-Layer Startup**: `systemd → greetd → niri-session → desktop environment`
 - **Architecture**: flake-parts based modular configuration
 
-**Output Format**: Reply in Chinese (中文), end with "喵！"
+**Output Format**: Reply in Chinese (中文), end with "主人！主人！任务完成了，喵！"
 
 ## Essential Commands
 

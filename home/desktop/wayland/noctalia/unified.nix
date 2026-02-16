@@ -17,8 +17,8 @@ in {
   programs.noctalia-shell = {
     enable = true;
 
-    # 启用 systemd 服务
-    systemd.enable = true;
+    # 禁用内置 systemd 服务（使用自定义服务以传递 QML2_IMPORT_PATH）
+    systemd.enable = false;
 
     # 基本配置
     settings = {
@@ -28,7 +28,7 @@ in {
       # 顶部栏配置
       bar = {
         position = "top";
-        backgroundOpacity = 0.95;
+        backgroundOpacity = lib.mkForce 0.95;
         density = "compact";
         showCapsule = true;
         exclusive = true;
@@ -136,7 +136,7 @@ in {
       appLauncher = {
         enableClipboardHistory = true;
         position = "center";
-        backgroundOpacity = 0.95;
+        backgroundOpacity = lib.mkForce 0.95;
         useApp2Unit = false;
         sortByMostUsed = true;
         terminalCommand = "ghostty";
@@ -202,7 +202,7 @@ in {
       dock = {
         enabled = false;
         displayMode = "always_visible";
-        backgroundOpacity = 1;
+        backgroundOpacity = lib.mkForce 1;
         floatingRatio = 1;
         size = 1;
         onlySameOutput = true;
@@ -221,7 +221,7 @@ in {
         doNotDisturb = false;
         location = "top_right";
         overlayLayer = true;
-        backgroundOpacity = 0.9;
+        backgroundOpacity = lib.mkForce 0.9;
         respectExpireTimeout = false;
         lowUrgencyDuration = 3;
         normalUrgencyDuration = 8;
@@ -290,7 +290,10 @@ in {
   };
 
   # 安装 Noctalia 包
-  home.packages = [noctalia];
+  home.packages = with pkgs; [
+    noctalia
+    kdePackages.kirigami # Noctalia 依赖 Kirigami QML 模块
+  ];
 
   # 配置 Noctalia 环境变量
   home.sessionVariables = {
@@ -490,11 +493,11 @@ in {
     };
 
     Service = {
-      ExecStart = "${noctalia}/bin/noctalia";
+      ExecStart = "${noctalia}/bin/noctalia-shell";
       Restart = "on-failure";
       RestartSec = 5;
-      Environment = [
-        "QML2_IMPORT_PATH=${config.home.sessionVariables.QML2_IMPORT_PATH}"
+      Environment = lib.mkForce [
+        "QML2_IMPORT_PATH=${noctalia}/lib/qt-6/qml:${inputs.quickshell.packages.${pkgs.system}.default}/lib/qt-6/qml:${pkgs.kdePackages.qtdeclarative}/lib/qt-6/qml:${pkgs.kdePackages.kirigami.unwrapped}/lib/qt-6/qml"
         "XDG_CONFIG_HOME=${config.xdg.configHome}"
       ];
     };

@@ -1,6 +1,11 @@
 # KDE Plasma 主题配置
-# Papirus-Dark 图标 + Orchis 窗口主题 + Gruvbox 配色
-{pkgs, lib, ...}: {
+# chromeOS-dark 全局主题 + Bibata Modern Ice 光标 + Klassy 窗口装饰
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   home.packages = with pkgs; [
     # ========== 图标主题 ==========
     papirus-icon-theme # 现代扁平化图标
@@ -10,7 +15,7 @@
     orchis-theme # 现代 GTK/Qt 窗口主题
 
     # ========== 光标主题 ==========
-    bibata-cursors # 你当前在用 ✓
+    bibata-cursors # Bibata Modern Ice (通过系统设置选择)
 
     # ========== Fcitx5 KDE 集成 ==========
     kdePackages.fcitx5-qt # Qt5/Qt6 输入法支持
@@ -20,6 +25,56 @@
     kdePackages.breeze # 默认 Breeze 主题
     kdePackages.breeze-gtk # Breeze GTK 引擎
     kdePackages.qt6ct # Qt6 配置工具
+    klassy # chromeOS-dark 窗口装饰依赖
+
+    # ========== ChromeOS-kde 主题（自动安装）==========
+    # 从 GitHub 自动安装 ChromeOS KDE Plasma 全局主题
+    (pkgs.stdenvNoCC.mkDerivation {
+      pname = "ChromeOS-kde";
+      version = "2020-04-02";
+
+      src = pkgs.fetchFromGitHub {
+        owner = "vinceliuice";
+        repo = "ChromeOS-kde";
+        rev = "b9fe1bd";
+        hash = "sha256-5qNjAHcNfiOjYsoVMcsnx5TMCMtJHyNS4xSt2AzRj+Y=";
+      };
+
+      buildInputs = [bash];
+
+      buildPhase = "# 主题不需要编译";
+
+      installPhase = ''
+        mkdir -p $out/share
+
+        # 安装 Plasma Look-and-Feel 主题
+        mkdir -p $out/share/plasma/look-and-feel
+        cp -r plasma/look-and-feel/com.github.vinceliuice.ChromeOS \
+          $out/share/plasma/look-and-feel/
+
+        # 安装颜色方案
+        mkdir -p $out/share/color-schemes
+        cp color-schemes/*.colors $out/share/color-schemes/
+
+        # 安装 Plasma 主题
+        mkdir -p $out/share/plasma/desktoptheme
+        cp -r plasma/desktoptheme/ChromeOS* $out/share/plasma/desktoptheme/ 2>/dev/null || true
+
+        # 安装 Kvantum 主题
+        mkdir -p $out/share/Kvantum
+        cp -r Kvantum/* $out/share/Kvantum/ 2>/dev/null || true
+
+        # 安装 Aurorae 主题
+        mkdir -p $out/share/aurorae/themes
+        cp -r aurorae/* $out/share/aurorae/themes/ 2>/dev/null || true
+      '';
+
+      meta = with lib; {
+        description = "ChromeOS theme for KDE Plasma";
+        homepage = "https://github.com/vinceliuice/ChromeOS-kde";
+        license = licenses.gpl3Plus;
+      };
+    })
 
     # ========== KDE 实用应用 ==========
     kdePackages.dolphin # 文件管理器
@@ -46,52 +101,214 @@
   # 注意：完整 KDE Plasma 环境下不需要手动配置 Qt
   qt = {
     enable = true;
-    platformTheme = "kde";
+    platformTheme.name = lib.mkForce "kde"; # 强制使用 KDE 平台主题
   };
 
   # ========== 主题配置文件 ==========
+  # Gruvbox Dark Hard 标准配色方案
+  # 参考: home/shared/colors/gruvbox-dark-hard.yml
+  xdg.dataFile = {
+    "color-schemes/GruvboxDarkHard.colors".text = ''
+      [General]
+      Name=GruvboxDarkHard
+      ColorScheme=GruvboxDarkHard
+
+      [ColorEffects:Disabled]
+      Color=102,92,84
+      ColorAmount=0
+      ColorEffect=0
+      ContrastAmount=0.65
+      ContrastEffect=1
+      IntensityAmount=0.1
+      IntensityEffect=2
+
+      [ColorEffects:Inactive]
+      ChangeSelectionColor=true
+      Color=80,73,69
+      ColorAmount=0.025
+      ColorEffect=2
+      ContrastAmount=0.1
+      ContrastEffect=2
+      Enable=true
+      IntensityAmount=0
+      IntensityEffect=0
+
+      [Colors:Button]
+      BackgroundAlternate=80,73,69
+      BackgroundNormal=60,56,54
+      DecorationFocus=142,192,124
+      DecorationHover=184,187,38
+      ForegroundActive=251,241,199
+      ForegroundInactive=189,174,147
+      ForegroundLink=250,189,47
+      ForegroundNegative=251,73,52
+      ForegroundNeutral=254,128,25
+      ForegroundNormal=235,219,178
+      ForegroundPositive=184,187,38
+
+      [Colors:Complementary]
+      BackgroundAlternate=80,73,69
+      BackgroundNormal=60,56,54
+      DecorationFocus=142,192,124
+      DecorationHover=184,187,38
+      ForegroundActive=251,241,199
+      ForegroundInactive=189,174,147
+      ForegroundLink=250,189,47
+      ForegroundNegative=251,73,52
+      ForegroundNeutral=254,128,25
+      ForegroundNormal=235,219,178
+      ForegroundPositive=184,187,38
+
+      [Colors:Header]
+      BackgroundAlternate=60,56,54
+      BackgroundNormal=29,32,33
+      DecorationFocus=142,192,124
+      DecorationHover=184,187,38
+      ForegroundActive=251,241,199
+      ForegroundInactive=189,174,147
+      ForegroundLink=250,189,47
+      ForegroundNegative=251,73,52
+      ForegroundNeutral=254,128,25
+      ForegroundNormal=235,219,178
+      ForegroundPositive=184,187,38
+
+      [Colors:Selection]
+      BackgroundAlternate=142,192,124
+      BackgroundNormal=184,187,38
+      DecorationFocus=184,187,38
+      DecorationHover=142,192,124
+      ForegroundActive=29,32,33
+      ForegroundInactive=29,32,33
+      ForegroundLink=29,32,33
+      ForegroundNegative=29,32,33
+      ForegroundNeutral=29,32,33
+      ForegroundPositive=29,32,33
+
+      [Colors:Tooltip]
+      BackgroundAlternate=60,56,54
+      BackgroundNormal=29,32,33
+      DecorationFocus=142,192,124
+      DecorationHover=184,187,38
+      ForegroundActive=251,241,199
+      ForegroundInactive=189,174,147
+      ForegroundLink=250,189,47
+      ForegroundNegative=251,73,52
+      ForegroundNeutral=254,128,25
+      ForegroundNormal=235,219,178
+      ForegroundPositive=184,187,38
+
+      [Colors:View]
+      BackgroundAlternate=60,56,54
+      BackgroundNormal=29,32,33
+      DecorationFocus=142,192,124
+      DecorationHover=184,187,38
+      ForegroundActive=251,241,199
+      ForegroundInactive=189,174,147
+      ForegroundLink=250,189,47
+      ForegroundNegative=251,73,52
+      ForegroundNeutral=254,128,25
+      ForegroundNormal=235,219,178
+      ForegroundPositive=184,187,38
+
+      [Colors:Window]
+      BackgroundAlternate=60,56,54
+      BackgroundNormal=29,32,33
+      DecorationFocus=142,192,124
+      DecorationHover=184,187,38
+      ForegroundActive=251,241,199
+      ForegroundInactive=189,174,147
+      ForegroundLink=250,189,47
+      ForegroundNegative=251,73,52
+      ForegroundNeutral=254,128,25
+      ForegroundNormal=235,219,178
+      ForegroundPositive=184,187,38
+
+      [WM]
+      activeBackground=29,32,33
+      activeForeground=235,219,178
+      inactiveBackground=60,56,54
+      inactiveForeground=189,174,147
+    '';
+  };
+
   xdg.configFile = {
     # KDE 全局主题配置
     "kdeglobals".text = ''
-       [General]
-       ColorScheme=GruvboxDarkHard
-       Name=Default
-       XftAntialias=true
-       XftHintStyle=hintmedium
-       XftSubPixel=none
+      [General]
+      ColorScheme=GruvboxDarkHard
+      Name=Default
+      XftAntialias=true
+      XftHintStyle=hintmedium
+      XftSubPixel=none
 
-       [KDE]
-       SingleClick=true
-       ShowDeleteCommand=false
-      LookAndFeelPackage=org.kde.breezedark.desktop
+      [KDE]
+      SingleClick=true
+      ShowDeleteCommand=false
+      # LookAndFeelPackage=org.kde.breezedark.desktop
+      LookAndFeelPackage=com.github.vinceliuice.ChromeOS-dark
 
-       [Icons]
-       Theme=Papirus-Dark
+      [Icons]
+      Theme=Papirus-Dark
 
-       [WM]
-       activeFont=Noto Sans,10,-1,5,50,0,0,0,0,0
-       inactiveFont=Noto Sans,10,-1,5,50,0,0,0,0,0
+      [WM]
+      activeFont=Noto Sans,10,-1,5,50,0,0,0,0,0
+      inactiveFont=Noto Sans,10,-1,5,50,0,0,0,0,0
+      activeBackground=29,32,33
+      activeForeground=235,219,178
+      inactiveBackground=60,56,54
+      inactiveForeground=189,174,147
     '';
 
-    # Breeze 窗口装饰配置
-    "blossomrc".text = ''
+    # Klassy 窗口装饰配置（chromeOS-dark 风格）
+    "klassyrc".text = ''
       [Common]
-      BorderSize=3
+      BorderSize=2
       DrawBorderOnMaximizedWindows=false
       EnableBlurBehind=true
       ShadowStrength=50
 
       [Windeco]
-      ButtonSize=50
-      BorderSize=3
+      ButtonSize=40
+      BorderSize=2
+      TitleBarSize=30
+      TitleBarSidePadding=10
+
+      [Colors:Button]
+      BackgroundAlternate=60,56,54
+      BackgroundNormal=29,32,33
+      DecorationFocus=142,192,124
+      ForegroundNormal=235,219,178
+
+      [Colors:TitleBar]
+      BackgroundNormal=29,32,33
+      ForegroundNormal=235,219,178
+      BackgroundActive=29,32,33
+      ForegroundActive=235,219,178
+      BackgroundInactive=60,56,54
+      ForegroundInactive=189,174,147
+
+      [Colors]
+      UseThemeColors=true
+      BlendTitleBarColors=true
+    '';
+
+    # Plasma 样式配置
+    "plasmarc".text = ''
+      [General]
+      # ChromeOS-dark Plasma 样式
+      PlasmaStyle=ChromeOS-dark
+      PlasmaTheme=ChromeOS-dark
+
+      [Theme]
+      name=ChromeOS-dark
     '';
   };
 
   # ========== 环境变量 ==========
   home.sessionVariables = {
-    # KDE 应用使用 Breeze (强制覆盖 wayland 配置中的 gtk3)
+    # KDE 应用使用 Breeze (强制覆盖 Stylix 的 qtct)
     QT_QPA_PLATFORMTHEME = lib.mkForce "kde";
-    # GTK 应用使用 Orchis
-    GTK_THEME = "Orchis-dark";
+    # GTK 应用使用 Breeze 深色主题
+    GTK_THEME = "Breeze-Dark";
   };
 }

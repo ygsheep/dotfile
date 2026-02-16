@@ -37,7 +37,6 @@
       zfxtop
       nix-search-tv
       television
-      opencode
       crush
     ]
     ++ (with inputs.mynixpkgs.packages.${pkgs.system}; [

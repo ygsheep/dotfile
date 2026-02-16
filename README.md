@@ -88,8 +88,9 @@ reboot
 - **窗口管理器** • [Niri](https://github.com/YaLTeR/niri/) - 可滚动的平铺窗口管理器
 - **桌面 Shell** • [Noctalia](https://github.com/noctalia-dev/noctalia-shell) - 现代化桌面环境
 - **显示管理** • [Greetd](https://git.sr.ht/~kennylevinsen/greetd) - 极简显示管理器 (3层启动链)
-- **终端** • [WezTerm](https://wezfurlong.org/wezterm/) - 强大的现代化终端
-- **文件管理** • [Yazi](https://github.com/sxyazi/yazi) - Rust 时代的文件管理器
+- **主题系统** • ChromeOS-dark 全局主题 + Klassy 窗口装饰 + Bibata Modern Ice 光标
+- **终端** • [WezTerm](https://wezfurlong.org/wezterm/) / [Kitty](https://sw.kovidgoyal.net/kitty/) - 强大的现代化终端
+- **文件管理** • [Yazi](https://github.com/sxyazi/yazi) / Dolphin - Rust 时代的文件管理器
 - **编辑器** • 多编辑器支持：Neovim、Helix、VSCode、Zed
 - **启动器** • [AnyRun](https://github.com/Kirottu/anyrun) - 快速应用启动器
 
@@ -152,6 +153,27 @@ home.packages = with pkgs; [
 # 然后在 Makefile 中添加对应的快捷命令
 ```
 
+#### 主题配置
+
+当前默认主题配置（`home/desktop/kde.nix`）：
+
+| 组件 | 主题 |
+|------|------|
+| 全局主题 | ChromeOS-dark |
+| Plasma 样式 | ChromeOS-dark |
+| 窗口装饰 | Klassy |
+| 图标主题 | Papirus-Dark |
+| 光标主题 | Bibata Modern Ice |
+| 颜色方案 | Gruvbox Dark Hard |
+
+**手动应用主题**：
+```bash
+# 系统设置 → 外观 → 全局主题 → ChromeOS-dark
+# 系统设置 → 外观 → Plasma 样式 → ChromeOS-dark
+# 系统设置 → 外观 → 窗口装饰 → Klassy
+# 系统设置 → 外观 → 光标主题 → Bibata Modern Ice
+```
+
 **支持的主机配置:**
 - `desktop` - 桌面机完整配置
 - `thinkbook` - ThinkBook 笔记本（默认）
@@ -172,8 +194,11 @@ Niri-Dot/
 │   ├── editors/            # 编辑器配置
 │   └── programs/           # 程序配置
 ├── system/                  # 系统级配置
-│   ├── core/               # 核心系统
+│   ├── core/               # 核心系统（启动、内核、NTFS 支持）
 │   ├── chinese/            # 中文本土化
+│   ├── desktop/            # 桌面环境（KDE）
+│   ├── hardware/           # 硬件配置
+│   ├── network/            # 网络配置
 │   ├── nix/                # Nix 相关
 │   └── services/           # 系统服务
 ├── hosts/                   # 主机配置
@@ -226,6 +251,35 @@ make check
 # 清理并重新构建
 make clean
 make switch
+```
+
+#### Windows 双系统问题
+
+##### NTFS 分区挂载失败
+如果无法挂载 Windows 分区（错误：`wrong fs type, bad option, bad superblock`）：
+
+**原因**：Windows 快速启动（Fast Startup）导致 NTFS 分区处于休眠状态
+
+**解决方案**：
+1. 进入 Windows，打开**命令提示符（管理员）**，运行：
+   ```cmd
+   powercfg /h off
+   ```
+2. 或通过**控制面板 → 电源选项 → 选择电源按钮的功能**禁用快速启动
+3. 完全关机后重新启动到 NixOS
+
+**配置**：系统已预装 `ntfs3g` 支持 NTFS 读写
+
+##### 时间同步问题
+双系统时间不同步：
+```bash
+# NixOS 已配置为使用本地时间（与 Windows 兼容）
+# 检查时间状态
+timedatectl status
+
+# 如需重新同步
+sudo systemctl restart chronyd
+sudo chronyc sources
 ```
 
 ---

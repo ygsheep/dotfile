@@ -9,6 +9,7 @@ in {
   home.packages = with pkgs;
     [
       quickshell
+      kdePackages.kirigami # Noctalia Shell 依赖 Kirigami 模块
     ]
     ++ [
       # inputs.mynixpkgs.packages.${pkgs.system}.dgop  # 暂时注释掉，包不存在
