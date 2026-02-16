@@ -57,5 +57,9 @@
 
     # Git GUI 工具
     lazygit
+
+    # 开发工具
+    github-desktop
+    obsidian
   ];
 }
