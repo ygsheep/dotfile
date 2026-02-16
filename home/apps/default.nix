@@ -54,5 +54,8 @@
 
     # lmstudio本地大模型
     lmstudio
+
+    # Git GUI 工具
+    lazygit
   ];
 }
