@@ -48,12 +48,8 @@
       #!/usr/bin/env bash
       # OpenCode Desktop 启动脚本 - 使用 nix-shell
 
-      # 设置 KDE 环境变量（使用原生窗口装饰）
-      export XDG_CURRENT_DESKTOP=KDE
-      export DESKTOP_SESSION=plasma
-      export KDE_FULL_SESSION=true
-      export XDG_SESSION_TYPE=wayland
-      export GTK_USE_PORTAL=1
+      # 强制使用 X11 后端
+      export OC_ALLOW_WAYLAND=0
 
       # 使用 nix-shell 提供干净环境并启动 OpenCode
       exec nix-shell -p opencode --run "OpenCode $@"
