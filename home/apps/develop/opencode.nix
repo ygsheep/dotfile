@@ -1,4 +1,8 @@
-{pkgs, globals, ...}: {
+{
+  pkgs,
+  globals,
+  ...
+}: {
   # 启用 xdg 模块（用于 desktop entries）
   xdg.enable = true;
   xdg.mimeApps.enable = true;

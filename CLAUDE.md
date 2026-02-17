@@ -18,14 +18,16 @@ NixOS is a modular NixOS desktop environment configuration optimized for Chinese
 # Development
 nix develop              # Enter dev environment
 make check              # Run all checks
-make format              # Format Nix files
+make format             # Format Nix files
 nix flake update        # Update dependencies
 
-# Build & Deploy
-make switch             # Apply config (default: thinkbook)
-make switch-desktop     # Apply desktop config
-make switch-thinkbook   # Apply thinkbook config
-make build HOST=xxx     # Build specific host
+# Build & Deploy (simplified)
+make s                  # Apply config (default: thinkbook)
+make b                  # Build config
+make si                 # Interactive select host & apply
+make bi                 # Interactive select host & build
+make switch             # Full switch (HOST=desktop make switch)
+make build              # Full build (HOST=desktop make build)
 nh os switch            # Apply with nh tool
 
 # Hosts: desktop, thinkbook

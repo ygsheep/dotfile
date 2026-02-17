@@ -62,7 +62,10 @@ nix.settings.substituters = "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/s
 #### 正常安装
 ```bash
 # 使用 Makefile（推荐）
-make switch-thinkbook
+make s              # 交互式选择主机
+make si             # 交互式选择主机并应用
+# 或直接指定主机
+HOST=thinkbook make s
 
 # 或直接使用 nixos-rebuild
 sudo nixos-rebuild switch --flake .#thinkbook
@@ -111,18 +114,21 @@ reboot
 
 ### 🚀 系统管理
 ```bash
-# 推荐方式：使用 Makefile（默认主机：thinkbook）
+# Makefile 命令（默认主机：thinkbook）
 make help               # 查看所有命令
-make switch             # 应用配置（使用默认主机）
-make switch-thinkbook   # 应用 thinkbook 配置
-make switch-desktop     # 应用 desktop 配置
+make s                  # 应用配置（快捷）
+make b                  # 构建配置（快捷）
+make si                 # 交互式选择主机并应用
+make bi                 # 交互式选择主机并构建
+make switch             # 完整 switch（可用 HOST=desktop 指定）
+make build              # 完整 build（可用 HOST=desktop 指定）
 make check              # 运行检查
 make format             # 格式化代码
 make update             # 更新依赖
 
 # 指定主机名
-make build HOST=desktop
-make switch HOST=laptop
+HOST=desktop make s
+HOST=laptop make b
 
 # 或使用 nh 工具
 nh os switch            # 应用系统配置

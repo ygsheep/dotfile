@@ -267,8 +267,8 @@ in {
         gtk = true;
         qt = true;
         kcolorscheme = true;
-        alacritty = true;
-        kitty = false;
+        alacritty = false;
+        kitty = true;
         ghostty = true;
         foot = false;
         wezterm = false;

@@ -234,29 +234,31 @@
   xdg.configFile = {
     # KDE 全局主题配置
     "kdeglobals".text = ''
-      [General]
-      ColorScheme=GruvboxDarkHard
-      Name=Default
-      XftAntialias=true
-      XftHintStyle=hintmedium
-      XftSubPixel=none
+        [General]
+        ColorScheme=GruvboxDarkHard
+        Name=Default
+        XftAntialias=true
+        XftHintStyle=hintmedium
+        XftSubPixel=none
+        TerminalApplication=kitty
+        Browser=firefox
 
       [KDE]
-      SingleClick=true
-      ShowDeleteCommand=false
-      # LookAndFeelPackage=org.kde.breezedark.desktop
-      LookAndFeelPackage=com.github.vinceliuice.ChromeOS-dark
+        SingleClick=true
+        ShowDeleteCommand=false
+        # LookAndFeelPackage=org.kde.breezedark.desktop
+        LookAndFeelPackage=com.github.vinceliuice.ChromeOS-dark
 
-      [Icons]
-      Theme=Papirus-Dark
+        [Icons]
+        Theme=Papirus-Dark
 
-      [WM]
-      activeFont=Noto Sans,10,-1,5,50,0,0,0,0,0
-      inactiveFont=Noto Sans,10,-1,5,50,0,0,0,0,0
-      activeBackground=29,32,33
-      activeForeground=235,219,178
-      inactiveBackground=60,56,54
-      inactiveForeground=189,174,147
+        [WM]
+        activeFont=Noto Sans,10,-1,5,50,0,0,0,0,0
+        inactiveFont=Noto Sans,10,-1,5,50,0,0,0,0,0
+        activeBackground=29,32,33
+        activeForeground=235,219,178
+        inactiveBackground=60,56,54
+        inactiveForeground=189,174,147
     '';
 
     # Klassy 窗口装饰配置（chromeOS-dark 风格）

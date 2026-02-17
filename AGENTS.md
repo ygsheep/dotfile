@@ -25,15 +25,17 @@ nix develop
 
 ### Build & Deploy
 ```bash
-# Build specific host
-make build HOST=desktop    # or HOST=thinkbook
-make build-desktop
-make build-thinkbook
+# Quick commands (default: thinkbook)
+make s                    # Apply config (switch shortcut)
+make b                    # Build config (build shortcut)
 
-# Apply configuration (requires root)
-make switch HOST=desktop
-make switch-desktop
-make switch-thinkbook
+# Interactive host selection
+make si                   # Select host & apply
+make bi                   # Select host & build
+
+# Full commands with HOST variable
+make switch HOST=desktop  # Apply desktop config
+make build HOST=thinkbook # Build thinkbook config
 
 # Alternative using nh tool
 nh os switch

@@ -104,7 +104,6 @@
         "workbench.tree.renderIndentGuides" = "always";
         "workbench.list.smoothScrolling" = true;
         "editor.smoothScrolling" = true;
-
       };
     };
   };
