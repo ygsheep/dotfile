@@ -89,6 +89,12 @@
     kdePackages.kde-gtk-config # GTK 配置集成
     kdePackages.systemsettings # 系统设置
     kdePackages.kdeconnect-kde # KDE Connect 设备连接
+    kdePackages.powerdevil # 电源管理和亮度控制
+    kdePackages.plasma-browser-integration # 浏览器集成
+    kdePackages.kscreen # 显示器管理
+    kdePackages.ksystemlog # 系统日志查看器
+    kdePackages.kwallet # 密钥管理
+    kdePackages.bluedevil # 蓝牙管理 GUI
   ];
 
   # ========== KDE Connect 服务 ==========
@@ -260,16 +266,28 @@
         inactiveBackground=60,56,54
         inactiveForeground=235,219,178
 
-      # KDE 应用程序工具栏颜色设置
+      # KDE 应用程序暗色背景设置
+      [Colors:Button]
+        BackgroundNormal=60,56,54
+        ForegroundNormal=235,219,178
+        ForegroundInactive=235,219,178
+
       [Colors:Header]
         BackgroundNormal=29,32,33
         ForegroundNormal=251,241,199
         ForegroundInactive=251,241,199
 
-      [Colors:Button]
-        BackgroundNormal=60,56,54
+      [Colors:View]
+        BackgroundNormal=29,32,33
         ForegroundNormal=235,219,178
-        ForegroundInactive=235,219,178
+
+      [Colors:Window]
+        BackgroundNormal=29,32,33
+        ForegroundNormal=235,219,178
+
+      [Colors:Selection]
+        BackgroundNormal=184,187,38
+        ForegroundNormal=29,32,33
     '';
 
     # Klassy 窗口装饰配置（chromeOS-dark 风格）
@@ -327,6 +345,8 @@
   home.sessionVariables = {
     # KDE 应用使用 Breeze (强制覆盖 Stylix 的 qtct)
     QT_QPA_PLATFORMTHEME = lib.mkForce "kde";
+    # 强制 Qt 应用使用暗色主题
+    QT_STYLE_OVERRIDE = "breeze";
     # GTK 应用使用 Breeze 深色主题
     GTK_THEME = "Breeze-Dark";
   };
