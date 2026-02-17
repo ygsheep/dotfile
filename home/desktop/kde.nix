@@ -119,19 +119,19 @@
       ColorEffect=0
       ContrastAmount=0.65
       ContrastEffect=1
-      IntensityAmount=0.1
+      IntensityAmount=0.25
       IntensityEffect=2
 
       [ColorEffects:Inactive]
       ChangeSelectionColor=true
       Color=80,73,69
-      ColorAmount=0.025
-      ColorEffect=2
+      ColorAmount=0
+      ColorEffect=0
       ContrastAmount=0.1
-      ContrastEffect=2
+      ContrastEffect=1
       Enable=true
-      IntensityAmount=0
-      IntensityEffect=0
+      IntensityAmount=0.15
+      IntensityEffect=2
 
       [Colors:Button]
       BackgroundAlternate=80,73,69
@@ -139,7 +139,7 @@
       DecorationFocus=142,192,124
       DecorationHover=184,187,38
       ForegroundActive=251,241,199
-      ForegroundInactive=189,174,147
+      ForegroundInactive=235,219,178
       ForegroundLink=250,189,47
       ForegroundNegative=251,73,52
       ForegroundNeutral=254,128,25
@@ -152,7 +152,7 @@
       DecorationFocus=142,192,124
       DecorationHover=184,187,38
       ForegroundActive=251,241,199
-      ForegroundInactive=189,174,147
+      ForegroundInactive=235,219,178
       ForegroundLink=250,189,47
       ForegroundNegative=251,73,52
       ForegroundNeutral=254,128,25
@@ -165,11 +165,11 @@
       DecorationFocus=142,192,124
       DecorationHover=184,187,38
       ForegroundActive=251,241,199
-      ForegroundInactive=189,174,147
+      ForegroundInactive=251,241,199
       ForegroundLink=250,189,47
       ForegroundNegative=251,73,52
       ForegroundNeutral=254,128,25
-      ForegroundNormal=235,219,178
+      ForegroundNormal=251,241,199
       ForegroundPositive=184,187,38
 
       [Colors:Selection]
@@ -190,11 +190,11 @@
       DecorationFocus=142,192,124
       DecorationHover=184,187,38
       ForegroundActive=251,241,199
-      ForegroundInactive=189,174,147
+      ForegroundInactive=251,241,199
       ForegroundLink=250,189,47
       ForegroundNegative=251,73,52
       ForegroundNeutral=254,128,25
-      ForegroundNormal=235,219,178
+      ForegroundNormal=251,241,199
       ForegroundPositive=184,187,38
 
       [Colors:View]
@@ -203,7 +203,7 @@
       DecorationFocus=142,192,124
       DecorationHover=184,187,38
       ForegroundActive=251,241,199
-      ForegroundInactive=189,174,147
+      ForegroundInactive=235,219,178
       ForegroundLink=250,189,47
       ForegroundNegative=251,73,52
       ForegroundNeutral=254,128,25
@@ -216,7 +216,7 @@
       DecorationFocus=142,192,124
       DecorationHover=184,187,38
       ForegroundActive=251,241,199
-      ForegroundInactive=189,174,147
+      ForegroundInactive=235,219,178
       ForegroundLink=250,189,47
       ForegroundNegative=251,73,52
       ForegroundNeutral=254,128,25
@@ -227,7 +227,7 @@
       activeBackground=29,32,33
       activeForeground=235,219,178
       inactiveBackground=60,56,54
-      inactiveForeground=189,174,147
+      inactiveForeground=235,219,178
     '';
   };
 
@@ -258,7 +258,18 @@
         activeBackground=29,32,33
         activeForeground=235,219,178
         inactiveBackground=60,56,54
-        inactiveForeground=189,174,147
+        inactiveForeground=235,219,178
+
+      # KDE 应用程序工具栏颜色设置
+      [Colors:Header]
+        BackgroundNormal=29,32,33
+        ForegroundNormal=251,241,199
+        ForegroundInactive=251,241,199
+
+      [Colors:Button]
+        BackgroundNormal=60,56,54
+        ForegroundNormal=235,219,178
+        ForegroundInactive=235,219,178
     '';
 
     # Klassy 窗口装饰配置（chromeOS-dark 风格）
@@ -287,7 +298,7 @@
       BackgroundActive=29,32,33
       ForegroundActive=235,219,178
       BackgroundInactive=60,56,54
-      ForegroundInactive=189,174,147
+      ForegroundInactive=235,219,178
 
       [Colors]
       UseThemeColors=true
@@ -303,6 +314,12 @@
 
       [Theme]
       name=ChromeOS
+    '';
+
+    # KDE 颜色模块配置
+    "kcmrc".text = ''
+      [General]
+      ColorScheme=GruvboxDarkHard
     '';
   };
 
