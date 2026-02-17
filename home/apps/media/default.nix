@@ -10,5 +10,8 @@
     pamixer
     alsa-utils
     easyeffects
+
+    # 3D graphics
+    blender
   ];
 }

@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   home.packages = with pkgs; [
     # ========== 编译工具 ==========
     gcc
@@ -61,41 +65,28 @@
     ccache
   ];
 
-  # ========== C++ 开发环境变量 ==========
-  home.sessionVariables = {
-    # 库路径 - 确保 SDL3 可以动态加载 X11/Wayland 库
-    LD_LIBRARY_PATH =
-      "${pkgs.libGL}/lib:"
-      + "${pkgs.mesa}/lib:"
-      + "${pkgs.libX11}/lib:"
-      + "${pkgs.libXext}/lib:"
-      + "${pkgs.libXcursor}/lib:"
-      + "${pkgs.libXrandr}/lib:"
-      + "${pkgs.libXi}/lib:"
-      + "${pkgs.libXfixes}/lib:"
-      + "${pkgs.libffi}/lib:"
-      + "${pkgs.wayland}/lib:"
-      + "${pkgs.libxkbcommon}/lib:"
-      + "${pkgs.pipewire}/lib:"
-      + "${pkgs.vulkan-loader}/lib:$LD_LIBRARY_PATH";
+  # ========== Shell 初始化脚本 - 设置 C++ 开发环境变量 ==========
+  # 使用 $USER 环境变量动态构建路径，避免硬编码用户名
+  programs.bash.initExtra = ''
+    # C++ 开发环境 - 动态设置库路径
+    export NIX_PROFILE="/etc/profiles/per-user/$USER"
+
+    # 头文件路径
+    export CPATH="$NIX_PROFILE/include:$CPATH"
+
+    # CMake 前缀路径
+    export CMAKE_PREFIX_PATH="$NIX_PROFILE:$CMAKE_PREFIX_PATH"
+
+    # Boost 路径
+    export BOOST_ROOT="$NIX_PROFILE"
+
+    # 库路径
+    export LD_LIBRARY_PATH="$NIX_PROFILE/lib:$LD_LIBRARY_PATH"
 
     # PKG_CONFIG_PATH
-    PKG_CONFIG_PATH =
-      "${pkgs.wayland}/lib/pkgconfig:"
-      + "${pkgs.libxkbcommon}/lib/pkgconfig:"
-      + "${pkgs.libffi}/lib/pkgconfig:$PKG_CONFIG_PATH";
+    export PKG_CONFIG_PATH="$NIX_PROFILE/lib/pkgconfig:$PKG_CONFIG_PATH"
 
-    # Vulkan ICD 路径 - Mesa 驱动 (lavapipe 软件渲染)
-    VK_ICD_FILENAMES =
-      "${pkgs.mesa.drivers}/share/vulkan/icd.d/lvp_icd.x86_64.json:"
-      + "${pkgs.mesa.drivers}/share/vulkan/icd.d/intel_icd.x86_64.json:"
-      + "${pkgs.mesa.drivers}/share/vulkan/icd.d/radeon_icd.x86_64.json";
-  };
-
-  # ========== Shell 初始化脚本 ==========
-  # 自动检测并使用合适的后端
-  programs.bash.initExtra = ''
-    # C++ 开发环境 - 自动检测显示后端
+    # SDL 显示后端
     if [ -n "$WAYLAND_DISPLAY" ]; then
       export SDL_VIDEODRIVER=wayland
     elif [ -n "$DISPLAY" ]; then
@@ -104,7 +95,25 @@
   '';
 
   programs.zsh.initExtra = ''
-    # C++ 开发环境 - 自动检测显示后端
+    # C++ 开发环境 - 动态设置库路径
+    export NIX_PROFILE="/etc/profiles/per-user/$USER"
+
+    # 头文件路径
+    export CPATH="$NIX_PROFILE/include:$CPATH"
+
+    # CMake 前缀路径
+    export CMAKE_PREFIX_PATH="$NIX_PROFILE:$CMAKE_PREFIX_PATH"
+
+    # Boost 路径
+    export BOOST_ROOT="$NIX_PROFILE"
+
+    # 库路径
+    export LD_LIBRARY_PATH="$NIX_PROFILE/lib:$LD_LIBRARY_PATH"
+
+    # PKG_CONFIG_PATH
+    export PKG_CONFIG_PATH="$NIX_PROFILE/lib/pkgconfig:$PKG_CONFIG_PATH"
+
+    # SDL 显示后端
     if [ -n "$WAYLAND_DISPLAY" ]; then
       export SDL_VIDEODRIVER=wayland
     elif [ -n "$DISPLAY" ]; then
@@ -113,10 +122,28 @@
   '';
 
   programs.nushell.extraConfig = ''
-    # C++ 开发环境 - 自动检测显示后端
-    if ($env.WAYLAND_DISPLAY != null) {
+    # C++ 开发环境 - 动态设置库路径
+    $env.NIX_PROFILE = $"/etc/profiles/per-user/($env.USER)"
+
+    # 头文件路径
+    $env.CPATH = $"($env.NIX_PROFILE)/include:($env.CPATH? | default [])"
+
+    # CMake 前缀路径
+    $env.CMAKE_PREFIX_PATH = $"($env.NIX_PROFILE):($env.CMAKE_PREFIX_PATH? | default [])"
+
+    # Boost 路径
+    $env.BOOST_ROOT = $env.NIX_PROFILE
+
+    # 库路径
+    $env.LD_LIBRARY_PATH = $"($env.NIX_PROFILE)/lib:($env.LD_LIBRARY_PATH? | default [])"
+
+    # PKG_CONFIG_PATH
+    $env.PKG_CONFIG_PATH = $"($env.NIX_PROFILE)/lib/pkgconfig:($env.PKG_CONFIG_PATH? | default [])"
+
+    # SDL 显示后端
+    if ($env.WAYLAND_DISPLAY? | default null) != null {
       $env.SDL_VIDEODRIVER = "wayland"
-    } else if ($env.DISPLAY != null) {
+    } else if ($env.DISPLAY? | default null) != null {
       $env.SDL_VIDEODRIVER = "x11"
     }
   '';

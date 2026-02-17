@@ -234,6 +234,30 @@
       extraEnv = ''
         $env.CARAPACE_BRIDGES = 'inshellisense,carapace,zsh,fish,bash'
 
+        # ========== C++ 开发环境变量 ==========
+        # 动态使用当前用户名，避免硬编码
+        let nix_profile = $"/etc/profiles/per-user/($env.USER)"
+
+        # 头文件路径
+        $env.CPATH = ($env.CPATH? | default [] | split row (char esep)
+          | prepend $"($nix_profile)/include"
+          | str join (char esep))
+
+        # CMake 前缀路径
+        $env.CMAKE_PREFIX_PATH = ($env.CMAKE_PREFIX_PATH? | default [] | split row (char esep)
+          | prepend $nix_profile
+          | str join (char esep))
+
+        # Boost 路径
+        $env.BOOST_ROOT = $nix_profile
+
+        # SDL 显示后端自动检测
+        if ($env.WAYLAND_DISPLAY? | default null) != null {
+          $env.SDL_VIDEODRIVER = 'wayland'
+        } else if ($env.DISPLAY? | default null) != null {
+          $env.SDL_VIDEODRIVER = 'x11'
+        }
+
         # 用户本地 bin 路径（优先级从高到低）
         # OpenCode, 用户本地工具
         # Python: pipx, poetry

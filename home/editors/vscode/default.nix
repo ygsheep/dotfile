@@ -12,7 +12,7 @@
 
       userSettings = {
         # General settings
-        "workbench.colorTheme" = "Dracula";
+        "workbench.colorTheme" = "One Dark Pro Darker";
         "workbench.iconTheme" = "vscode-jetbrains-icon-theme-2023-dark";
         "workbench.startupEditor" = "none";
         "workbench.editor.enablePreview" = false;
@@ -21,7 +21,7 @@
         "workbench.editor.wrapTabs" = true;
 
         # Editor settings
-        "editor.fontSize" = 14;
+        "editor.fontSize" = 16;
         "editor.fontFamily" = lib.mkForce "'JetBrains Mono', 'monospace', monospace";
         "editor.lineHeight" = 1.6;
         "editor.tabSize" = 2;
