@@ -6,7 +6,8 @@
 }: {
   programs = {
     carapace.enable = true;
-    carapace.enableNushellIntegration = true;
+    # 禁用自动集成，手动配置以避免 $env.HOME 错误
+    carapace.enableNushellIntegration = false;
 
     nushell = {
       enable = true;
@@ -128,6 +129,9 @@
           "bat"
         ]}
 
+        # Carapace 补全加载
+        source "${globals.homeDir}/.config/carapace/carapace.nu"
+
         # use ${pkgs.nu_scripts}/share/nu_scripts/modules/background_task/task.nu
         # source ${pkgs.nu_scripts}/share/nu_scripts/modules/formats/from-env.nu
 
@@ -180,9 +184,6 @@
         koji = "meteor";
         gitui = "lazygit";
 
-        test-build = "sudo nixos-rebuild test --flake .#desktop";
-        switch-build = "sudo nixos-rebuild switch --flake .#desktop --show-trace";
-
         # 键盘布局
         kb-cn = "setxkbmap -layout cn";
         kb-us = "setxkbmap -layout us";
@@ -234,6 +235,11 @@
       extraEnv = ''
         $env.CARAPACE_BRIDGES = 'inshellisense,carapace,zsh,fish,bash'
 
+        # ========== Carapace 补全配置 ==========
+        # 使用全局 homeDir，避免 nushell 变量兼容问题
+        mkdir "${globals.homeDir}/.config/carapace"
+        ${pkgs.carapace}/bin/carapace _carapace nushell | save -f "${globals.homeDir}/.config/carapace/carapace.nu"
+
         # ========== C++ 开发环境变量 ==========
         # 动态使用当前用户名，避免硬编码
         let nix_profile = $"/etc/profiles/per-user/($env.USER)"
@@ -247,9 +253,6 @@
         $env.CMAKE_PREFIX_PATH = ($env.CMAKE_PREFIX_PATH? | default [] | split row (char esep)
           | prepend $nix_profile
           | str join (char esep))
-
-        # Boost 路径
-        $env.BOOST_ROOT = $nix_profile
 
         # SDL 显示后端自动检测
         if ($env.WAYLAND_DISPLAY? | default null) != null {

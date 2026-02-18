@@ -77,9 +77,6 @@
     # CMake 前缀路径
     export CMAKE_PREFIX_PATH="$NIX_PROFILE:$CMAKE_PREFIX_PATH"
 
-    # Boost 路径
-    export BOOST_ROOT="$NIX_PROFILE"
-
     # 库路径
     export LD_LIBRARY_PATH="$NIX_PROFILE/lib:$LD_LIBRARY_PATH"
 
@@ -103,9 +100,6 @@
 
     # CMake 前缀路径
     export CMAKE_PREFIX_PATH="$NIX_PROFILE:$CMAKE_PREFIX_PATH"
-
-    # Boost 路径
-    export BOOST_ROOT="$NIX_PROFILE"
 
     # 库路径
     export LD_LIBRARY_PATH="$NIX_PROFILE/lib:$LD_LIBRARY_PATH"
@@ -132,7 +126,7 @@
     $env.CMAKE_PREFIX_PATH = $"($env.NIX_PROFILE):($env.CMAKE_PREFIX_PATH? | default [])"
 
     # Boost 路径
-    $env.BOOST_ROOT = $env.NIX_PROFILE
+    # $env.BOOST_ROOT = $env.NIX_PROFILE
 
     # 库路径
     $env.LD_LIBRARY_PATH = $"($env.NIX_PROFILE)/lib:($env.LD_LIBRARY_PATH? | default [])"

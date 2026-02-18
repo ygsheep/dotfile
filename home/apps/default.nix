@@ -55,6 +55,9 @@
     # lmstudio本地大模型
     lmstudio
 
+    # database
+    sqlitestudio
+
     # Git GUI 工具
     lazygit
 

@@ -30,4 +30,9 @@
       };
     };
   };
+
+  # HiDPI 2K 显示器 Qt 应用缩放 (2560x1600 @ 120Hz)
+  home.sessionVariables = {
+    QT_SCALE_FACTOR = "1.75";
+  };
 }
