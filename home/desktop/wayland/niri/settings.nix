@@ -167,40 +167,33 @@ in {
 
       # ========== 窗口规则 (类似 i3wm 的 assign/for_window) ==========
       window-rules = [
-        # Firefox → 工作区 1 (浏览器)
+        # ========== 工作区 1: 浏览器 ==========
         {
           match = {app-id = "firefox";};
           open-on-workspace = "1";
           block-out-from = "screencast";
         }
-
-        # Zen → 工作区 1 (浏览器)
         {
           match = {app-id = "zen";};
           open-on-workspace = "1";
           block-out-from = "screencast";
         }
-
-        # Godot → 工作区 2 (游戏开发)
         {
-          match = {app-id = "godot";};
-          open-on-workspace = "2";
+          match = {app-id = "chromium";};
+          open-on-workspace = "1";
+          block-out-from = "screencast";
+        }
+        {
+          match = {app-id = "microsoft-edge";};
+          open-on-workspace = "1";
           block-out-from = "screencast";
         }
 
-        # Blender → 工作区 2 (3D 建模)
-        {
-          match = {app-id = "blender";};
-          open-on-workspace = "2";
-        }
-
-        # JetBrains IDEs → 工作区 2 (开发)
+        # ========== 工作区 2: 开发 ==========
         {
           match = {app-id = "jetbrains-*";};
           open-on-workspace = "2";
         }
-
-        # VSCode / Zed → 工作区 2
         {
           match = {app-id = "code";};
           open-on-workspace = "2";
@@ -209,67 +202,117 @@ in {
           match = {app-id = "zed";};
           open-on-workspace = "2";
         }
+        {
+          match = {app-id = "github-desktop";};
+          open-on-workspace = "2";
+        }
+        {
+          match = {app-id = "lazygit";};
+          open-on-workspace = "2";
+          open-floating = true;
+        }
 
-        # Kitty 终端 → 工作区 3 (终端)
+        # ========== 工作区 3: 终端 + 笔记 ==========
         {
           match = {app-id = "kitty";};
           open-on-workspace = "3";
         }
-
-        # Obsidian → 工作区 3 (知识笔记)
+        {
+          match = {app-id = "ghostty";};
+          open-on-workspace = "3";
+        }
         {
           match = {app-id = "obsidian";};
           open-on-workspace = "3";
         }
 
-        # WeChat → 工作区 4 (通讯)
+        # ========== 工作区 4: 创作/3D (原 ws-5) ==========
+        {
+          match = {app-id = "godot";};
+          open-on-workspace = "4";
+          block-out-from = "screencast";
+        }
+        {
+          match = {app-id = "blender";};
+          open-on-workspace = "4";
+        }
+        {
+          match = {app-id = "inkscape";};
+          open-on-workspace = "4";
+        }
+
+        # ========== 工作区 5: 通讯 (原 ws-4) ==========
         {
           match = {app-id = "wechat";};
-          open-on-workspace = "4";
+          open-on-workspace = "5";
         }
         {
           match = {app-id = "com.wechat.WeChat";};
-          open-on-workspace = "4";
+          open-on-workspace = "5";
         }
-
-        # Telegram → 工作区 4 (通讯)
         {
           match = {app-id = "telegram-desktop";};
-          open-on-workspace = "4";
+          open-on-workspace = "5";
         }
         {
           match = {app-id = "org.telegram.desktop";};
-          open-on-workspace = "4";
+          open-on-workspace = "5";
         }
-
-        # Discord → 工作区 4 (社交)
         {
           match = {app-id = "discord";};
-          open-on-workspace = "4";
+          open-on-workspace = "5";
         }
         {
           match = {app-id = "vesktop";};
-          open-on-workspace = "4";
-        }
-
-        # Spotify/音乐 → 工作区 5 (媒体)
-        {
-          match = {app-id = "spotify";};
           open-on-workspace = "5";
         }
 
-        # Steam/游戏 → 工作区 6 (游戏)
+        # ========== 工作区 6: 媒体工具 ==========
+        {
+          match = {app-id = "obs";};
+          open-on-workspace = "6";
+        }
+        {
+          match = {app-id = "celluloid";};
+          open-on-workspace = "6";
+        }
+        {
+          match = {app-id = "amberol";};
+          open-on-workspace = "6";
+        }
+        {
+          match = {app-id = "mpv";};
+          open-on-workspace = "6";
+          open-floating = true;
+        }
+        {
+          match = {app-id = "spotify";};
+          open-on-workspace = "6";
+        }
+
+        # ========== 工作区 7: AI/数据 ==========
+        {
+          match = {app-id = "lmstudio";};
+          open-on-workspace = "7";
+        }
+        {
+          match = {app-id = "sqlitestudio";};
+          open-on-workspace = "7";
+        }
+
+        # ========== 工作区 8: 游戏 ==========
         {
           match = {app-id = "steam";};
-          open-on-workspace = "6";
+          open-on-workspace = "8";
           block-out-from = "screencast";
         }
 
-        # 设置对话框/浮点窗口 → 浮动
+        # ========== 浮动窗口 ==========
+        # 设置对话框
         {
           match = {
             is-floating = true;
-            app-id = "org.gnome.*"; # GNOME 设置
+            app-id = "org.gnome.*";
           };
         }
         {
@@ -281,7 +324,7 @@ in {
           open-floating = true;
         }
 
-        # 文件管理器 → 浮动
+        # 文件管理器 → 始终浮动
         {
           match = {app-id = "org.gnome.Nautilus";};
           open-floating = true;
@@ -292,6 +335,44 @@ in {
         }
         {
           match = {app-id = "org.kde.dolphin";};
+          open-floating = true;
+        }
+
+        # PDF 阅读器
+        {
+          match = {app-id = "org.gnome.Evince";};
+          open-floating = true;
+        }
+        {
+          match = {app-id = "papers";};
+          open-floating = true;
+        }
+
+        # 图片查看器
+        {
+          match = {app-id = "loupe";};
+          open-floating = true;
+        }
+        {
+          match = {app-id = "org.gnome.Loupe";};
+          open-floating = true;
+        }
+
+        # 文本编辑器 (小工具)
+        {
+          match = {app-id = "gnome-text-editor";};
+          open-floating = true;
+        }
+
+        # 配置编辑器
+        {
+          match = {app-id = "dconf-editor";};
+          open-floating = true;
+        }
+
+        # 文件传输
+        {
+          match = {app-id = "localsend";};
           open-floating = true;
         }
       ];
