@@ -56,25 +56,22 @@
         /* ========== 主容器 ========== */
         box {
           background: rgba(29, 32, 33, 0.95);
-          border: 2px solid rgba(189, 174, 147, 0.2);
-          border-radius: 16px;
-          padding: 8px;
+          border-radius: 12px;
+          padding: 6px;
         }
 
         /* ========== 输入框 ========== */
         #entry {
           background: rgba(60, 56, 54, 0.5);
-          border: 1px solid rgba(189, 174, 147, 0.3);
-          border-radius: 10px;
-          margin: 8px;
-          padding: 12px 16px;
-          font-size: 16px;
+          border-radius: 8px;
+          margin: 6px;
+          padding: 10px 14px;
+          font-size: 15px;
           color: #ebdbb2;
         }
 
         #entry:focus {
-          border-color: #b8bb26;
-          outline: none;
+          outline: 2px solid rgba(184, 187, 38, 0.5);
         }
 
         #entry placeholder {
@@ -84,32 +81,31 @@
         /* ========== 插件选择器 ========== */
         #plugin {
           background: transparent;
-          border: none;
-          padding: 8px 12px;
-          margin: 4px;
-          border-radius: 8px;
+          padding: 6px 10px;
+          margin: 2px;
+          border-radius: 6px;
           color: #bdae93;
         }
 
         #plugin:hover {
-          background: rgba(184, 187, 38, 0.15);
+          background: rgba(184, 187, 38, 0.1);
         }
 
         #plugin selected {
-          background: rgba(184, 187, 38, 0.25);
+          background: rgba(184, 187, 38, 0.2);
           color: #ebdbb2;
         }
 
         /* ========== 匹配项列表 ========== */
         list {
-          margin: 4px 0;
+          margin: 2px 0;
         }
 
         #match {
           background: transparent;
-          border-radius: 10px;
-          padding: 10px 14px;
-          margin: 2px 4px;
+          border-radius: 8px;
+          padding: 8px 12px;
+          margin: 1px 2px;
         }
 
         #match:selected {
@@ -117,7 +113,7 @@
         }
 
         #match:hover {
-          background: rgba(184, 187, 38, 0.15);
+          background: rgba(184, 187, 38, 0.12);
         }
 
         /* ========== 图标 ========== */
@@ -132,13 +128,18 @@
         /* ========== 文字样式 ========== */
         #match-title {
           color: #ebdbb2;
-          font-size: 15px;
+          font-size: 14px;
           font-weight: 500;
         }
 
         #match-desc {
-          color: rgba(189, 174, 147, 0.7);
-          font-size: 13px;
+          color: rgba(189, 174, 147, 0.6);
+          font-size: 12px;
+          /* 超出省略号 */
+          max-width: 400px;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
         }
 
         #match:selected #match-title {
@@ -146,7 +147,7 @@
         }
 
         #match:selected #match-desc {
-          color: rgba(235, 219, 178, 0.8);
+          color: rgba(235, 219, 178, 0.7);
         }
 
         /* ========== 滚动条 ========== */
@@ -155,25 +156,13 @@
         }
 
         list > scrollbar thumb {
-          background: rgba(189, 174, 147, 0.3);
-          border-radius: 6px;
-          min-height: 20px;
+          background: rgba(189, 174, 147, 0.25);
+          border-radius: 4px;
+          min-height: 16px;
         }
 
         list > scrollbar thumb:hover {
-          background: rgba(189, 174, 147, 0.5);
-        }
-
-        /* ========== 分隔线 ========== */
-        separator {
-          background: rgba(189, 174, 147, 0.2);
-          margin: 4px 0;
-        }
-
-        /* ========== 特殊样式 ========== */
-        /* Shell 命令高亮 */
-        #match[title ^= ""] {
-          /* 可添加特定类型的样式 */
+          background: rgba(189, 174, 147, 0.4);
         }
       '';
 
