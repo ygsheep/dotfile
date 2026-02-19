@@ -24,7 +24,8 @@ in {
         {command = ["wl-paste" "--type text" "--watch" "cliphist" "store"];}
         {command = ["fcitx5" "-d" "--replace"];} # 启动 Fcitx5 输入法
         {command = ["qs" "-c" "DankMaterialShell"];}
-        # {command = ["mpvpaper ALL ~/.dotfile/assets/video/andvari-last-origin.3840x2160.mp4"];}
+        {command = ["firefox"];} # 启动 Firefox (会自动到工作区 1)
+        # {command = ["mpvpaper" "ALL" "~/.dotfile/assets/video/andvari-last-origin.3840x2160.mp4"];}
         # {command = ["anyrun"];}
       ];
       input = {
@@ -162,6 +163,77 @@ in {
       '';
       prefer-no-csd = true;
       hotkey-overlay.skip-at-startup = true;
+
+      # ========== 窗口规则 (类似 i3wm 的 assign/for_window) ==========
+      window-rules = [
+        # Firefox → 工作区 1 (浏览器)
+        {
+          match = {app-id = "firefox";};
+          open-on-workspace = "1";
+          block-out-from = "screencast"; # 防止录屏时捕获
+        }
+
+        # JetBrains IDEs → 工作区 2 (开发)
+        {
+          match = {app-id = "jetbrains-*";};
+          open-on-workspace = "2";
+        }
+
+        # VSCode / Zed → 工作区 2
+        {
+          match = {app-id = "code";};
+          open-on-workspace = "2";
+        }
+        {
+          match = {app-id = "zed";};
+          open-on-workspace = "2";
+        }
+
+        # Kitty 终端 → 工作区 3 (终端)
+        {
+          match = {app-id = "kitty";};
+          open-on-workspace = "3";
+        }
+
+        # Discord/通讯应用 → 工作区 4 (社交)
+        {
+          match = {app-id = "discord";};
+          open-on-workspace = "4";
+        }
+        {
+          match = {app-id = "vesktop";};
+          open-on-workspace = "4";
+        }
+
+        # Spotify/音乐 → 工作区 5 (媒体)
+        {
+          match = {app-id = "spotify";};
+          open-on-workspace = "5";
+        }
+
+        # Steam/游戏 → 工作区 6 (游戏)
+        {
+          match = {app-id = "steam";};
+          open-on-workspace = "6";
+          block-out-from = "screencast";
+        }
+
+        # 设置对话框/浮点窗口 → 浮动
+        {
+          match = {
+            is-floating = true;
+            app-id = "org.gnome.*"; # GNOME 设置
+          };
+        }
+        {
+          match = {
+            window-title = ".*Preferences.*";
+            window-title = ".*Settings.*";
+            window-title = ".*设置.*";
+          };
+          open-floating = true;
+        }
+      ];
     };
   };
 }
