@@ -80,7 +80,6 @@
     base16Scheme = "${inputs.self}/home/shared/colors/gruvbox-dark-hard.yml";
 
     targets = {
-      anyrun.enable = true; # Anyrun 启动器主题
       bat.enable = true;
       gtk.enable = true; # GTK 深色主题
       kde.enable = true; # KDE 深色主题

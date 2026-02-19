@@ -165,153 +165,150 @@ in {
       hotkey-overlay.skip-at-startup = true;
 
       # ========== 自定义快捷键 ==========
-      keybinds = {
-        # 保留 Niri 默认快捷键
-        inherit-defaults = true;
-
+      binds = with config.lib.niri.actions; {
         # Super+D / Super+/ → 启动 Anyrun 应用启动器
-        "Super+D".spawn = ["anyrun"];
-        "Super+Slash".spawn = ["anyrun"];
+        "Super+D".action.spawn = ["anyrun"];
+        "Super+Slash".action.spawn = ["anyrun"];
       };
 
       # ========== 窗口规则 (类似 i3wm 的 assign/for_window) ==========
       window-rules = [
         # ========== 工作区 1: 浏览器 ==========
         {
-          match = {app-id = "firefox";};
+          matches = [{app-id = "firefox";}];
           open-on-workspace = "1";
           block-out-from = "screencast";
         }
         {
-          match = {app-id = "zen";};
+          matches = [{app-id = "zen";}];
           open-on-workspace = "1";
           block-out-from = "screencast";
         }
         {
-          match = {app-id = "chromium";};
+          matches = [{app-id = "chromium";}];
           open-on-workspace = "1";
           block-out-from = "screencast";
         }
         {
-          match = {app-id = "microsoft-edge";};
+          matches = [{app-id = "microsoft-edge";}];
           open-on-workspace = "1";
           block-out-from = "screencast";
         }
 
         # ========== 工作区 2: 终端 + 笔记 ==========
         {
-          match = {app-id = "kitty";};
+          matches = [{app-id = "kitty";}];
           open-on-workspace = "2";
         }
         {
-          match = {app-id = "ghostty";};
+          matches = [{app-id = "ghostty";}];
           open-on-workspace = "2";
         }
         {
-          match = {app-id = "obsidian";};
+          matches = [{app-id = "obsidian";}];
           open-on-workspace = "2";
         }
 
         # ========== 工作区 3: 开发 ==========
         {
-          match = {app-id = "jetbrains-*";};
+          matches = [{app-id = "jetbrains-*";}];
           open-on-workspace = "3";
         }
         {
-          match = {app-id = "code";};
+          matches = [{app-id = "code";}];
           open-on-workspace = "3";
         }
         {
-          match = {app-id = "zed";};
+          matches = [{app-id = "zed";}];
           open-on-workspace = "3";
         }
         {
-          match = {app-id = "github-desktop";};
+          matches = [{app-id = "github-desktop";}];
           open-on-workspace = "3";
         }
         {
-          match = {app-id = "lazygit";};
+          matches = [{app-id = "lazygit";}];
           open-on-workspace = "3";
           open-floating = true;
         }
 
         # ========== 工作区 4: 创作/3D (原 ws-5) ==========
         {
-          match = {app-id = "godot";};
+          matches = [{app-id = "godot";}];
           open-on-workspace = "4";
           block-out-from = "screencast";
         }
         {
-          match = {app-id = "blender";};
+          matches = [{app-id = "blender";}];
           open-on-workspace = "4";
         }
         {
-          match = {app-id = "inkscape";};
+          matches = [{app-id = "inkscape";}];
           open-on-workspace = "4";
         }
 
         # ========== 工作区 5: 通讯 (原 ws-4) ==========
         {
-          match = {app-id = "wechat";};
+          matches = [{app-id = "wechat";}];
           open-on-workspace = "5";
         }
         {
-          match = {app-id = "com.wechat.WeChat";};
+          matches = [{app-id = "com.wechat.WeChat";}];
           open-on-workspace = "5";
         }
         {
-          match = {app-id = "telegram-desktop";};
+          matches = [{app-id = "telegram-desktop";}];
           open-on-workspace = "5";
         }
         {
-          match = {app-id = "org.telegram.desktop";};
+          matches = [{app-id = "org.telegram.desktop";}];
           open-on-workspace = "5";
         }
         {
-          match = {app-id = "discord";};
+          matches = [{app-id = "discord";}];
           open-on-workspace = "5";
         }
         {
-          match = {app-id = "vesktop";};
+          matches = [{app-id = "vesktop";}];
           open-on-workspace = "5";
         }
 
         # ========== 工作区 6: 媒体工具 ==========
         {
-          match = {app-id = "obs";};
+          matches = [{app-id = "obs";}];
           open-on-workspace = "6";
         }
         {
-          match = {app-id = "celluloid";};
+          matches = [{app-id = "celluloid";}];
           open-on-workspace = "6";
         }
         {
-          match = {app-id = "amberol";};
+          matches = [{app-id = "amberol";}];
           open-on-workspace = "6";
         }
         {
-          match = {app-id = "mpv";};
+          matches = [{app-id = "mpv";}];
           open-on-workspace = "6";
           open-floating = true;
         }
         {
-          match = {app-id = "spotify";};
+          matches = [{app-id = "spotify";}];
           open-on-workspace = "6";
         }
 
         # ========== 工作区 7: AI/数据 ==========
         {
-          match = {app-id = "lmstudio";};
+          matches = [{app-id = "lmstudio";}];
           open-on-workspace = "7";
         }
         {
-          match = {app-id = "sqlitestudio";};
+          matches = [{app-id = "sqlitestudio";}];
           open-on-workspace = "7";
         }
 
         # ========== 工作区 8: 游戏 ==========
         {
-          match = {app-id = "steam";};
+          matches = [{app-id = "steam";}];
           open-on-workspace = "8";
           block-out-from = "screencast";
         }
@@ -319,73 +316,75 @@ in {
         # ========== 浮动窗口 ==========
         # 设置对话框
         {
-          match = {
-            is-floating = true;
-            app-id = "org.gnome.*";
-          };
+          matches = [
+            {
+              is-floating = true;
+              app-id = "org.gnome.*";
+            }
+          ];
         }
         {
-          match = {window-title = ".*Preferences.*";};
+          matches = [{title = ".*Preferences.*";}];
           open-floating = true;
         }
         {
-          match = {window-title = ".*Settings.*";};
+          matches = [{title = ".*Settings.*";}];
           open-floating = true;
         }
         {
-          match = {window-title = ".*设置.*";};
+          matches = [{title = ".*设置.*";}];
           open-floating = true;
         }
 
         # 文件管理器 → 始终浮动
         {
-          match = {app-id = "org.gnome.Nautilus";};
+          matches = [{app-id = "org.gnome.Nautilus";}];
           open-floating = true;
         }
         {
-          match = {app-id = "dolphin";};
+          matches = [{app-id = "dolphin";}];
           open-floating = true;
         }
         {
-          match = {app-id = "org.kde.dolphin";};
+          matches = [{app-id = "org.kde.dolphin";}];
           open-floating = true;
         }
 
         # PDF 阅读器
         {
-          match = {app-id = "org.gnome.Evince";};
+          matches = [{app-id = "org.gnome.Evince";}];
           open-floating = true;
         }
         {
-          match = {app-id = "papers";};
+          matches = [{app-id = "papers";}];
           open-floating = true;
         }
 
         # 图片查看器
         {
-          match = {app-id = "loupe";};
+          matches = [{app-id = "loupe";}];
           open-floating = true;
         }
         {
-          match = {app-id = "org.gnome.Loupe";};
+          matches = [{app-id = "org.gnome.Loupe";}];
           open-floating = true;
         }
 
         # 文本编辑器 (小工具)
         {
-          match = {app-id = "gnome-text-editor";};
+          matches = [{app-id = "gnome-text-editor";}];
           open-floating = true;
         }
 
         # 配置编辑器
         {
-          match = {app-id = "dconf-editor";};
+          matches = [{app-id = "dconf-editor";}];
           open-floating = true;
         }
 
         # 文件传输
         {
-          match = {app-id = "localsend";};
+          matches = [{app-id = "localsend";}];
           open-floating = true;
         }
       ];

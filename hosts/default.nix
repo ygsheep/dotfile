@@ -52,7 +52,6 @@
       ++ [
         ./thinkbook
         "${mod}/desktop/kde.nix" # KDE Plasma 6 桌面环境 + SDDM
-        "${mod}/desktop/gnome.nix" # GNOME 42 桌面环境（与 KDE 共存）
         {
           home-manager = {
             users.${globals.user}.imports = homeImports."${globals.user}@thinkbook";
