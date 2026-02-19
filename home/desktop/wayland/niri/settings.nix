@@ -24,7 +24,8 @@ in {
         {command = ["wl-paste" "--type text" "--watch" "cliphist" "store"];}
         {command = ["fcitx5" "-d" "--replace"];} # 启动 Fcitx5 输入法
         {command = ["qs" "-c" "DankMaterialShell"];}
-        {command = ["obsidian"];} # 启动 Obsidian (会自动到工作区 1)
+        {command = ["firefox"];} # 启动 Firefox (会自动到工作区 1)
+        {command = ["obsidian"];} # 启动 Obsidian (会自动到工作区 3)
         # {command = ["mpvpaper" "ALL" "~/.dotfile/assets/video/andvari-last-origin.3840x2160.mp4"];}
         # {command = ["anyrun"];}
       ];
@@ -166,10 +167,18 @@ in {
 
       # ========== 窗口规则 (类似 i3wm 的 assign/for_window) ==========
       window-rules = [
-        # Obsidian → 工作区 1 (知识笔记)
+        # Firefox → 工作区 1 (浏览器)
         {
-          match = {app-id = "obsidian";};
+          match = {app-id = "firefox";};
           open-on-workspace = "1";
+          block-out-from = "screencast";
+        }
+
+        # Zen → 工作区 1 (浏览器)
+        {
+          match = {app-id = "zen";};
+          open-on-workspace = "1";
+          block-out-from = "screencast";
         }
 
         # Godot → 工作区 2 (游戏开发)
@@ -207,6 +216,12 @@ in {
           open-on-workspace = "3";
         }
 
+        # Obsidian → 工作区 3 (知识笔记)
+        {
+          match = {app-id = "obsidian";};
+          open-on-workspace = "3";
+        }
+
         # WeChat → 工作区 4 (通讯)
         {
           match = {app-id = "wechat";};
@@ -237,23 +252,16 @@ in {
           open-on-workspace = "4";
         }
 
-        # Firefox → 工作区 5 (浏览器)
-        {
-          match = {app-id = "firefox";};
-          open-on-workspace = "5";
-          block-out-from = "screencast";
-        }
-
-        # Spotify/音乐 → 工作区 6 (媒体)
+        # Spotify/音乐 → 工作区 5 (媒体)
         {
           match = {app-id = "spotify";};
-          open-on-workspace = "6";
+          open-on-workspace = "5";
         }
 
-        # Steam/游戏 → 工作区 7 (游戏)
+        # Steam/游戏 → 工作区 6 (游戏)
         {
           match = {app-id = "steam";};
-          open-on-workspace = "7";
+          open-on-workspace = "6";
           block-out-from = "screencast";
         }
 
