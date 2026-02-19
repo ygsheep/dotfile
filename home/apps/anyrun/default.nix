@@ -45,6 +45,65 @@
       css
       */
       ''
+        #window {
+          background: transparent;
+        }
+
+        box {
+          background: rgba(30, 30, 46, 0.95);
+          border: 2px solid rgba(189, 174, 147, 0.3);
+          border-radius: 12px;
+        }
+
+        /* 输入框 */
+        #entry {
+          placeholder-color: rgba(189, 174, 147, 0.5);
+        }
+
+        #entry:focus {
+          border-color: rgba(142, 192, 124, 0.8);
+        }
+
+        #plugin:hover {
+          background: rgba(142, 192, 124, 0.1);
+        }
+
+        #match {
+          background: transparent;
+          border-radius: 8px;
+          padding: 8px 12px;
+        }
+
+        #match:selected {
+          background: rgba(142, 192, 124, 0.2);
+        }
+
+        #match:hover {
+          background: rgba(142, 192, 124, 0.15);
+        }
+
+        /* 匹配项文字颜色 */
+        #match-title {
+          color: #ebdbb2;
+        }
+
+        #match-desc {
+          color: rgba(189, 174, 147, 0.7);
+        }
+
+        /* 滚动条 */
+        list > scrollbar {
+          background: transparent;
+        }
+
+        list > scrollbar thumb {
+          background: rgba(189, 174, 147, 0.3);
+          border-radius: 4px;
+        }
+
+        list > scrollbar thumb:hover {
+          background: rgba(189, 174, 147, 0.5);
+        }
       '';
 
     extraConfigFiles = {
