@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   # GNOME 42 桌面环境（与 KDE 共存，使用 GDM 显示管理器）
@@ -62,4 +63,8 @@
 
   # NetworkManager applet
   programs.nm-applet.enable = true;
+
+  # 解决与 KDE Plasma 的 SSH askPassword 冲突
+  # 优先使用 seahorse（GNOME）而非 ksshaskpass（KDE）
+  programs.ssh.askPassword = lib.mkForce "${pkgs.seahorse}/libexec/seahorse/ssh-askpass";
 }
