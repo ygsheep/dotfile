@@ -8,11 +8,8 @@
   programs.anyrun = {
     enable = true;
     config = {
-      # 水平居中
       x = {fraction = 0.5;};
-      # 垂直偏上 (30% 位置)
       y = {fraction = 0.3;};
-      # 宽度 (屏幕的 45%)
       width = {fraction = 0.45;};
       hideIcons = false;
       ignoreExclusiveZones = false;
@@ -169,59 +166,8 @@
     extraConfigFiles = {
       "applications.ron".text = ''
         Config(
-          // 水平居中
-          x: Fraction(0.5),
-
-          // 垂直位置 (30%)
-          y: Fraction(0.3),
-
-          // 宽度 (屏幕的 45%)
-          width: Fraction(0.45),
-
-          // 最小高度，自动扩展
-          height: Absolute(1),
-
-          // 显示图标
-          hide_icons: false,
-
-          // 尊重 exclusive zones
-          ignore_exclusive_zones: false,
-
-          // 层级
-          layer: Overlay,
-
-          // 显示插件信息
-          hide_plugin_info: false,
-
-          // 点击外部不关闭
-          close_on_click: false,
-
-          // 立即显示结果
-          show_results_immediately: true,
-
-          // 最大条目数
-          max_entries: Some(8),
-
-          // 插件列表
-          plugins: [
-            "libapplications.so",
-            "libsymbols.so",
-            "libshell.so",
-            "libdictionary.so",
-            "libwebsearch.so",
-            "libnix_run.so",
-            "libniri_focus.so",
-          ],
-
-          // 快捷键
-          keybinds: [
-            Keybind(key: "Return", action: Select),
-            Keybind(key: "Up", action: Up),
-            Keybind(key: "Down", action: Down),
-            Keybind(key: "ISO_Left_Tab", action: Up, shift: true),
-            Keybind(key: "Tab", action: Down),
-            Keybind(key: "Escape", action: Close),
-          ],
+          // Applications 插件特有配置
+          // 注意：布局设置 (x, y, width 等) 在主 config 中定义
         )
       '';
 
