@@ -280,6 +280,20 @@ in {
           };
           open-floating = true;
         }
+
+        # 文件管理器 → 浮动
+        {
+          match = {app-id = "org.gnome.Nautilus";};
+          open-floating = true;
+        }
+        {
+          match = {app-id = "dolphin";};
+          open-floating = true;
+        }
+        {
+          match = {app-id = "org.kde.dolphin";};
+          open-floating = true;
+        }
       ];
     };
   };
