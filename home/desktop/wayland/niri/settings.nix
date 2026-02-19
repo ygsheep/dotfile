@@ -24,7 +24,7 @@ in {
         {command = ["wl-paste" "--type text" "--watch" "cliphist" "store"];}
         {command = ["fcitx5" "-d" "--replace"];} # 启动 Fcitx5 输入法
         {command = ["qs" "-c" "DankMaterialShell"];}
-        {command = ["firefox"];} # 启动 Firefox (会自动到工作区 1)
+        {command = ["obsidian"];} # 启动 Obsidian (会自动到工作区 1)
         # {command = ["mpvpaper" "ALL" "~/.dotfile/assets/video/andvari-last-origin.3840x2160.mp4"];}
         # {command = ["anyrun"];}
       ];
@@ -166,11 +166,23 @@ in {
 
       # ========== 窗口规则 (类似 i3wm 的 assign/for_window) ==========
       window-rules = [
-        # Firefox → 工作区 1 (浏览器)
+        # Obsidian → 工作区 1 (知识笔记)
         {
-          match = {app-id = "firefox";};
+          match = {app-id = "obsidian";};
           open-on-workspace = "1";
-          block-out-from = "screencast"; # 防止录屏时捕获
+        }
+
+        # Godot → 工作区 2 (游戏开发)
+        {
+          match = {app-id = "godot";};
+          open-on-workspace = "2";
+          block-out-from = "screencast";
+        }
+
+        # Blender → 工作区 2 (3D 建模)
+        {
+          match = {app-id = "blender";};
+          open-on-workspace = "2";
         }
 
         # JetBrains IDEs → 工作区 2 (开发)
@@ -195,7 +207,27 @@ in {
           open-on-workspace = "3";
         }
 
-        # Discord/通讯应用 → 工作区 4 (社交)
+        # WeChat → 工作区 4 (通讯)
+        {
+          match = {app-id = "wechat";};
+          open-on-workspace = "4";
+        }
+        {
+          match = {app-id = "com.wechat.WeChat";};
+          open-on-workspace = "4";
+        }
+
+        # Telegram → 工作区 4 (通讯)
+        {
+          match = {app-id = "telegram-desktop";};
+          open-on-workspace = "4";
+        }
+        {
+          match = {app-id = "org.telegram.desktop";};
+          open-on-workspace = "4";
+        }
+
+        # Discord → 工作区 4 (社交)
         {
           match = {app-id = "discord";};
           open-on-workspace = "4";
@@ -205,16 +237,23 @@ in {
           open-on-workspace = "4";
         }
 
-        # Spotify/音乐 → 工作区 5 (媒体)
+        # Firefox → 工作区 5 (浏览器)
         {
-          match = {app-id = "spotify";};
+          match = {app-id = "firefox";};
           open-on-workspace = "5";
+          block-out-from = "screencast";
         }
 
-        # Steam/游戏 → 工作区 6 (游戏)
+        # Spotify/音乐 → 工作区 6 (媒体)
+        {
+          match = {app-id = "spotify";};
+          open-on-workspace = "6";
+        }
+
+        # Steam/游戏 → 工作区 7 (游戏)
         {
           match = {app-id = "steam";};
-          open-on-workspace = "6";
+          open-on-workspace = "7";
           block-out-from = "screencast";
         }
 
