@@ -8,16 +8,19 @@
   programs.anyrun = {
     enable = true;
     config = {
+      # 水平居中
       x = {fraction = 0.5;};
+      # 垂直偏上 (30% 位置)
       y = {fraction = 0.3;};
-      width = {fraction = 0.3;};
+      # 宽度 (屏幕的 45%)
+      width = {fraction = 0.45;};
       hideIcons = false;
       ignoreExclusiveZones = false;
       layer = "overlay";
       hidePluginInfo = false;
       closeOnClick = false;
-      showResultsImmediately = false;
-      maxEntries = null;
+      showResultsImmediately = true;
+      maxEntries = 8;
 
       plugins = [
         # Applications - 搜索和运行系统及用户桌面应用
@@ -37,7 +40,7 @@
       ];
     };
 
-    # 使用暗色主题样式
+    # 使用 Gruvbox Dark Hard 主题样式
     # Inline comments are supported for language injection into
     # multi-line strings with Treesitter! (Depends on your editor)
     extraCss =
@@ -45,64 +48,132 @@
       css
       */
       ''
+        /* ========== 主窗口 ========== */
         #window {
           background: transparent;
         }
 
+        /* ========== 主容器 ========== */
         box {
-          background: rgba(30, 30, 46, 0.95);
-          border: 2px solid rgba(189, 174, 147, 0.3);
-          border-radius: 12px;
+          background: rgba(29, 32, 33, 0.95);
+          border: 2px solid rgba(189, 174, 147, 0.2);
+          border-radius: 16px;
+          padding: 8px;
         }
 
-        /* 输入框 */
+        /* ========== 输入框 ========== */
         #entry {
-          placeholder-color: rgba(189, 174, 147, 0.5);
+          background: rgba(60, 56, 54, 0.5);
+          border: 1px solid rgba(189, 174, 147, 0.3);
+          border-radius: 10px;
+          margin: 8px;
+          padding: 12px 16px;
+          font-size: 16px;
+          color: #ebdbb2;
         }
 
         #entry:focus {
-          border-color: rgba(142, 192, 124, 0.8);
+          border-color: #b8bb26;
+          outline: none;
+        }
+
+        #entry placeholder {
+          color: rgba(189, 174, 147, 0.5);
+        }
+
+        /* ========== 插件选择器 ========== */
+        #plugin {
+          background: transparent;
+          border: none;
+          padding: 8px 12px;
+          margin: 4px;
+          border-radius: 8px;
+          color: #bdae93;
         }
 
         #plugin:hover {
-          background: rgba(142, 192, 124, 0.1);
+          background: rgba(184, 187, 38, 0.15);
+        }
+
+        #plugin selected {
+          background: rgba(184, 187, 38, 0.25);
+          color: #ebdbb2;
+        }
+
+        /* ========== 匹配项列表 ========== */
+        list {
+          margin: 4px 0;
         }
 
         #match {
           background: transparent;
-          border-radius: 8px;
-          padding: 8px 12px;
+          border-radius: 10px;
+          padding: 10px 14px;
+          margin: 2px 4px;
         }
 
         #match:selected {
-          background: rgba(142, 192, 124, 0.2);
+          background: rgba(184, 187, 38, 0.2);
         }
 
         #match:hover {
-          background: rgba(142, 192, 124, 0.15);
+          background: rgba(184, 187, 38, 0.15);
         }
 
-        /* 匹配项文字颜色 */
+        /* ========== 图标 ========== */
+        #match icon {
+          size: 20px;
+        }
+
+        #match img {
+          size: 20px;
+        }
+
+        /* ========== 文字样式 ========== */
         #match-title {
           color: #ebdbb2;
+          font-size: 15px;
+          font-weight: 500;
         }
 
         #match-desc {
           color: rgba(189, 174, 147, 0.7);
+          font-size: 13px;
         }
 
-        /* 滚动条 */
+        #match:selected #match-title {
+          color: #fbf1c7;
+        }
+
+        #match:selected #match-desc {
+          color: rgba(235, 219, 178, 0.8);
+        }
+
+        /* ========== 滚动条 ========== */
         list > scrollbar {
           background: transparent;
         }
 
         list > scrollbar thumb {
           background: rgba(189, 174, 147, 0.3);
-          border-radius: 4px;
+          border-radius: 6px;
+          min-height: 20px;
         }
 
         list > scrollbar thumb:hover {
           background: rgba(189, 174, 147, 0.5);
+        }
+
+        /* ========== 分隔线 ========== */
+        separator {
+          background: rgba(189, 174, 147, 0.2);
+          margin: 4px 0;
+        }
+
+        /* ========== 特殊样式 ========== */
+        /* Shell 命令高亮 */
+        #match[title ^= ""] {
+          /* 可添加特定类型的样式 */
         }
       '';
 
