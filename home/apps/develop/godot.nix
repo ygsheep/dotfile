@@ -5,22 +5,10 @@
   pkgs,
   lib,
   ...
-}: {
-  home.packages = with pkgs; [
-    godot_4
-    godot_4-export-templates-bin
-  ];
-
-  # 导出模板链接
-  home.file.".local/share/godot/export_templates/${
-    builtins.replaceStrings ["-"] ["."] pkgs.godot_4-export-templates-bin.version
-  }".source =
-    pkgs.godot_4-export-templates-bin;
-
+}: let
   # ========== Godot KDE 兼容性启动脚本 ==========
   # 创建自定义 Godot 启动脚本，解决 KDE Wayland 卡死问题
-  home.file.".local/bin/godot4-kde".text = ''
-    #!/usr/bin/env bash
+  godot4-kde = pkgs.writeShellScriptBin "godot4-kde" ''
     # Godot 4 KDE Wayland 兼容性启动脚本
     # 解决问题：KDE Plasma Wayland 下 OpenGL 上下文冲突导致卡死
 
@@ -58,16 +46,20 @@
     echo "[$(date)] Godot 启动 (XWayland 模式)" >> "$LOGFILE"
     echo "环境变量: QT_QPA_PLATFORM=$QT_QPA_PLATFORM, GDK_BACKEND=$GDK_BACKEND" >> "$LOGFILE"
 
-    exec godot4 "$@" 2>&1 | tee -a "$LOGFILE"
+    exec ${pkgs.godot_4}/bin/godot4 "$@" 2>&1 | tee -a "$LOGFILE"
   '';
+in {
+  home.packages = with pkgs; [
+    godot_4
+    godot_4-export-templates-bin
+    godot4-kde  # 添加 KDE 兼容性启动脚本
+  ];
 
-  # 设置脚本可执行权限
-  home.activation.godotKdeWrapper = lib.mkAfter ''
-    file=${config.home.homeDirectory}/.local/bin/godot4-kde
-    if [ -f "$file" ]; then
-      chmod +x "$file"
-    fi
-  '';
+  # 导出模板链接
+  home.file.".local/share/godot/export_templates/${
+    builtins.replaceStrings ["-"] ["."] pkgs.godot_4-export-templates-bin.version
+  }".source =
+    pkgs.godot_4-export-templates-bin;
 
   # ========== Helix GDScript 支持 ==========
   programs.helix = {
