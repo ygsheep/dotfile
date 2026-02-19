@@ -27,7 +27,6 @@ in {
         {command = ["firefox"];} # 启动 Firefox (会自动到工作区 1)
         {command = ["obsidian"];} # 启动 Obsidian (会自动到工作区 3)
         # {command = ["mpvpaper" "ALL" "~/.dotfile/assets/video/andvari-last-origin.3840x2160.mp4"];}
-        # {command = ["anyrun"];}
       ];
       input = {
         keyboard.xkb = {
@@ -164,6 +163,16 @@ in {
       '';
       prefer-no-csd = true;
       hotkey-overlay.skip-at-startup = true;
+
+      # ========== 自定义快捷键 ==========
+      keybinds = {
+        # 保留 Niri 默认快捷键
+        inherit-defaults = true;
+
+        # Super+D / Super+/ → 启动 Anyrun 应用启动器
+        "Super+D".spawn = ["anyrun"];
+        "Super+Slash".spawn = ["anyrun"];
+      };
 
       # ========== 窗口规则 (类似 i3wm 的 assign/for_window) ==========
       window-rules = [
