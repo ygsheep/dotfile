@@ -189,41 +189,41 @@ in {
           block-out-from = "screencast";
         }
 
-        # ========== 工作区 2: 开发 ==========
-        {
-          match = {app-id = "jetbrains-*";};
-          open-on-workspace = "2";
-        }
-        {
-          match = {app-id = "code";};
-          open-on-workspace = "2";
-        }
-        {
-          match = {app-id = "zed";};
-          open-on-workspace = "2";
-        }
-        {
-          match = {app-id = "github-desktop";};
-          open-on-workspace = "2";
-        }
-        {
-          match = {app-id = "lazygit";};
-          open-on-workspace = "2";
-          open-floating = true;
-        }
-
-        # ========== 工作区 3: 终端 + 笔记 ==========
+        # ========== 工作区 2: 终端 + 笔记 ==========
         {
           match = {app-id = "kitty";};
-          open-on-workspace = "3";
+          open-on-workspace = "2";
         }
         {
           match = {app-id = "ghostty";};
-          open-on-workspace = "3";
+          open-on-workspace = "2";
         }
         {
           match = {app-id = "obsidian";};
+          open-on-workspace = "2";
+        }
+
+        # ========== 工作区 3: 开发 ==========
+        {
+          match = {app-id = "jetbrains-*";};
           open-on-workspace = "3";
+        }
+        {
+          match = {app-id = "code";};
+          open-on-workspace = "3";
+        }
+        {
+          match = {app-id = "zed";};
+          open-on-workspace = "3";
+        }
+        {
+          match = {app-id = "github-desktop";};
+          open-on-workspace = "3";
+        }
+        {
+          match = {app-id = "lazygit";};
+          open-on-workspace = "3";
+          open-floating = true;
         }
 
         # ========== 工作区 4: 创作/3D (原 ws-5) ==========
