@@ -110,6 +110,10 @@
     platformTheme.name = lib.mkForce "kde"; # 强制使用 KDE 平台主题
   };
 
+  # ========== Godot 兼容性说明 ==========
+  # Godot 启动脚本位于: home/apps/develop/godot.nix
+  # 使用 godot4-kde 命令启动 Godot，自动应用 KDE Wayland 兼容性设置
+
   # ========== 主题配置文件 ==========
   # Gruvbox Dark Hard 标准配色方案
   # 参考: home/shared/colors/gruvbox-dark-hard.yml
@@ -140,7 +144,7 @@
       IntensityEffect=2
 
       [Colors:Button]
-      BackgroundAlternate=80,73,69
+      BackgroundAlternate=29,32,33
       BackgroundNormal=60,56,54
       DecorationFocus=142,192,124
       DecorationHover=184,187,38
@@ -153,7 +157,7 @@
       ForegroundPositive=184,187,38
 
       [Colors:Complementary]
-      BackgroundAlternate=80,73,69
+      BackgroundAlternate=29,32,33
       BackgroundNormal=60,56,54
       DecorationFocus=142,192,124
       DecorationHover=184,187,38
@@ -166,7 +170,7 @@
       ForegroundPositive=184,187,38
 
       [Colors:Header]
-      BackgroundAlternate=60,56,54
+      BackgroundAlternate=29,32,33
       BackgroundNormal=29,32,33
       DecorationFocus=142,192,124
       DecorationHover=184,187,38
@@ -191,7 +195,7 @@
       ForegroundPositive=29,32,33
 
       [Colors:Tooltip]
-      BackgroundAlternate=60,56,54
+      BackgroundAlternate=29,32,33
       BackgroundNormal=29,32,33
       DecorationFocus=142,192,124
       DecorationHover=184,187,38
@@ -204,7 +208,7 @@
       ForegroundPositive=184,187,38
 
       [Colors:View]
-      BackgroundAlternate=60,56,54
+      BackgroundAlternate=29,32,33
       BackgroundNormal=29,32,33
       DecorationFocus=142,192,124
       DecorationHover=184,187,38
@@ -217,7 +221,7 @@
       ForegroundPositive=184,187,38
 
       [Colors:Window]
-      BackgroundAlternate=60,56,54
+      BackgroundAlternate=29,32,33
       BackgroundNormal=29,32,33
       DecorationFocus=142,192,124
       DecorationHover=184,187,38
@@ -305,7 +309,7 @@
       TitleBarSidePadding=10
 
       [Colors:Button]
-      BackgroundAlternate=60,56,54
+      BackgroundAlternate=29,32,33
       BackgroundNormal=29,32,33
       DecorationFocus=142,192,124
       ForegroundNormal=235,219,178
