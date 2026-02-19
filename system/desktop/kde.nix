@@ -3,28 +3,20 @@
   pkgs,
   ...
 }: {
-  # KDE Plasma 6 桌面环境
+  # KDE Plasma 6 桌面环境（与 GNOME 共存，使用 GDM 显示管理器）
   services = {
-    displayManager = {
-      sddm = {
-        enable = true;
-        wayland.enable = true;
-        settings = {
-          General = {
-            DisplayServer = "wayland";
-          };
-          Wayland = {
-            SessionDir = "/run/current-system/sw/share/wayland-sessions";
-          };
-          X11 = {
-          };
-        };
-      };
+    xserver.enable = true;
+
+    # 使用 GDM 作为显示管理器（支持 KDE、GNOME、Niri 会话选择）
+    displayManager.gdm = {
+      enable = true;
+      wayland = true;
     };
 
+    # 启用 KDE Plasma 6 桌面
     desktopManager.plasma6.enable = true;
 
-    # 电源管理 - KDE 需要 power-profiles-daemon
+    # 电源管理
     power-profiles-daemon.enable = true;
   };
 
@@ -33,11 +25,9 @@
     [General]
     ColorScheme=GruvboxDarkHard
     Name=Default
-    # LookAndFeelPackage=org.kde.breezedark.desktop
     LookAndFeelPackage=com.github.vinceliuice.ChromeOS-dark
 
     [KDE]
-    # LookAndFeelPackage=org.kde.breezedark.desktop
     LookAndFeelPackage=com.github.vinceliuice.ChromeOS-dark
 
     [WM]
@@ -49,7 +39,7 @@
 
   # KDE 核心应用包 + Niri 会话文件
   environment.systemPackages = with pkgs; [
-    # Niri 会话文件
+    # Niri 会话文件（在 GDM 中可用）
     (pkgs.writeTextDir "share/wayland-sessions/niri.desktop" ''
       [Desktop Entry]
       Name=Niri
@@ -67,7 +57,6 @@
     kdePackages.kcolorchooser # 颜色选择器
     kdePackages.kolourpaint # 画图程序
     kdePackages.ksystemlog # 系统日志查看器
-    kdePackages.sddm-kcm # SDDM 配置模块
     kdiff3 # 文件比较和合并工具
     kdePackages.isoimagewriter # ISO 镜像写入工具
     kdePackages.partitionmanager # 分区管理器
