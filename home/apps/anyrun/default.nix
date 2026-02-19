@@ -169,82 +169,58 @@
     extraConfigFiles = {
       "applications.ron".text = ''
         Config(
-          // Position/size fields use an enum for the value, it can be either:
-          // Absolute(n): The absolute value in pixels
-          // Fraction(n): A fraction of the width or height of the full screen (depends on exclusive zones and the settings related to them) window respectively
-
-          // The horizontal position, adjusted so that Relative(0.5) always centers the runner
+          // 水平居中
           x: Fraction(0.5),
 
-          // The vertical position, works the same as `x`
-          y: Absolute(0),
+          // 垂直位置 (30%)
+          y: Fraction(0.3),
 
-          // The width of the runner
-          width: Absolute(800),
+          // 宽度 (屏幕的 45%)
+          width: Fraction(0.45),
 
-          // The minimum height of the runner, the runner will expand to fit all the entries
-          // NOTE: If this is set to 0, the window will never shrink after being expanded
+          // 最小高度，自动扩展
           height: Absolute(1),
 
-          // Hide match and plugin info icons
+          // 显示图标
           hide_icons: false,
 
-          // ignore exclusive zones, f.e. Waybar
+          // 尊重 exclusive zones
           ignore_exclusive_zones: false,
 
-          // Layer shell layer: Background, Bottom, Top, Overlay
+          // 层级
           layer: Overlay,
 
-          // Hide the plugin info panel
+          // 显示插件信息
           hide_plugin_info: false,
 
-          // Close window when a click outside the main box is received
+          // 点击外部不关闭
           close_on_click: false,
 
-          // Show search results immediately when Anyrun starts
-          show_results_immediately: false,
+          // 立即显示结果
+          show_results_immediately: true,
 
-          // Limit amount of entries shown in total
-          max_entries: None,
+          // 最大条目数
+          max_entries: Some(8),
 
-          // List of plugins to be loaded by default, can be specified with a relative path to be loaded from the
-          // `<anyrun config dir>/plugins` directory or with an absolute path to just load the file the path points to.
-          //
-          // The order of plugins here specifies the order in which they appear
-          // in the results. As in it works as a priority for the plugins.
+          // 插件列表
           plugins: [
             "libapplications.so",
             "libsymbols.so",
             "libshell.so",
-            "libtranslate.so",
+            "libdictionary.so",
+            "libwebsearch.so",
+            "libnix_run.so",
+            "libniri_focus.so",
           ],
 
+          // 快捷键
           keybinds: [
-            Keybind(
-              key: "Return",
-              action: Select,
-            ),
-            Keybind(
-              key: "Up",
-              action: Up,
-            ),
-            Keybind(
-              key: "Down",
-              action: Down,
-            ),
-            Keybind(
-              key: "ISO_Left_Tab",
-              action: Up,
-              shift: true,
-            ),
-            Keybind(
-              key: "Tab",
-              action: Down,
-            ),
-            Keybind(
-              key: "Escape",
-              action: Close,
-            ),
+            Keybind(key: "Return", action: Select),
+            Keybind(key: "Up", action: Up),
+            Keybind(key: "Down", action: Down),
+            Keybind(key: "ISO_Left_Tab", action: Up, shift: true),
+            Keybind(key: "Tab", action: Down),
+            Keybind(key: "Escape", action: Close),
           ],
         )
       '';
