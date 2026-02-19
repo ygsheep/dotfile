@@ -325,11 +325,15 @@ in {
           };
         }
         {
-          match = {
-            window-title = ".*Preferences.*";
-            window-title = ".*Settings.*";
-            window-title = ".*设置.*";
-          };
+          match = {window-title = ".*Preferences.*";};
+          open-floating = true;
+        }
+        {
+          match = {window-title = ".*Settings.*";};
+          open-floating = true;
+        }
+        {
+          match = {window-title = ".*设置.*";};
           open-floating = true;
         }
 
