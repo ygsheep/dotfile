@@ -89,13 +89,40 @@
     kdePackages.kde-gtk-config # GTK 配置集成
     kdePackages.systemsettings # 系统设置
     kdePackages.kdeconnect-kde # KDE Connect 设备连接
-    kdePackages.powerdevil # 电源管理和亮度控制
+    kdePackages.powerdevil # 电源管理和亮度控制（禁用自动配置切换）
     kdePackages.plasma-browser-integration # 浏览器集成
     kdePackages.kscreen # 显示器管理
     kdePackages.ksystemlog # 系统日志查看器
     kdePackages.kwallet # 密钥管理
     kdePackages.bluedevil # 蓝牙管理 GUI
   ];
+
+  # ========== 禁用 PowerDevil 的自动电源配置切换 ==========
+  # 原因：与 power-monitor 脚本冲突，会导致配置来回切换
+  # 解决：让 power-monitor 脚本完全接管电源配置管理
+  #
+  # 注意：PowerDevil 在 Plasma 6 中可能通过 D-Bus 控制 power-profiles-daemon
+  # 这个配置文件主要保留亮度控制和休眠设置，禁用电源配置自动切换
+  xdg.configFile."powerdevilrc".text = ''
+    [AC][Display]
+    DimDisplayIdleTimeoutSec=-1
+    DimDisplayWhenIdle=false
+    TurnOffDisplayIdleTimeoutSec=-1
+    TurnOffDisplayWhenIdle=false
+
+    [AC][SuspendAndShutdown]
+    AutoSuspendAction=0
+    AutoSuspendIdleTimeoutSec=1800
+
+    [Battery][Display]
+    DimDisplayIdleTimeoutSec=-1
+    DimDisplayWhenIdle=false
+    TurnOffDisplayIdleTimeoutSec=-1
+    TurnOffDisplayWhenIdle=false
+
+    [Battery][SuspendAndShutdown]
+    AutoSuspendAction=0
+  '';
 
   # ========== KDE Connect 服务 ==========
   services.kdeconnect = {

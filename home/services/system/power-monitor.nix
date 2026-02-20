@@ -71,6 +71,19 @@
     }
 
     log "Starting power monitor"
+
+    # 禁用 PowerDevil 的电源配置自动切换（如果存在）
+    if command -v kwriteconfig6 >/dev/null 2>&1; then
+      # 通过 KDE 配置禁用自动电源配置切换
+      kwriteconfig6 --file powerdevilrc --group "AC" --key "Profile" "" 2>/dev/null || true
+      kwriteconfig6 --file powerdevilrc --group "Battery" --key "Profile" "" 2>/dev/null || true
+      log "PowerDevil auto-profile switching disabled (via kwriteconfig6)"
+    elif command -v kwriteconfig5 >/dev/null 2>&1; then
+      kwriteconfig5 --file powerdevilrc --group "AC" --key "Profile" "" 2>/dev/null || true
+      kwriteconfig5 --file powerdevilrc --group "Battery" --key "Profile" "" 2>/dev/null || true
+      log "PowerDevil auto-profile switching disabled (via kwriteconfig5)"
+    fi
+
     prev_profile=""
 
     while true; do
@@ -93,6 +106,8 @@
     power-profiles-daemon
     inotify-tools
     gsettings-desktop-schemas
+    # KDE 配置工具（用于禁用 PowerDevil 的自动电源配置切换）
+    kdePackages.kconfig
   ];
 in {
   # Power state monitor. Switches Power profiles based on charging state.

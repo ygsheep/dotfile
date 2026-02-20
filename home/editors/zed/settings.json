@@ -1,0 +1,149 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  // Git 面板配置，使用树形视图显示
+  "git_panel": {
+    "tree_view": true,
+  },
+  // 图标主题
+  "icon_theme": "JetBrains New UI Icons (Dark)",
+  // 启用 Vim 模式
+  "vim_mode": true,
+  // 基础快捷键映射（VSCode 风格）
+  "base_keymap": "VSCode",
+  // 主题配置
+  "theme": {
+    "mode": "dark",
+    "light": "Gruvbox Light",
+    "dark": "One Dark",
+  },
+  // 用户界面（UI）字体大小
+  "ui_font_size": 18,
+  // 用户界面（UI）字体样式
+  "ui_font_family": "Cascadia Mono PL",
+  // 代码编辑区（Buffer）字体大小
+  "buffer_font_size": 16,
+  // 代码编辑区（Buffer）字体样式
+  "buffer_font_family": "JetBrains Mono",
+  // 代码编辑区字体粗细（500 = Medium）
+  "buffer_font_weight": 500,
+  // 启用相对行号
+  "relative_line_numbers": "enabled",
+  // 标签栏配置
+  "tab_bar": {
+    // 隐藏标签栏中的导航历史按钮
+    "show_nav_history_buttons": false,
+  },
+  // 标签页配置
+  "tabs": {
+    // 启用文件图标显示，在标签页中显示文件类型对应的图标
+    "file_icons": true,
+    // 在标签页中显示文件的 Git 状态
+    "git_status": true,
+  },
+  // 内联提示设置
+  "inlay_hints": {
+    "enabled": true,
+  },
+  // 缩进参考线配置
+  "indent_guides": {
+    // 根据缩进级别进行着色
+    "coloring": "indent_aware",
+  },
+  // 启用软换行，当行长度超过编辑器宽度时自动换行
+  "soft_wrap": "editor_width",
+  // Tab 键缩进大小（空格数）
+  "tab_size": 2,
+  // 启用文件保存时自动格式化功能
+  "format_on_save": "on",
+  // 设置垂直滚动的边距（行数）
+  "vertical_scroll_margin": 6,
+  // 编辑器启动时恢复上次打开的会话
+  "restore_on_startup": "last_session",
+  // 禁用在新行继续注释的功能
+  "extend_comment_on_newline": false,
+  // 文件类型关联配置
+  "file_types": {
+    // C/C++ 文件扩展名关联
+    "C++": ["c", "h", "cpp", "hpp"],
+  },
+  // 文件扫描时要排除的文件和目录模式
+  "file_scan_exclusions": [
+    "**/.git",
+    "**/.svn",
+    "**/.hg",
+    "**/CVS",
+    "**/.DS_Store",
+    "**/Thumbs.db",
+    "**/.classpath",
+    "**/.settings",
+    "**/vendor",
+    "**/.tmp*",
+  ],
+  // 搜索时要排除的文件和目录
+  "search": {
+    "exclude": {
+      "**/*.snap": true,
+      "**/.git": true,
+      "**/.github": false,
+      "**/.nuxt": true,
+      "**/.output": true,
+      "**/.pnpm": true,
+      "**/.vscode": true,
+      "**/.yarn": true,
+      "**/node_modules": true,
+      "**/out/**": true,
+      "**/package-lock.json": true,
+      "**/pnpm-lock.yaml": true,
+      "**/temp": true,
+      "**/yarn.lock": true,
+      "**/CHANGELOG*": true,
+      "**/LICENSE*": true,
+    },
+  },
+  // 终端配置
+  "terminal": {
+    // 终端字体样式
+    "font_family": "Cascadia Code NF",
+    "toolbar": {
+      // 隐藏终端工具栏标题
+      "title": false,
+    },
+    // 启用在终端中选择文本时自动复制到剪贴板的功能
+    "copy_on_select": true,
+  },
+  // Git 配置
+  "git": {
+    // 启用 Git 集成功能
+    "enabled": true,
+    // 定期从远程仓库获取最新的更改
+    "autoFetch": true,
+    // 设置自动获取的时间间隔为 300 秒（5分钟）
+    "autoFetchInterval": 300,
+    // 当编辑器窗口获得焦点时自动获取最新的 Git 更改
+    "autoFetchOnFocus": true,
+    // 当编辑器窗口切换时自动获取最新的 Git 更改
+    "autoFetchOnWindowChange": true,
+    // 在构建项目时自动获取最新的 Git 更改
+    "autoFetchOnBuild": true,
+    // 在指定的构建事件（如构建、运行、调试）时自动获取最新的Git更改
+    "autoFetchOnBuildEvents": ["build", "run", "debug"],
+    // 设置在构建后延迟 1500 毫秒（1.5秒）再进行自动获取
+    "autoFetchOnBuildDelay": 1500,
+    // 在编辑器的行号栏（gutter）中显示 Git 状态，仅显示已跟踪文件的状态
+    "inline_blame": {
+      // 启用在代码行旁边显示最后一次修改该行的提交信息
+      "enabled": false,
+      // 显示位置（右侧）
+      "position": "right",
+    },
+  },
+  // 代理设置
+  "proxy": "http://127.0.0.1:20171",
+}
