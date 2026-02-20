@@ -85,17 +85,28 @@
     fi
 
     prev_profile=""
+    prev_status=""
+    prev_capacity=""
 
     while true; do
+      # 读取当前状态
+      current_status=$(cat "$BAT_STATUS")
+      current_capacity=$(cat "$BAT_CAP")
       current_profile=$(get_power_profile)
 
-      if [[ "$prev_profile" != "$current_profile" ]]; then
-        apply_profile "$current_profile"
-        prev_profile=$current_profile
+      # 只有当状态或电量真正变化时才切换
+      if [[ "$prev_status" != "$current_status" ]] || [[ "$prev_capacity" != "$current_capacity" ]]; then
+        if [[ "$prev_profile" != "$current_profile" ]]; then
+          apply_profile "$current_profile"
+          prev_profile=$current_profile
+        fi
+        prev_status="$current_status"
+        prev_capacity="$current_capacity"
       fi
 
-      if ! inotifywait -qq "$BAT_STATUS" "$BAT_CAP"; then
-        log "inotifywait failed, sleeping for 5 seconds before retry"
+      # 等待电池状态变化，使用超时避免无限等待
+      if ! inotifywait -qq -t 60 "$BAT_STATUS" "$BAT_CAP"; then
+        # 超时或失败，继续循环检查
         sleep 5
       fi
     done
