@@ -4,6 +4,7 @@
   ...
 }: {
   imports = [
+    ./warp-terminal.nix
     ./browsers/chromium.nix
     ./browsers/firefox.nix
     ./browsers/edge.nix
@@ -49,7 +50,6 @@
 
     # swww
     ghostty
-    warp-terminal
     mods
     openvpn
 
