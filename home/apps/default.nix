@@ -49,6 +49,7 @@
 
     # swww
     ghostty
+    warp-terminal
     mods
     openvpn
 
