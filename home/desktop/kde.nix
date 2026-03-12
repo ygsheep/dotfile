@@ -83,7 +83,8 @@
     kdePackages.ark # 压缩工具
     kdePackages.kate # 文本编辑器
     # kdePackages.konsole # 终端 (已移除，使用 kitty/foot)
-    kdePackages.spectacle # 截图工具
+    kdePackages.spectacle # KDE 内置截图工具
+    ksnip # 功能更强大的截图工具（支持 Wayland）
 
     # ========== KDE 系统工具 ==========
     kdePackages.kde-gtk-config # GTK 配置集成
@@ -128,6 +129,24 @@
   services.kdeconnect = {
     enable = true;
     indicator = true;
+  };
+
+  # KDE Connect 不使用代理（需要发现本地设备）
+  systemd.user.services.kdeconnect.environment = {
+    http_proxy = "";
+    HTTP_PROXY = "";
+    https_proxy = "";
+    HTTPS_PROXY = "";
+    no_proxy = "*";
+    NO_PROXY = "*";
+  };
+  systemd.user.services.kdeconnect-indicator.environment = {
+    http_proxy = "";
+    HTTP_PROXY = "";
+    https_proxy = "";
+    HTTPS_PROXY = "";
+    no_proxy = "*";
+    NO_PROXY = "*";
   };
 
   # ========== Qt 配置 ==========

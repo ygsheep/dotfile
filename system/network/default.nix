@@ -48,6 +48,23 @@
     NO_PROXY = globals.proxy.noProxy;
   };
 
+  # KDE Connect 防火墙规则
+  networking.firewall = {
+    enable = true;
+    allowedTCPPortRanges = [
+      {
+        from = 1714;
+        to = 1764;
+      } # KDE Connect
+    ];
+    allowedUDPPortRanges = [
+      {
+        from = 1714;
+        to = 1764;
+      } # KDE Connect
+    ];
+  };
+
   services = {
     openssh = {
       enable = true;
