@@ -3,6 +3,7 @@
     ./security.nix
     ./users.nix
     ./time-sync.nix
+    ./shell-compat.nix
     ../nix
     ../programs/nushell.nix
   ];
