@@ -15,6 +15,13 @@
     };
   };
 
+  # 等待网络就绪后再启动 greeter
+  systemd.services.greetd = {
+    wantedBy = ["graphical.target"];
+    after = ["network-online.target"];
+    wants = ["network-online.target"];
+  };
+
   # 注释掉 SDDM 配置，改回使用 Greetd
   /*
   services = {
@@ -43,5 +50,15 @@
     CLUTTER_BACKEND = "wayland";
     # Fix for greetd expandable variables
     XDG_SESSION_TYPE = "wayland";
+
+    # Proxy settings from globals
+    http_proxy = globals.proxy.http;
+    HTTP_PROXY = globals.proxy.http;
+    https_proxy = globals.proxy.https;
+    HTTPS_PROXY = globals.proxy.https;
+    socks_proxy = globals.proxy.socks;
+    SOCKS_PROXY = globals.proxy.socks;
+    no_proxy = globals.proxy.noProxy;
+    NO_PROXY = globals.proxy.noProxy;
   };
 }

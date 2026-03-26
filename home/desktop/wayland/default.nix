@@ -39,10 +39,10 @@
     enable = true;
     settings = {
       General = {
-        # Enable grim adapter for Wayland support
-        useGrimAdapter = true;
+        # 禁用 grim 适配器以解决分数缩放问题
+        # useGrimAdapter 会导致截图缩放不正确
+        useGrimAdapter = false;
 
-        # Other useful settings
         disabledTrayIcon = false;
         showStartupLaunchMessage = true;
         autoCloseIdleDaemon = false;

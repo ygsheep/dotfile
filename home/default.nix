@@ -24,12 +24,12 @@
 
   # 用户级代理环境变量
   home.sessionVariables = {
-    http_proxy = "http://${globals.proxy.host}:${toString globals.proxy.httpPort}";
-    HTTP_PROXY = "http://${globals.proxy.host}:${toString globals.proxy.httpPort}";
-    https_proxy = "http://${globals.proxy.host}:${toString globals.proxy.httpsPort}";
-    HTTPS_PROXY = "http://${globals.proxy.host}:${toString globals.proxy.httpsPort}";
-    socks_proxy = "socks5://${globals.proxy.host}:${toString globals.proxy.socksPort}";
-    SOCKS_PROXY = "socks5://${globals.proxy.host}:${toString globals.proxy.socksPort}";
+    http_proxy = globals.proxy.http;
+    HTTP_PROXY = globals.proxy.http;
+    https_proxy = globals.proxy.https;
+    HTTPS_PROXY = globals.proxy.https;
+    socks_proxy = globals.proxy.socks;
+    SOCKS_PROXY = globals.proxy.socks;
     no_proxy = globals.proxy.noProxy;
     NO_PROXY = globals.proxy.noProxy;
     GTK_THEME = "Breeze-Dark"; # 使用 Breeze 深色主题

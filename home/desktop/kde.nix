@@ -125,28 +125,9 @@
     AutoSuspendAction=0
   '';
 
-  # ========== KDE Connect 服务 ==========
+  # ========== KDE Connect 服务 (禁用 - Niri 不兼容) ==========
   services.kdeconnect = {
-    enable = true;
-    indicator = true;
-  };
-
-  # KDE Connect 不使用代理（需要发现本地设备）
-  systemd.user.services.kdeconnect.environment = {
-    http_proxy = "";
-    HTTP_PROXY = "";
-    https_proxy = "";
-    HTTPS_PROXY = "";
-    no_proxy = "*";
-    NO_PROXY = "*";
-  };
-  systemd.user.services.kdeconnect-indicator.environment = {
-    http_proxy = "";
-    HTTP_PROXY = "";
-    https_proxy = "";
-    HTTPS_PROXY = "";
-    no_proxy = "*";
-    NO_PROXY = "*";
+    enable = false;
   };
 
   # ========== Qt 配置 ==========
