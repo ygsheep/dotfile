@@ -76,6 +76,35 @@
       };
     })
 
+    # ========== Kuro Splash Screen（自动安装）==========
+    # 从 GitHub 自动安装 Kuro 猫主题启动屏幕
+    (pkgs.stdenvNoCC.mkDerivation {
+      pname = "kuro-splashscreen";
+      version = "2.0.0";
+
+      src = pkgs.fetchFromGitHub {
+        owner = "bouteillerAlan";
+        repo = "kuro";
+        rev = "1c390b27fe5e586ab2014d3435a6c64576bb84a3";
+        hash = "sha256-IfaZuyQ5WxOclglDhzgmSSmX/nlHVIi9Z528GQ+X27Y=";
+      };
+
+      buildInputs = [bash];
+
+      buildPhase = "";
+
+      installPhase = ''
+        mkdir -p $out/share/plasma/look-and-feel
+        cp -r a2n.kuro $out/share/plasma/look-and-feel/
+      '';
+
+      meta = with lib; {
+        description = "Kuro the cat splash screen for KDE Plasma";
+        homepage = "https://github.com/bouteillerAlan/kuro";
+        license = licenses.gpl3;
+      };
+    })
+
     # ========== KDE 实用应用 ==========
     kdePackages.dolphin # 文件管理器
     kdePackages.okular # PDF 阅读器
@@ -285,6 +314,7 @@
         ShowDeleteCommand=false
         # LookAndFeelPackage=org.kde.breezedark.desktop
         LookAndFeelPackage=com.github.vinceliuice.ChromeOS-dark
+        SplashScreen=a2n.kuro
 
         [Icons]
         Theme=Papirus-Dark
