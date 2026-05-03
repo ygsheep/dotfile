@@ -32,7 +32,7 @@ in {
         }
         {
           timeout = timeout + 10;
-          on-timeout = lock;
+          on-timeout = "${lock} --grace 30";
         }
       ];
     };

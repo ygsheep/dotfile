@@ -2,7 +2,7 @@ _: let
   windowRules = [
     {
       geometry-corner-radius = let
-        radius = 12.0;
+        radius = 20.0;
       in {
         bottom-left = radius;
         bottom-right = radius;
@@ -78,8 +78,12 @@ _: let
         y = 32;
         relative-to = "bottom-right";
       };
-      default-column-width = {fixed = 480;};
-      default-window-height = {fixed = 270;};
+      default-column-width = {
+        fixed = 480;
+      };
+      default-window-height = {
+        fixed = 270;
+      };
     }
     {
       matches = [
@@ -94,8 +98,12 @@ _: let
         y = 32;
         relative-to = "bottom-right";
       };
-      default-column-width = {fixed = 480;};
-      default-window-height = {fixed = 270;};
+      default-column-width = {
+        fixed = 480;
+      };
+      default-window-height = {
+        fixed = 270;
+      };
     }
     {
       matches = [{title = "Picture in picture";}];

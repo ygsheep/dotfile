@@ -25,13 +25,21 @@ in {
       settingsVersion = 18;
       setupCompleted = false;
 
-      # 顶部栏配置
+      # 顶部栏配置（参考 nix-config）
       bar = {
         position = "top";
-        backgroundOpacity = lib.mkForce 0.95;
+        backgroundOpacity = 0.2;
+        useSeparateOpacity = true;
+        capsuleOpacity = 1;
         density = "compact";
+        displayMode = "always_visible";
+        frameRadius = 12;
+        frameThickness = 4;
+        marginHorizontal = 5;
+        marginVertical = 3;
+        outerCorners = true;
         showCapsule = true;
-        exclusive = true;
+        widgetSpacing = 4;
 
         widgets = {
           left = [
@@ -118,18 +126,65 @@ in {
       # 壁纸设置（使用全局变量）
       wallpaper = {
         enabled = true;
-        overviewEnabled = false;
+        overviewEnabled = true;
+        overviewBlur = 0.4;
+        overviewTint = 0.6;
         directory = "${globals.assetsDir}/wallpaper";
         setWallpaperOnAllMonitors = true;
         defaultWallpaper = "${globals.assetsDir}/wallpaper/wallhaven-pkwxxm_3840x2160.png";
-        fillMode = "scale";
+        fillMode = "crop";
         fillColor = "#1e1e2e";
-        randomEnabled = true;
-        randomIntervalSec = 300;
         transitionDuration = 1500;
-        transitionType = "random";
         transitionEdgeSmoothness = 0.05;
+        transitionType = ["fade"];
         panelPosition = "follow_bar";
+      };
+
+      # 桌面小部件
+      desktopWidgets = {
+        enabled = true;
+        overviewEnabled = true;
+        gridSnap = true;
+        gridSnapScale = false;
+        monitorWidgets = [
+          {
+            name = "eDP-1";
+            widgets = [
+              {
+                id = "Clock";
+                clockStyle = "digital";
+                format = "HH:mm\\ndd MMMM";
+                roundedCorners = true;
+                scale = 0.8;
+                showBackground = true;
+                useCustomFont = false;
+                usePrimaryColor = false;
+                x = 100;
+                y = 150;
+              }
+              {
+                id = "MediaPlayer";
+                hideMode = "visible";
+                roundedCorners = true;
+                scale = 1.0;
+                showAlbumArt = true;
+                showBackground = true;
+                showButtons = true;
+                showVisualizer = true;
+                visualizerType = "linear";
+                x = 100;
+                y = 300;
+              }
+              {
+                id = "Weather";
+                scale = 1.2;
+                showBackground = true;
+                x = 250;
+                y = 150;
+              }
+            ];
+          }
+        ];
       };
 
       # 应用启动器设置
@@ -274,17 +329,6 @@ in {
         wezterm = false;
         code = false;
         enableUserTemplates = false;
-      };
-
-      # 夜间模式
-      nightLight = {
-        enabled = false;
-        forced = false;
-        autoSchedule = true;
-        nightTemp = "4000";
-        dayTemp = "6500";
-        manualSunrise = "06:30";
-        manualSunset = "18:30";
       };
     };
   };
@@ -497,7 +541,9 @@ in {
       Restart = "on-failure";
       RestartSec = 5;
       Environment = lib.mkForce [
-        "QML2_IMPORT_PATH=${noctalia}/lib/qt-6/qml:${inputs.quickshell.packages.${pkgs.system}.default}/lib/qt-6/qml:${pkgs.kdePackages.qtdeclarative}/lib/qt-6/qml:${pkgs.kdePackages.kirigami.unwrapped}/lib/qt-6/qml"
+        "QML2_IMPORT_PATH=${noctalia}/lib/qt-6/qml:${
+          inputs.quickshell.packages.${pkgs.system}.default
+        }/lib/qt-6/qml:${pkgs.kdePackages.qtdeclarative}/lib/qt-6/qml:${pkgs.kdePackages.kirigami.unwrapped}/lib/qt-6/qml"
         "XDG_CONFIG_HOME=${config.xdg.configHome}"
       ];
     };

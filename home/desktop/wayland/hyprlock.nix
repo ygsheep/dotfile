@@ -2,6 +2,7 @@
   config,
   pkgs,
   globals,
+  lib,
   ...
 }: {
   programs.hyprlock = {
@@ -12,6 +13,7 @@
         disable_loading_bar = true;
         immediate_render = true;
         hide_cursor = false;
+        ignore_empty_input = true;
       };
 
       background = [
@@ -44,7 +46,7 @@
           check_color = "rgba(141, 186, 100, 0.5)";
           fail_color = "rgba(229, 90, 79, 0.5)";
 
-          placeholder_text = "Enter Password";
+          placeholder_text = "按回车解锁";
 
           dots_spacing = 0.2;
           dots_center = true;

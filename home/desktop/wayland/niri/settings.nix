@@ -20,10 +20,37 @@ in {
         _JAVA_AWT_WM_NONREPARENTING = "1";
       };
       spawn-at-startup = [
-        {command = ["wl-paste" "--watch" "cliphist" "store"];}
-        {command = ["wl-paste" "--type text" "--watch" "cliphist" "store"];}
-        {command = ["fcitx5" "-d" "--replace"];} # 启动 Fcitx5 输入法
-        {command = ["qs" "-c" "DankMaterialShell"];}
+        {
+          command = [
+            "wl-paste"
+            "--watch"
+            "cliphist"
+            "store"
+          ];
+        }
+        {
+          command = [
+            "wl-paste"
+            "--type text"
+            "--watch"
+            "cliphist"
+            "store"
+          ];
+        }
+        {
+          command = [
+            "fcitx5"
+            "-d"
+            "--replace"
+          ];
+        } # 启动 Fcitx5 输入法
+        {
+          command = [
+            "qs"
+            "-c"
+            "DankMaterialShell"
+          ];
+        }
         {command = ["firefox"];} # 启动 Firefox (会自动到工作区 1)
         {command = ["obsidian"];} # 启动 Obsidian (会自动到工作区 3)
         # {command = ["mpvpaper" "ALL" "~/.dotfile/assets/video/andvari-last-origin.3840x2160.mp4"];}
@@ -80,7 +107,9 @@ in {
         workspace-shadow.enable = false;
         backdrop-color = "#1e1e2e";
       };
-      gestures = {hot-corners.enable = true;};
+      gestures = {
+        hot-corners.enable = true;
+      };
       cursor = {
         size = 20;
         theme = "${pointer.name}";
@@ -102,7 +131,9 @@ in {
           {proportion = 0.75;}
           {proportion = 1.0;}
         ];
-        default-column-width = {proportion = 0.5;};
+        default-column-width = {
+          proportion = 0.5;
+        };
 
         gaps = 6;
         struts = {
@@ -166,8 +197,7 @@ in {
 
       # ========== 自定义快捷键 ==========
       binds = with config.lib.niri.actions; {
-        # Super+D / Super+/ → 启动 Anyrun 应用启动器
-        "Super+D".action.spawn = ["anyrun"];
+        # Super+/ → 启动 Anyrun 应用启动器
         "Super+Slash".action.spawn = ["anyrun"];
       };
 
