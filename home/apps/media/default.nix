@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   imports = [
-    ./obs.nix
+    # ./obs.nix (网络问题暂关闭)
     ./rnnoise.nix
     ./mpvpaper.nix
   ];
@@ -11,7 +11,7 @@
     alsa-utils
     easyeffects
 
-    # 3D graphics
-    blender
+    # 3D graphics (网络问题暂关闭)
+    # blender
   ];
 }

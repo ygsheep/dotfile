@@ -63,7 +63,7 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
 
     # rest of inputs, alphabetical order
     agenix = {

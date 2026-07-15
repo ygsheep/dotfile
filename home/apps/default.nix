@@ -18,7 +18,7 @@
   home.packages = with pkgs; [
     # apps
     localsend
-    wechat-uos
+    # wechat-uos (暂时关闭)
 
     # messaging
     telegram-desktop
@@ -53,8 +53,8 @@
     mods
     openvpn
 
-    # lmstudio本地大模型
-    lmstudio
+    # lmstudio本地大模型 (网络问题暂关闭)
+    # lmstudio
 
     # database
     sqlitestudio

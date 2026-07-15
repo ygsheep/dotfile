@@ -17,6 +17,6 @@
     http = "";
     https = "";
     socks = "";
-    noProxy = "*";
+    noProxy = "";
   };
 }

@@ -278,14 +278,15 @@ in {
         }
 
         # ========== 工作区 5: 通讯 (原 ws-4) ==========
-        {
-          matches = [{app-id = "wechat";}];
-          open-on-workspace = "5";
-        }
-        {
-          matches = [{app-id = "com.wechat.WeChat";}];
-          open-on-workspace = "5";
-        }
+        # wechat-uos 暂时关闭
+        # {
+        #   matches = [{app-id = "wechat";}];
+        #   open-on-workspace = "5";
+        # }
+        # {
+        #   matches = [{app-id = "com.wechat.WeChat";}];
+        #   open-on-workspace = "5";
+        # }
         {
           matches = [{app-id = "telegram-desktop";}];
           open-on-workspace = "5";
