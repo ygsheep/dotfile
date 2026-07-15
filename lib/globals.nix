@@ -1,6 +1,6 @@
 {self}: {
-  user = "sheep";
-  homeDir = "/home/sheep";
+  user = "young";
+  homeDir = "/home/young";
   projectDir = toString self;
   assetsDir = "${toString self}/assets";
   version = "2.0.0";

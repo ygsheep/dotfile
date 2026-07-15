@@ -122,8 +122,8 @@ in {
   systemd.user.services.vscode-init = {
     Unit = {
       Description = "Initialize VS Code settings";
-      After = ["home-manager-sheep.service"];
-      Wants = ["home-manager-sheep.service"];
+      After = ["home-manager-young.service"];
+      Wants = ["home-manager-young.service"];
     };
     Service = {
       Type = "oneshot";

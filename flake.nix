@@ -4,8 +4,8 @@
   outputs = inputs @ {self, ...}: let
     # 全局配置变量
     globals = {
-      user = "sheep";
-      homeDir = "/home/sheep";
+      user = "young";
+      homeDir = "/home/young";
       projectDir = toString ./.;
       assetsDir = "${toString ./.}/assets";
       version = "2.0.0";
