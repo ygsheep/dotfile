@@ -80,6 +80,7 @@
     base16Scheme = "${inputs.self}/home/shared/colors/gruvbox-dark-hard.yml";
 
     targets = {
+      xresources.enable = false; # xrdb 在 nixos-25.11 已移除
       bat.enable = true;
       gtk.enable = true; # GTK 深色主题
       kde.enable = true; # KDE 深色主题
